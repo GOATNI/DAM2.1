@@ -1,36 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <TextView
+    <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="berron hijo_puta1"
-        android:layout_gravity="center"
-
+        app:srcCompat="@drawable/perro"
+        android:adjustViewBounds="true"
         />
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="berron hijo_puta2"
-        android:layout_gravity="center_horizontal"
-        />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="berron hijo_puta3"
-        android:layout_gravity="center_vertical"
-        />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="berron hijo_puta4"
-
+        android:textSize="20dp"
+        android:padding="16dp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:text="@string/textoPrincipal"
         />
 
-</FrameLayout>
+    <EditText
+        android:id="@+id/etEdad"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/introduce_tu_edad"
+        android:inputType="number"
+        android:padding="24dp"
+
+        android:gravity="center"
+        android:layout_marginHorizontal="80dp"
+
+        />
+
+    <Button
+        android:id="@+id/calcularButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="100dp"
+        android:layout_marginVertical="16dp"
+        android:backgroundTint="#F27878"
+        android:gravity="center"
+        android:text="@string/calcular"
+        />
+
+    <TextView
+        android:id="@+id/resultado"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="Si fueras un perro tendrias 40 años"
+        android:layout_marginHorizontal="24dp"
+        android:textSize="16dp"
+        android:gravity="center"
+        />
+</LinearLayout>
+

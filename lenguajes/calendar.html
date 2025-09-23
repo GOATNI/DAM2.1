@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Calendario de Festivales</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+    }
+    table {
+      margin: 20px auto;
+      border-collapse: collapse;
+    }
+    th, td {
+      border: 1px solid #ccc;
+     
+    }
+    th {
+      background-color: #f0f0f0;
+    }
+    .festival {
+     color: red;
+    }
+   
+  </style>
+</head>
+<body>
+  <h1>Calendario de Festivales</h1>
+
+  <label for="mes">Escribe el mes (ej. enero, febrero...):</label>
+  <input type="text" id="mes" placeholder="enero, febrero, marzo...">
+  <button onclick="mostrarCalendario()">Mostrar Calendario</button>
+
+  <div id="calendar"></div>
+
+  <!-- link to external JavaScript -->
+  <script src="calendar.js"></script>
+</body>
+</html>
