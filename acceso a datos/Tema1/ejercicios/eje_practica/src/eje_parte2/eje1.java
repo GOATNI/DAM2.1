@@ -13,6 +13,6 @@ public class eje1 {
 
         numeros.removeIf(numerosimapres);
 
-        System.out.println(new ArrayList<>(numeros));
+        System.out.println(numeros);
     }
 }

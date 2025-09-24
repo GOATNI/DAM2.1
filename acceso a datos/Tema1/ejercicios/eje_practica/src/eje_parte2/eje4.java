@@ -7,7 +7,7 @@ import java.util.function.Supplier;
 imprimir una secuencia de diez números aleatorios.*/
 public class eje4 {
     public static void main(String[] args) {
-        Supplier<Integer> numbers = () -> new Random().nextInt(0,10);
+        Supplier<Integer> numbers = () -> new Random().nextInt(10);
 
         for (int i = 0; i < 5; i++) {
             System.out.println(numbers.get());
