@@ -15,6 +15,7 @@ fun main() {
         println("El dia es $valor")
     }*/
 
+
     weekDays.forEach { dia -> println(dia) }
 
 }
