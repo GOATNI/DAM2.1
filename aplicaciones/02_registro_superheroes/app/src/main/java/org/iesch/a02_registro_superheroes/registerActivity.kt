@@ -12,37 +12,39 @@ import org.iesch.a02_registro_superheroes.detalle.detalleHeroeActivity
 class registerActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityregisterBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         binding = ActivityregisterBinding.inflate(layoutInflater)
-        setContentView(R.layout.activityregister)
+        setContentView(binding.root)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
         binding.btnGuardar.setOnClickListener {
-            val superheroname = binding.etheroname.text.toString()
-            val alterego = binding.etAlterEgo.text.toString()
-            val bio = binding.etbio.text.toString()
-            val power = binding.rtPower.rating
+            // Nos creamos las variables necesarias para pasarlas al Intent
+            val superHeroName = binding.etHeroName.text.toString()
+            val alterEgo = binding.etAlterEgo.text.toString()
+            val bio = binding.etBio.text.toString()
+            val power = binding.rbPower.rating
 
-            iraldetalle(superheroname,alterego,bio,power)
+            irADetalleHeroe( superHeroName, alterEgo, bio, power )
 
         }
     }
-}
 
-private fun registerActivity.iraldetalle(superheroname:String,alterego:String,bio:String,power: Float) {
-    //Al pulsar el boton quirto ir a la otra pagina
-    //el intent debe tener claro desde donde les llama y donde va
-    val intent = Intent(this, detalleHeroeActivity::class.java)
+    private fun irADetalleHeroe( superHeroName:String, alterEgo: String, bio: String, power: Float ) {
+        // El intent debe tener muy claro desde dónde se le llama y a dónde va
+        val intent = Intent(this, detalleHeroeActivity::class.java)
 
-    intent.putExtra("heroName",superheroname)
-    intent.putExtra("alter_ego",alterego)
-    intent.putExtra("bio",bio)
-    intent.putExtra("power",power)
+        // Añado los valores al Intent con la función putExtra
+        intent.putExtra("heroName", superHeroName)
+        intent.putExtra( "alter_ego", alterEgo)
+        intent.putExtra("bio",bio)
+        intent.putExtra("power", power)
 
-    startActivity(intent)
+        startActivity(intent)
+    }
 }
