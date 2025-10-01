@@ -10,6 +10,7 @@ import android.widget.ImageView
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.FileProvider
 import androidx.core.graphics.drawable.toBitmap
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -74,6 +75,11 @@ class RegisterActivity : AppCompatActivity() {
         // 2 aqui debemos crear un path temporal para gurdar la imagen
 
         val imageFile = createImageFile()
+
+        //ahora ya tenemos el file pero nesecitamos el uri
+        //como estampos por encima de la sdk 24 obtendre mos la uri atravez de file provider file provider lo que hace es compartir file con otros de forma segura
+        val uri = FileProvider.getUriForFile(this,"${applicationContext.packageName}.provider",imageFile)
+        getContent.launch(uri)
 
     }
 
