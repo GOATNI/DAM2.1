@@ -19,6 +19,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "02_registro_superheroes"
+rootProject.name = "02_Registro_Superheroes"
 include(":app")
  

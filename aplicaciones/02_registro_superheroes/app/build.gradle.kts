@@ -1,6 +1,8 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+    // 5 - Añadimos el plugin parzelize
+    id("kotlin-parcelize")
 }
 
 android {
@@ -33,7 +35,8 @@ android {
     kotlinOptions {
         jvmTarget = "11"
     }
-    buildFeatures{
+
+    buildFeatures {
         viewBinding = true
     }
 }
