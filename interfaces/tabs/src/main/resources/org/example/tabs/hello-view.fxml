@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<TabPane prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" tabMaxHeight="10000.0" tabMinHeight="90.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/24.0.1" fx:controller="org.example.tabs.HelloController">
+  <tabs>
+    <Tab fx:id="persona" text="Datos de la persona">
+      <content>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="323.0" prefWidth="464.0">
+               <children>
+                  <VBox alignment="CENTER" layoutX="38.0" prefHeight="329.0" prefWidth="525.0" spacing="30.0">
+                     <children>
+                        <HBox alignment="CENTER" prefHeight="58.0" prefWidth="525.0" spacing="20.0">
+                           <children>
+                              <Label text="Nombre" />
+                              <TextField fx:id="nombre" />
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
+                           <children>
+                              <Label text="Apellidos" />
+                              <TextField fx:id="apellidos" />
+                           </children>
+                        </HBox>
+                        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="20.0">
+                           <children>
+                              <CheckBox fx:id="habilitarcoche" mnemonicParsing="false" onAction="#hablitarco" text="Coche" />
+                              <CheckBox fx:id="hablilirmonovolumen" mnemonicParsing="false" onAction="#habilitarmo" text="Monovolumen" />
+                           </children>
+                        </VBox>
+                     </children>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                  </VBox>
+               </children></AnchorPane>
+      </content>
+         <graphic>
+            <ImageView fitHeight="36.0" fitWidth="101.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../img/cara.png" />
+               </image>
+            </ImageView>
+         </graphic>
+    </Tab>
+    <Tab fx:id="coche" text="Coche">
+      <content>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+      </content>
+         <graphic>
+            <ImageView fitHeight="34.0" fitWidth="146.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../img/coche.png" />
+               </image>
+            </ImageView>
+         </graphic>
+    </Tab>
+      <Tab fx:id="monovolumen" text="Monovolumen">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+        </content>
+         <graphic>
+            <ImageView fitHeight="30.0" fitWidth="182.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../img/monovolumen.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Tab>
+  </tabs>
+</TabPane>
