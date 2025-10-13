@@ -1,6 +1,7 @@
 package org.iesch.a02_registro_superheroes.detalle
 
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -34,33 +35,28 @@ class DetalleHeroeActivity : AppCompatActivity() {
             insets
         }
         val bundle = intent.extras!!
-        // 8 - Recibimos el Objeto SuperHeroe del intent
+
         val superHeroe = if ( android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.TIRAMISU) {
-            // Para versiones 33 o superior
             intent.getParcelableExtra(SUPERHEROE_KEY, SuperHeroe::class.java)
         } else {
             @Suppress("DEPRECATION")
             intent.getParcelableExtra<SuperHeroe>(SUPERHEROE_KEY)
         }
-        val bitmap = bundle.getParcelable<Bitmap>(FOTO_KEY)!!
+        //val bitmap = bundle.getParcelable<Bitmap>(FOTO_KEY)!!
+        // 8 - Eliminamos el Bitmap y obtenemos el String del directorio de ese bitmap
+        val bitmapDirectory = bundle.getString(FOTO_KEY)
+        val bitmap = BitmapFactory.decodeFile(bitmapDirectory)
 
 
-
-        //  1 - Recibimos  los objetos del Intent
-        // Un objeto Bundle es un contenedor de datos que permite almacenar y transportar multiples valores en Activyties o Fragmentos
-        // val bundle = intent.extras!!
-        // val superHeroName = bundle.getString(HERO_NAME) ?: "No hay nombre"
-        // val alterEgo = bundle.getString(ALTER_EGO) ?: "No hay alter ego"
-        // val bio = bundle.getString(BIO) ?: "No hay bio"
-        // val power = bundle.getFloat(POWER)
-        // 2 - Rellenamos con los campos que hemos recibido del intent
         binding.tvHeroNameResult.text = superHeroe?.nombre ?: "No hay nombre"
         binding.tvAlterEgoResult.text = superHeroe?.alterEgo ?: "No hay alter ego"
         binding.tvBioResult.text = superHeroe?.bio ?: "No hay Bio"
         binding.rbResultado.rating = superHeroe?.power ?: 0f
 
-        // 14 Asigno la imagen a la imagenView
-        binding.imageView.setImageBitmap(bitmap)
+        if ( bitmap != null ){
+            binding.imageView.setImageBitmap(bitmap)
+        }
+
     }
 }
 

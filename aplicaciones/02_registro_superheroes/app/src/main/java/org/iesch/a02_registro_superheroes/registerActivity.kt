@@ -23,20 +23,17 @@ class RegisterActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityRegisterBinding
     private lateinit var heroImage: ImageView
-    // 9 - Creamos una variable que va a manejar el resultado de haber hecho la foto
+
     private var heroBitmap: Bitmap? = null
-    //cambiamos el take pictureprewie por take picture
-    private var picturepath = ""
+    // 1 - Cambiamos el TakePicturePreview por TakePicture
+    private  var picturePath = ""
     private val getContent = registerForActivityResult(ActivityResultContracts.TakePicture()){
-        // Esto nos va a devolver un objeto de tipo bitmap
-       // ahora en lugar de un bitmap nos va devolver un booleano si la toma
-        //de la foto es exitosa
+        //Ahora en lugar de un bitmap nos va a devolver un booleano si la toma de la foto es exitosa
         success ->
-            if (success && picturepath.isNotEmpty()){
-                // cualquier imagen del directoru¡io la pòdemeos convertir
-                    //en un bitmap
-                heroBitmap = BitmapFactory.decodeFile(picturepath)
-                //pintamos la imagen en el cualquier cuadradito
+            if ( success && picturePath.isNotEmpty() ){
+                // Culquier imagen del directorio la podemos convertir en un bitmap
+                heroBitmap = BitmapFactory.decodeFile(picturePath)
+                // Pintamos la imagen en el cuadradito
                 heroImage.setImageBitmap(heroBitmap)
             }
     }
@@ -64,7 +61,7 @@ class RegisterActivity : AppCompatActivity() {
 
         }
 
-            // 10
+
         heroImage = binding.superheroImage
         binding.superheroImage.setOnClickListener {
             openCamera()
@@ -72,26 +69,29 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     private fun openCamera() {
-        // 2 aqui debemos crear un path temporal para gurdar la imagen
-
+        // 2 - Ahora a quí debemos crear un path temporal para guardar la imagen
         val imageFile = createImageFile()
-
-        //ahora ya tenemos el file pero nesecitamos el uri
-        //como estampos por encima de la sdk 24 obtendre mos la uri atravez de file provider file provider lo que hace es compartir file con otros de forma segura
-        val uri = FileProvider.getUriForFile(this,"${applicationContext.packageName}.provider",imageFile)
+        // 4-  Ahora ya tenemos el File, pero lo que necesitamos es el uri
+        // Como estamospor encima de la SDK 24 obtendremos el Uri a través de FileProvider
+        // FileProvider lo que hace es compartir el file con otras aplicaciones de forma segura
+        val uri = FileProvider.getUriForFile(
+            this,
+            "${applicationContext.packageName}.provider",
+            imageFile
+        )
+        // 5 - Ahora le pasamos el uri a la funcion launcher
         getContent.launch(uri)
-
     }
 
-    //3-esta funcion crea un file y de ese file recuperaremos la uri
+    //3 - Esta función crea un File y de ese File recupreraremos el uri.
     private fun createImageFile() : File {
         val fileName = "superhero_image"
-        // este es el directorio donde almacenamos la imagen por defecto es directory pictures
-        val fileDirectory = getExternalFilesDir(Environment.DIRECTORY_PICTURES)
-        // creamos nuestro file, y aqui nos pide el nombre,el formato,el directorio
-        val imageFile = File.createTempFile(fileName,".jpg",fileDirectory)
-        //Ahoa ya podemos guradar el path en la variable global
-        picturepath = imageFile.absolutePath
+        // Esto será el directorio donde vamos a almcenar la imagen. Por defecto es DIRECTORY_PICTURES
+        val fileDirectory = getExternalFilesDir(Environment.DIRECTORY_PICTURES )
+        // creamos nuestro file, y aqui nos pide el nombre, el formato, y el directorio
+        val imageFile = File.createTempFile(fileName, ".jpg", fileDirectory )
+        // Ahora ya podemos guardar el path en la variable global
+        picturePath = imageFile.absolutePath
         return imageFile
     }
 
@@ -99,8 +99,8 @@ class RegisterActivity : AppCompatActivity() {
 
         val intent = Intent(this, DetalleHeroeActivity::class.java)
         intent.putExtra(DetalleHeroeActivity.SUPERHEROE_KEY, superHeroe)
-        // 12 - Añado el objeto bitmap al intent
-        intent.putExtra(DetalleHeroeActivity.FOTO_KEY, heroImage.drawable.toBitmap())
+        // 7 . Pasamos solamente el picturePath
+        intent.putExtra(DetalleHeroeActivity.FOTO_KEY, picturePath)
         startActivity(intent)
     }
 }

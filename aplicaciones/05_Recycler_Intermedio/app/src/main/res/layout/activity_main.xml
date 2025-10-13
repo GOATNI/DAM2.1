@@ -4,20 +4,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     tools:context=".MainActivity">
 
     <TextView
-        android:id="@+id/tvListas"
+        android:id="@+id/tv_listas"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Listas de versiones android"
-        android:textColor="@color/black"
-        android:textStyle="bold"
-        android:textSize="20sp"
-        android:paddingTop="16dp"
         android:paddingStart="16dp"
+        android:paddingTop="16dp"
         android:paddingBottom="16dp"
+        android:text="Listas de Versiones Android"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -25,10 +25,9 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_versiones_android"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="478dp"
+        android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvListas" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_listas" />
 </androidx.constraintlayout.widget.ConstraintLayout>
