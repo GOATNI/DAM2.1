@@ -213,6 +213,8 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
 
+                    android:id="@+id/btnRazas"
+                    android:clickable="true"
                     android:layout_width="match_parent"
                     android:layout_height="170dp"
                     android:layout_marginStart="12dp"
@@ -221,10 +223,10 @@
                     android:background="@drawable/btn_background_4">
 
                     <TextView
-                        android:id="@+id/tvApi_reset"
+                        android:id="@+id/tvApi_resetRazas"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Api reset"
+                        android:text="Api reset Razas"
                         android:textColor="@color/white"
                         android:textSize="18dp"
                         android:textStyle="bold"
@@ -247,7 +249,7 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:srcCompat="@drawable/btn_4"/>
+                        app:srcCompat="@drawable/btn_4" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
             </LinearLayout>
@@ -296,7 +298,7 @@
                     app:srcCompat="@drawable/calcultadora" />
 
                 <TextView
-                    android:id="@+id/tvpractica2"
+                    android:id="@+id/tvpractica1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
@@ -309,7 +311,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/tvPractica2desc"
+                    android:id="@+id/tvPractica1desc"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
@@ -327,7 +329,7 @@
                 android:background="@drawable/list_background1">
 
                 <ImageView
-                    android:id="@+id/icquiz"
+                    android:id="@+id/icquiz2"
                     android:layout_width="64dp"
                     android:layout_height="64dp"
                     android:layout_marginEnd="16dp"

@@ -67,7 +67,9 @@ class MainActivity : AppCompatActivity() {
                     currentIndex++
                     showQuestion(currentIndex)
                 } else {
-                    if (currentIndex >= quiz.questions.size - 1) {
+                    if (currentIndex >= quiz.questions.size -
+
+                        1) {
                         val intent = Intent(this, Finish::class.java)
                         startActivity(intent)
                     } else {
