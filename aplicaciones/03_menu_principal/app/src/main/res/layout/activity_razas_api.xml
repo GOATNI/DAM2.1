@@ -14,8 +14,9 @@
         android:gravity="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent" >
 
+    </androidx.appcompat.widget.SearchView>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvDogs"
         android:layout_width="409dp"

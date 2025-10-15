@@ -12,7 +12,7 @@ interface ApiService {
     //esta funcion resibira por parametro algo una direccion + hound/imagens
     //y devolvera un objeto de tipo dogresponse
     @GET
-    fun getperrosraza(@Url url: String): Response<DogsResponse>
+    suspend fun getperrosraza(@Url url: String): Response<DogsResponse>
     //
 
 }
