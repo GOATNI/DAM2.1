@@ -1,0 +1,19 @@
+meta {
+  name: productos2
+  type: http
+  seq: 9
+}
+
+post {
+  url: http://localhost:8091/api/Producto
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "id": 36,
+    "nombre": "Tomate frito",
+    "precio": 12.0
+  }
+}
