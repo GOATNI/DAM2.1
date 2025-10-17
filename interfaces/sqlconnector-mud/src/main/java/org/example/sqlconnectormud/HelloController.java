@@ -52,6 +52,10 @@ public class HelloController {
     private Button last;
     @FXML
     private Button first;
+    @FXML
+    private Button guardar;
+    @FXML
+    private Button NuevoRegistro;
 
 
     @FXML
@@ -64,6 +68,7 @@ public class HelloController {
             Localidad.setText(rs.getString("Localidad"));
             Salario.setText(rs.getString("Salario"));
         }
+        guardar.setDisable(true);
 
     }
     @FXML
@@ -114,6 +119,31 @@ public class HelloController {
             Localidad.setText(rs.getString("Localidad"));
             Salario.setText(rs.getString("Salario"));
         }
+    }
+    private void insertarEmpleado(String nombre, String apellidos, String localidad, String salario) throws SQLException {
+        String sql = "INSERT INTO empleados (Nombre, Apellidos, Localidad, Salario) VALUES (?, ?, ?, ?)";
+        try (PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setString(1, nombre);
+            ps.setString(2, apellidos);
+            ps.setString(3, localidad);
+            ps.setString(4, salario);
+            ps.executeUpdate();
+        }
+    }
+
+    @FXML
+    void resgister(){
+        Nombre.setText("");
+        Apellidos.setText("");
+        Salario.setText("");
+        Localidad.setText("");
+        guardar.setDisable(false);
+    }
+
+    @FXML
+    void  save() throws SQLException {
+       insertarEmpleado(Nombre.getText(), Apellidos.getText(), Localidad.getText(),Salario.getText());
+       initialize();
     }
 
 
