@@ -81,6 +81,7 @@
 
 
                 <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/Calculator_back"
 
                     android:layout_width="match_parent"
                     android:layout_height="170dp"
@@ -95,7 +96,8 @@
                         android:id="@+id/ictransetiquta"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        app:srcCompat="@drawable/light_1" />
+                        app:srcCompat="@drawable/light_1"
+                        tools:ignore="MissingConstraints" />
 
                     <ImageView
                         android:id="@+id/icetiquta"
@@ -111,7 +113,7 @@
                         android:id="@+id/tvedadcanina"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Edad Canina"
+                        android:text="Calculadora"
                         android:textColor="@color/white"
                         android:textSize="18dp"
                         android:textStyle="bold"
@@ -122,6 +124,7 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/btnregister"
 
                     android:layout_width="match_parent"
                     android:layout_height="170dp"
@@ -171,7 +174,7 @@
 
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-
+                    android:id="@+id/btnquizz"
                     android:layout_width="match_parent"
                     android:layout_height="170dp"
                     android:layout_marginStart="12dp"

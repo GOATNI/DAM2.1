@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
-    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -12,8 +14,25 @@
         android:supportsRtl="true"
         android:theme="@style/Theme._03_menu_principal">
         <activity
-            android:name=".ApiRazas.RazasApiActivity"
+            android:name=".superhero.detalle.DetalleHeroeActivity"
             android:exported="false" />
+        <activity
+            android:name=".superhero.RegisterActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Calculadora"
+            android:exported="false" />
+        <activity
+            android:name=".Quiz.quizmain"
+            android:exported="false" />
+        <activity
+            android:name=".Quiz.QuestionAnswerdMain"
+            android:exported="false" />
+
+        <activity
+            android:name=".Quiz.Finish"
+            android:exported="false" />
+
         <activity
             android:name=".MenuActivity"
             android:exported="true">
