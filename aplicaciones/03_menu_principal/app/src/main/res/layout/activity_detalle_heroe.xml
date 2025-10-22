@@ -102,5 +102,14 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView6" />
+
+        <Button
+            android:id="@+id/btnvolver"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="volver"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/rb_resultado"
+            tools:layout_editor_absoluteX="165dp" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

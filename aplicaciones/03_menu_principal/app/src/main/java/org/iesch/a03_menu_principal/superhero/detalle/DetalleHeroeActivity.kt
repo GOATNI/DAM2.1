@@ -1,5 +1,6 @@
 package org.iesch.a03_menu_principal.superhero.detalle
 
+import android.content.Intent
 import android.graphics.BitmapFactory
 import android.os.Build
 import android.os.Bundle
@@ -9,6 +10,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import org.iesch.a03_menu_principal.R
 import org.iesch.a03_menu_principal.databinding.ActivityDetalleHeroeBinding
+import org.iesch.a03_menu_principal.superhero.RegisterActivity
 import org.iesch.a03_menu_principal.superhero.model.SuperHeroe
 
 class DetalleHeroeActivity : AppCompatActivity() {
@@ -55,6 +57,11 @@ class DetalleHeroeActivity : AppCompatActivity() {
 
         if ( bitmap != null ){
             binding.imageView.setImageBitmap(bitmap)
+        }
+        binding.btnvolver.setOnClickListener {
+            val intent = Intent(this, RegisterActivity::class.java)
+            startActivity(intent)
+            finish();
         }
 
     }

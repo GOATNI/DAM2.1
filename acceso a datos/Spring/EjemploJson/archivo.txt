@@ -1,0 +1,7 @@
+Persona(nombre=Mario, apellido=Berron)
+Persona(nombre=Mario, apellido=Berron)
+Persona(nombre=Mario, apellido=Berron)
+Persona(nombre=Ana, apellido=Lopez)
+Persona(nombre=Ana, apellido=Lopez)
+Persona(nombre=Ana, apellido=Berron)
+Persona(nombre=Ana, apellido=Berron)

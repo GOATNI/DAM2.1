@@ -15,7 +15,6 @@ class Finish : AppCompatActivity() {
 
         binding.startAgain.setOnClickListener {
             val intent = Intent(this, quizmain::class.java)
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
             startActivity(intent)
             finish()
         }

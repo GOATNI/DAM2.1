@@ -1,10 +1,6 @@
 package org.iesch.a03_menu_principal.ApiRazas
 
-import android.annotation.TargetApi
-import android.os.Build
 import android.os.Bundle
-import android.renderscript.ScriptGroup
-import android.widget.SearchView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity

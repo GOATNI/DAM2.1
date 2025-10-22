@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     id("kotlin-parcelize")
+
 }
 
 
@@ -51,7 +52,8 @@ dependencies {
     implementation("com.squareup.picasso:picasso:2.8")
     //glide
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.9")
-
+    //datastore
+    implementation("androidx.datastore:datastore:1.1.7")
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)

@@ -14,6 +14,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme._03_menu_principal">
         <activity
+            android:name=".Fragments.FragmentActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SettingsActivity"
+            android:exported="false" />
+        <activity
             android:name=".superhero.detalle.DetalleHeroeActivity"
             android:exported="false" />
         <activity
@@ -28,11 +34,12 @@
         <activity
             android:name=".Quiz.QuestionAnswerdMain"
             android:exported="false" />
-
         <activity
             android:name=".Quiz.Finish"
             android:exported="false" />
-
+        <activity
+            android:name=".ApiRazas.RazasApiActivity"
+            android:exported="false" />
         <activity
             android:name=".MenuActivity"
             android:exported="true">
@@ -42,6 +49,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <provider
+            android:authorities="${applicationId}.provider"
+            android:name="androidx.core.content.FileProvider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths" />
+        </provider>
     </application>
 
 </manifest>

@@ -8,6 +8,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 
 import org.iesch.a03_menu_principal.ApiRazas.RazasApiActivity
+import org.iesch.a03_menu_principal.Fragments.FragmentActivity
 import org.iesch.a03_menu_principal.Quiz.quizmain
 import org.iesch.a03_menu_principal.databinding.ActivityMenuBinding
 import org.iesch.a03_menu_principal.superhero.RegisterActivity
@@ -37,9 +38,16 @@ class MenuActivity : AppCompatActivity() {
         binding.btnregister.setOnClickListener {
             superhero()
         }
+        binding.btnFragments.setOnClickListener {
+            irAMenuFragments()
+        }
     }
 }
 
+private fun MenuActivity.irAMenuFragments() {
+    val irAFragments = Intent(this, FragmentActivity::class.java)
+    startActivity(irAFragments)
+}
 private fun MenuActivity.irARazasActivity() {
 
     val irarazas = Intent(this, RazasApiActivity::class.java)
