@@ -38,7 +38,7 @@ public class Ventana2 {
             Nombre.setCellValueFactory(new PropertyValueFactory<>(i.getNombre()));
             Apellido.setCellValueFactory(new PropertyValueFactory<>(i.getApellido()));
             Localidad.setCellValueFactory(new PropertyValueFactory<>(i.getLocalidad()));
-            Salario.setCellValueFactory(new PropertyValueFactory<>(i.getSalario()));
+            Salario.setCellValueFactory(new PropertyValueFactory<>(i.getSalario() ));
         }
     }
 }

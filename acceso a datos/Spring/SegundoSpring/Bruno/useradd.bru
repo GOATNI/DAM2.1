@@ -1,0 +1,21 @@
+meta {
+  name: useradd
+  type: http
+  seq: 7
+}
+
+post {
+  url: http://localhost:8080/producto
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "name": "Pizza",
+    "price": 11.50,
+    "descripcion": "Es pizza",
+    "categoria": "Alimentacion",
+    "stock": 5
+  }
+}
