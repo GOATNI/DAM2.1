@@ -53,7 +53,7 @@ dependencies {
     //glide
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.9")
     //datastore
-    implementation("androidx.datastore:datastore:1.1.7")
+    implementation("androidx.datastore:datastore-preferences:1.1.7")
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)

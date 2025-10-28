@@ -14,18 +14,19 @@
         android:supportsRtl="true"
         android:theme="@style/Theme._03_menu_principal">
         <activity
+            android:name=".settings.SettingsActivity"
+            android:exported="false" />
+        <activity
             android:name=".LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name=".Fragments.FragmentActivity"
-            android:exported="false" />
-        <activity
-            android:name=".SettingsActivity"
             android:exported="false" />
         <activity
             android:name=".superhero.detalle.DetalleHeroeActivity"
@@ -48,8 +49,9 @@
         <activity
             android:name=".ApiRazas.RazasApiActivity"
             android:exported="false" />
-        <activity android:name=".MenuActivity" android:exported="false" />
-
+        <activity
+            android:name=".MenuActivity"
+            android:exported="false" />
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.provider"

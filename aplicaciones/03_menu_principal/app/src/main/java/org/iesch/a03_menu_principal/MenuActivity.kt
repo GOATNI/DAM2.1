@@ -11,6 +11,7 @@ import org.iesch.a03_menu_principal.ApiRazas.RazasApiActivity
 import org.iesch.a03_menu_principal.Fragments.FragmentActivity
 import org.iesch.a03_menu_principal.Quiz.quizmain
 import org.iesch.a03_menu_principal.databinding.ActivityMenuBinding
+import org.iesch.a03_menu_principal.settings.SettingsActivity
 import org.iesch.a03_menu_principal.superhero.RegisterActivity
 
 class MenuActivity : AppCompatActivity() {
@@ -44,8 +45,21 @@ class MenuActivity : AppCompatActivity() {
         binding.btnFragments.setOnClickListener {
             irAMenuFragments()
         }
+        binding.btnsettings.setOnClickListener {
+            irASettings()
+        }
     }
 }
+
+
+
+
+private fun MenuActivity.irASettings(){
+    val iraSettings = Intent(this, SettingsActivity::class.java)
+    startActivity(iraSettings)
+}
+
+
 
 private fun MenuActivity.irAMenuFragments() {
     val irAFragments = Intent(this, FragmentActivity::class.java)
