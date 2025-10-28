@@ -25,6 +25,9 @@ class MenuActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+        val nombre = intent.getStringExtra("nombre")
+        binding.TVBienvenida.text = "Hola $nombre"
+
 
         binding.btnRazas.setOnClickListener {
             irARazasActivity()

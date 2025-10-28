@@ -1,0 +1,26 @@
+[
+    {
+        "merged": "C:\\Users\\azeem\\.gradle\\daemon\\8.13\\com.example.juego.app-mergeDebugResources-34:\\layout\\question_answerd.xml",
+        "source": "C:\\Users\\azeem\\.gradle\\daemon\\8.13\\com.example.juego.app-main-37:\\layout\\question_answerd.xml"
+    },
+    {
+        "merged": "com.example.juego.app-mergeDebugResources-34:/layout/activity_main.xml",
+        "source": "com.example.juego.app-main-37:/layout/activity_main.xml"
+    },
+    {
+        "merged": "C:\\Users\\azeem\\.gradle\\daemon\\8.13\\com.example.juego.app-mergeDebugResources-34:\\layout\\finished.xml",
+        "source": "C:\\Users\\azeem\\.gradle\\daemon\\8.13\\com.example.juego.app-main-37:\\layout\\finished.xml"
+    },
+    {
+        "merged": "C:\\Users\\azeem\\.gradle\\daemon\\8.13\\com.example.juego.app-mergeDebugResources-34:\\layout\\activity_main.xml",
+        "source": "C:\\Users\\azeem\\.gradle\\daemon\\8.13\\com.example.juego.app-main-37:\\layout\\activity_main.xml"
+    },
+    {
+        "merged": "C:\\Users\\azeem\\.gradle\\daemon\\8.13\\com.example.juego.app-mergeDebugResources-34:\\layout\\activity_finish.xml",
+        "source": "C:\\Users\\azeem\\.gradle\\daemon\\8.13\\com.example.juego.app-main-37:\\layout\\activity_finish.xml"
+    },
+    {
+        "merged": "com.example.juego.app-mergeDebugResources-34:/layout/activity_finish.xml",
+        "source": "com.example.juego.app-main-37:/layout/activity_finish.xml"
+    }
+]

@@ -1,0 +1,26 @@
+R_DEF: Internal format may change without notice
+local
+color black
+color white
+drawable ic_launcher_background
+drawable ic_launcher_foreground
+drawable ic_launcher_perro
+drawable perro
+id calcularButton
+id etEdad
+id main
+id resultado
+layout activity_main
+mipmap ic_launcher
+mipmap ic_launcher_foreground
+mipmap ic_launcher_round
+string app_name
+string calcular
+string introduce_tu_edad
+string resultado_format
+string textoPrincipal
+string toast_text
+style Base.Theme._01_EdadCanina
+style Theme._01_EdadCanina
+xml backup_rules
+xml data_extraction_rules
