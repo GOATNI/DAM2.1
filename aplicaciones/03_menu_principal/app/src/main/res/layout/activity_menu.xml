@@ -361,6 +361,85 @@
                 android:layout_marginTop="12dp">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/btn_pelicula"
+                    android:layout_width="383dp"
+                    android:layout_height="170dp"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginEnd="12dp"
+                    android:layout_weight="0.5"
+                    android:background="@drawable/btn_background_3"
+                    android:clickable="true">
+                    <ImageView
+                        android:id="@+id/ic_pelicula"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/bottom_btn3" />
+
+                    <TextView
+                        android:id="@+id/tv_pelicula"
+                        android:layout_width="107dp"
+                        android:layout_height="45dp"
+                        android:paddingBottom="24dp"
+                        android:text="Lista Pelicula"
+                        android:textColor="@color/white"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="@+id/ic_pelicula"
+                        app:layout_constraintStart_toStartOf="@+id/ic_pelicula"
+                        app:layout_constraintTop_toBottomOf="@+id/ic_pelicula" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="380dp"
+                    android:layout_height="170dp"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginEnd="12dp"
+                    android:layout_weight="0.5"
+                    android:id="@+id/btn_any"
+                    android:clickable="true"
+                    android:background="@drawable/btn_background_2">
+
+                    <TextView
+                        android:id="@+id/tv_any"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:text="Herramientas"
+                        android:textColor="@color/white"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="@+id/ic_any"
+                        app:layout_constraintStart_toStartOf="@+id/ic_any"
+                        app:layout_constraintTop_toBottomOf="@+id/ic_any" />
+
+                    <ImageView
+                        android:id="@+id/ic_any"
+                        android:layout_width="49dp"
+                        android:layout_height="61dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+
+                        app:srcCompat="@drawable/settings" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp"
+                android:layout_marginTop="12dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 

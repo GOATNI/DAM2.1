@@ -1,6 +1,8 @@
 package org.iesch.SegundoSpring.controler;
 
 import org.iesch.SegundoSpring.modelo.Usuario;
+import org.iesch.SegundoSpring.modelo.UsuarioDTORespuesta;
+import org.iesch.SegundoSpring.modelo.UsuarioDtopeticion;
 import org.iesch.SegundoSpring.servicios.usuarioservice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -21,9 +23,11 @@ public class usuariocontroler {
     usuarioservice Usuarioservice;
 
     @PostMapping("/usuario")
-    public ResponseEntity<?> registar(@RequestBody Usuario usuario){
-        Usuario usuario1 = Usuarioservice.adduser(usuario);
-        URI location = URI.create("/usuario/"+usuario.getId());
-        return ResponseEntity.created(location).body(usuario);
+    public ResponseEntity<?> registar(@RequestBody UsuarioDtopeticion usuariodto){
+        Usuario user = Usuario.builder().nombre(usuariodto.getNombre()).passwd(usuariodto.getPasswd()).build();
+        Usuario usuario1 = Usuarioservice.adduser(user);
+        URI location = URI.create("/usuario/"+usuario1.getId());
+        UsuarioDTORespuesta usuarioDTORespuesta = UsuarioDTORespuesta.builder().nombre(usuario1.getNombre()).build();
+        return ResponseEntity.created(location).body(usuarioDTORespuesta);
     }
 }

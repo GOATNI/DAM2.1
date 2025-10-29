@@ -6,6 +6,8 @@ import android.util.Log
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_NO
+import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_YES
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.datastore.core.DataStore
@@ -39,7 +41,9 @@ class SettingsActivity : AppCompatActivity() {
         const val KEY_VIBRATION = "vibration_enabled"
     }
     private lateinit var binding: ActivitySettingsBinding
-    private var firsttime : Boolean = true
+    // 8
+    private var firstTime: Boolean = true
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -53,19 +57,18 @@ class SettingsActivity : AppCompatActivity() {
         // 6 Llamo a la funcion para obtener los datos guardados
         // Vamos a consumir ese Flow
         CoroutineScope(Dispatchers.IO).launch {
-            getSettigs().filter { firsttime } .collect { datosAlmacenados ->
-                //Actualizar la uri en el hilo principal no se puede tocar la interfaz desde un hilo secundario
+            getSettigs().filter { firstTime }.collect { datosAlmacenados ->
+                // 7 Actualizar la UI en el hilo principal. NO se puede tocar la interfaz desde un hilo secundario
                 CoroutineScope(Dispatchers.Main).launch {
                     binding.swDarkmode.isChecked = datosAlmacenados?.darkMode ?: false
                     binding.swBluetooth.isChecked = datosAlmacenados?.bluetoothEnabled ?: false
-                    binding.swVibracion.isChecked = datosAlmacenados?.bluetoothEnabled ?: false
-                    binding.rsVolumen.setValues( datosAlmacenados?.volumen?.toFloat())
-                    firsttime = !firsttime
+                    binding.swVibracion.isChecked = datosAlmacenados?.vibrationEnabled ?: true
+                    binding.rsVolumen.setValues( datosAlmacenados?.volumen?.toFloat() )
+                    firstTime =! firstTime
                 }
 
             }
         }
-
 
         initUI()
     }
@@ -81,9 +84,10 @@ class SettingsActivity : AppCompatActivity() {
         // 3 Creamos el resto de funciones y variables de KEY
         binding.swDarkmode.setOnCheckedChangeListener { // El primer parámetro es el boton
                 _ , value ->
-            if (value){
+            // 10
+            if ( value ){
                 enableDarkMode()
-            }else{
+            } else {
                 disableDarkMode()
             }
             CoroutineScope(Dispatchers.IO).launch {
@@ -103,8 +107,6 @@ class SettingsActivity : AppCompatActivity() {
             }
         }
     }
-
-
 
 
     private suspend fun saveVolume( value: Int ) {
@@ -136,11 +138,14 @@ class SettingsActivity : AppCompatActivity() {
             // Entonces lo que haremos será crear un objeto que envuelva todos los valores que necesitamos
         }
     }
+    // 9 - Me creo las funciones para cambiar el modo a oscuro o claro
     private fun enableDarkMode(){
-        val pref = AppCompatDelegate.setDefaultNightMode(PREFS_NAME,MODE_PRIVATE)
-        return pref
+        AppCompatDelegate.setDefaultNightMode( MODE_NIGHT_YES )
+        delegate.applyDayNight()
     }
-    private fun disableDarkMode() {
-        TODO("Not yet implemented")
+
+    private fun disableDarkMode(){
+        AppCompatDelegate.setDefaultNightMode( MODE_NIGHT_NO )
+        delegate.applyDayNight()
     }
 }

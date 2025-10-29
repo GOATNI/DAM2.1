@@ -12,7 +12,10 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme._03_menu_principal">
+        android:theme="@style/Base.Theme._03_Menu_Principal">
+        <activity
+            android:name=".cine.ListaPeliculasActivity"
+            android:exported="false" />
         <activity
             android:name=".settings.SettingsActivity"
             android:exported="false" />
@@ -52,6 +55,7 @@
         <activity
             android:name=".MenuActivity"
             android:exported="false" />
+
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.provider"
