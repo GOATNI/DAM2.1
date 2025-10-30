@@ -1,0 +1,21 @@
+meta {
+  name: crearEstudiante
+  type: http
+  seq: 4
+}
+
+post {
+  url: http://127.0.0.1:8080/api/estudiantes
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+      "nombre":"Ana",
+      "apellidos":"Martin Perez",
+      "email":"dsfe@iesch.org",
+      "edad":19,
+      "ciclo":"DAM"
+  }
+}

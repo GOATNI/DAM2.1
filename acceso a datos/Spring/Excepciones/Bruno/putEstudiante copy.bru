@@ -1,0 +1,21 @@
+meta {
+  name: putEstudiante copy
+  type: http
+  seq: 5
+}
+
+put {
+  url: http://127.0.0.1:8080/api/estudiantes/1
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+      "nombre":"Ana",
+      "apellidos":"Martin Perez",
+      "email":"ddhne@iesch.org",
+      "edad":19,
+      "ciclo":"DAM"
+  }
+}
