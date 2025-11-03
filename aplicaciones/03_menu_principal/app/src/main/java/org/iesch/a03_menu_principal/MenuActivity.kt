@@ -22,10 +22,16 @@ import org.iesch.a03_menu_principal.superhero.RegisterActivity
 
 class MenuActivity : AppCompatActivity() {
     lateinit var binding: ActivityMenuBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
+        // Aplicar tema antes de crear la vista
+        lifecycleScope.launch {
+            SettingsActivity.applyTheme(this@MenuActivity)
+        }
+
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        binding= ActivityMenuBinding.inflate(layoutInflater)
+        binding = ActivityMenuBinding.inflate(layoutInflater)
         setContentView(binding.root)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -64,10 +70,12 @@ class MenuActivity : AppCompatActivity() {
             irASettings()
         }
 
-        // Logout button: clear LoginDataStore and refresh la Activity
+        // Logout button: clear LoginDataStore, SettingsDataStore and refresh la Activity
         binding.btnLogout.setOnClickListener {
             lifecycleScope.launch {
+                // Clear both login credentials and settings
                 LoginDataStore.clearCredentials(applicationContext)
+                SettingsActivity.clearSettings(applicationContext)
                 Toast.makeText(this@MenuActivity, "Sesión cerrada", Toast.LENGTH_SHORT).show()
                 // Volver a LoginActivity
                 startActivity(Intent(this@MenuActivity, LoginActivity::class.java))

@@ -11,7 +11,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
 // Nombre de la "base de datos": loginDB
-private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "loginDB")
+private val Context.loginDataStore: DataStore<Preferences> by preferencesDataStore(name = "loginDB")
 
 object LoginDataStore {
     private val KEY_EMAIL = stringPreferencesKey("email")
@@ -19,7 +19,7 @@ object LoginDataStore {
     private val KEY_LOGGED = booleanPreferencesKey("logged_in")
 
     suspend fun saveCredentials(context: Context, email: String, password: String) {
-        context.dataStore.edit { prefs ->
+        context.loginDataStore.edit { prefs ->
             prefs[KEY_EMAIL] = email
             prefs[KEY_PASSWORD] = password
             prefs[KEY_LOGGED] = true
@@ -27,17 +27,17 @@ object LoginDataStore {
     }
 
     fun isLoggedFlow(context: Context): Flow<Boolean> =
-        context.dataStore.data.map { prefs ->
+        context.loginDataStore.data.map { prefs ->
             prefs[KEY_LOGGED] ?: false
         }
 
     fun getEmailFlow(context: Context): Flow<String?> =
-        context.dataStore.data.map { prefs ->
+        context.loginDataStore.data.map { prefs ->
             prefs[KEY_EMAIL]
         }
 
     suspend fun clearCredentials(context: Context) {
-        context.dataStore.edit { prefs ->
+        context.loginDataStore.edit { prefs ->
             prefs.remove(KEY_EMAIL)
             prefs.remove(KEY_PASSWORD)
             prefs[KEY_LOGGED] = false

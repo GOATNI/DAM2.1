@@ -8,11 +8,17 @@ import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import org.iesch.a03_menu_principal.databinding.ActivityLoginBinding
+import org.iesch.a03_menu_principal.settings.SettingsActivity
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        // Aplicar tema antes de crear la vista
+        lifecycleScope.launch {
+            SettingsActivity.applyTheme(this@LoginActivity)
+        }
+
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -40,6 +46,19 @@ class LoginActivity : AppCompatActivity() {
                 LoginDataStore.saveCredentials(applicationContext, email, password)
                 startMenuActivity()
             }
+        }
+
+        binding.btnSettings.setOnClickListener {
+            val intent = Intent(this, SettingsActivity::class.java)
+            startActivity(intent)
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        // Volver a aplicar el tema cuando se regrese de Settings
+        lifecycleScope.launch {
+            SettingsActivity.applyTheme(this@LoginActivity)
         }
     }
 
