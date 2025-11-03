@@ -4,6 +4,9 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.launch
 import org.iesch.a03_menu_principal.databinding.ActivityLoginBinding
 
 class LoginActivity : AppCompatActivity() {
@@ -14,26 +17,35 @@ class LoginActivity : AppCompatActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Ejemplo: usuario y contraseña fijos (puedes cambiarlos)
-        val usuarioValido = "Azeem"
-        val passwordValida = "1234"
-
-        binding.btnLogin.setOnClickListener {
-            val nombre = binding.etNombre.text.toString().trim()
-            val password = binding.etPassword.text.toString().trim()
-
-            if (nombre.isEmpty() || password.isEmpty()) {
-                Toast.makeText(this, "Completa todos los campos", Toast.LENGTH_SHORT).show()
-            } else if (nombre == usuarioValido && password == passwordValida) {
-                // Login correcto
-                val intent = Intent(this, MenuActivity::class.java)
-                intent.putExtra("nombre", nombre)
-                startActivity(intent)
-                finish()
-            } else {
-                // Login incorrecto
-                Toast.makeText(this, "Usuario o contraseña incorrectos", Toast.LENGTH_SHORT).show()
+        // Comprobar si ya hay sesión
+        lifecycleScope.launch {
+            val isLogged = LoginDataStore.isLoggedFlow(applicationContext).first()
+            if (isLogged) {
+                startMenuActivity()
+                return@launch
             }
         }
+
+        binding.btnLogin.setOnClickListener {
+            val email = binding.etEmail.text.toString().trim()
+            val password = binding.etPassword.text.toString().trim()
+
+            if (email.isEmpty() || password.isEmpty()) {
+                Toast.makeText(this, "Completa todos los campos", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            // Guardar credenciales y marcar como logueado
+            lifecycleScope.launch {
+                LoginDataStore.saveCredentials(applicationContext, email, password)
+                startMenuActivity()
+            }
+        }
+    }
+
+    private fun startMenuActivity() {
+        val intent = Intent(this, MenuActivity::class.java)
+        startActivity(intent)
+        finish()
     }
 }

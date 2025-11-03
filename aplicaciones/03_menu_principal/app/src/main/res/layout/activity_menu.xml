@@ -37,6 +37,16 @@
                 android:layout_width="431dp"
                 android:layout_height="126dp">
 
+                <Button
+                    android:id="@+id/btnLogout"
+                    android:layout_width="108dp"
+                    android:layout_height="wrap_content"
+                    android:text="Logout"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/TVBienvenida"
+                    app:layout_constraintTop_toTopOf="parent" />
+
                 <ImageView
                     android:id="@+id/imageUser"
                     android:layout_width="78dp"
@@ -408,8 +418,8 @@
                         android:id="@+id/tv_any"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
-                        android:text="Herramientas"
+                        android:layout_marginTop="12dp"
+                        android:text="maps"
                         android:textColor="@color/white"
                         android:textSize="18sp"
                         android:textStyle="bold"
@@ -525,6 +535,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent" />
 
+                <!-- Logout button added to the top-right -->
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -578,6 +589,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
+
         </LinearLayout>
 
     </ScrollView>

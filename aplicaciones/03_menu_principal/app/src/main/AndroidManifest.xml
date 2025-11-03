@@ -13,21 +13,26 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Base.Theme._03_Menu_Principal">
+
+        <!-- Configurar LoginActivity como la actividad principal -->
+        <activity
+            android:name=".LoginActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".MenuActivity"
+            android:exported="false" />
         <activity
             android:name=".cine.ListaPeliculasActivity"
             android:exported="false" />
         <activity
             android:name=".settings.SettingsActivity"
             android:exported="false" />
-        <activity
-            android:name=".LoginActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
         <activity
             android:name=".Fragments.FragmentActivity"
             android:exported="false" />
@@ -51,9 +56,6 @@
             android:exported="false" />
         <activity
             android:name=".ApiRazas.RazasApiActivity"
-            android:exported="false" />
-        <activity
-            android:name=".MenuActivity"
             android:exported="false" />
 
         <provider
