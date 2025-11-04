@@ -2,4 +2,11 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <color name="amarillo_firebase">#FF9800</color>
+    <color name="naranja_firebase">#FF5722</color>
+    <color name="azul_firebase">#03A9F4</color>
+    <color name="gris_firebase">#EAEBF1</color>
+
+
 </resources>

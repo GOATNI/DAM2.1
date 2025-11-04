@@ -1,0 +1,146 @@
+package org.iesch.firebasedam
+
+import android.annotation.SuppressLint
+import android.content.Intent
+import android.os.Bundle
+import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import com.google.firebase.Firebase
+import com.google.firebase.analytics.FirebaseAnalytics
+import com.google.firebase.analytics.analytics
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.auth
+
+import org.iesch.firebasedam.databinding.ActivityLoginBinding
+
+class LoginActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityLoginBinding
+
+    private lateinit var firebaseAnalytics: FirebaseAnalytics
+    private lateinit var auth: FirebaseAuth
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
+        binding = ActivityLoginBinding.inflate( layoutInflater )
+        setContentView(binding.root)
+        ViewCompat.setOnApplyWindowInsetsListener(binding.root) { v, insets ->
+            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+            insets
+        }
+        iniciarAnalytics()
+        // 2 - Iniciamosla instancia de Firebase auth
+        // Initialize Firebase Auth
+        auth = Firebase.auth
+
+        // Configuramos los listeners de los botones
+        binding.loginButton.setOnClickListener {
+            // Comprobamos si hemos introducido email y contraseña
+            if ( binding.emailEditText.text.isNotEmpty() && binding.passwordEditText.text.isNotEmpty() ){
+                // Nos autenticamos con email y contraseña
+                val usuario = binding.emailEditText.text.toString()
+                val password = binding.passwordEditText.text.toString()
+                auth.signInWithEmailAndPassword( usuario, password )
+                    // Añadimos un listener para comprobar si el usuario se ha logueado correctamente o no
+                    .addOnCompleteListener { logueo ->
+                        if ( logueo.isSuccessful ){
+                            // El usuario se ha logueado correctamente
+                            mostrarHomeActivity()
+                        } else {
+                            // Ha habido un error
+                            mostrarError()
+                        }
+                    }
+
+            } else {
+                // Avisamos al usuario que ha de rellenar los campos
+                avisoUsuario()
+            }
+        }
+
+        binding.registerButton.setOnClickListener {
+            // Comprobamos si hemos introducido email y contraseña
+            if ( binding.emailEditText.text.isNotEmpty() && binding.passwordEditText.text.isNotEmpty() ){
+                // Nos autenticamos con email y contraseña
+                val usuario = binding.emailEditText.text.toString()
+                val password = binding.passwordEditText.text.toString()
+                auth.createUserWithEmailAndPassword( usuario, password )
+                    // Añadimos un listener para comprobar si el usuario se ha registrado correctamente o no
+                    .addOnCompleteListener { registro ->
+                        if ( registro.isSuccessful ){
+                            // El usuario se ha registrado correctamente
+                            mostrarRegistroCorrecto()
+                        } else {
+                            // Ha habido un error
+                            mostrarError()
+                        }
+                    }
+
+            } else {
+                // Avisamos al usuario que ha de rellenar los campos
+                avisoUsuario()
+            }
+        }
+
+    }
+
+    private fun mostrarRegistroCorrecto() {
+        // Mostramos el error mediante un AlertDialog
+        val builder = AlertDialog.Builder( this )
+        builder.setTitle("Usuario Registrado")
+        builder.setMessage("El usuario se ha registrado correctamente")
+        builder.setPositiveButton("Aceptar", null)
+        val dialog = builder.create()
+        dialog.show()
+    }
+
+    private fun avisoUsuario() {
+        // Mostramos el error mediante un AlertDialog
+        val builder = AlertDialog.Builder( this )
+        builder.setTitle("Error")
+        builder.setMessage("Rellena los campos, capuyo.")
+        builder.setPositiveButton("Aceptar", null)
+        val dialog = builder.create()
+        dialog.show()
+    }
+
+    private fun mostrarError() {
+        // Mostramos el error mediante un AlertDialog
+        val builder = AlertDialog.Builder( this )
+        builder.setTitle("Error de autenticación")
+        builder.setMessage("No se ha podido iniciar sesión. Revisa tu email y password e inténtalo de nuevo.")
+        builder.setPositiveButton("Aceptar", null)
+        val dialog = builder.create()
+        dialog.show()
+    }
+
+    private fun mostrarHomeActivity() {
+        val intent = Intent(this, HomeActivity::class.java)
+        startActivity( intent )
+        finish()
+    }
+    /*
+        override fun onStart() {
+            super.onStart()
+            // Compruebo si el usuario ya ha accedido
+            val usuarioActual = auth.currentUser
+            if (usuarioActual != null) {
+                // Si el usuario actial es diferente de null, estará logueado
+                val intent = Intent( this, HomeActivity::class.java)
+                startActivity( intent )
+                finish()
+            }
+        }*/
+
+    private fun iniciarAnalytics() {
+        firebaseAnalytics = Firebase.analytics
+        val bundle = Bundle()
+        bundle.putString("mensaje", "Integración con Firebase realizada correctamente.")
+        firebaseAnalytics.logEvent("LoginScreen", bundle)
+    }
+}

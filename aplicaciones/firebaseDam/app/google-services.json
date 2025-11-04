@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "719386752980",
+    "project_id": "fir-dam2-7f18f",
+    "storage_bucket": "fir-dam2-7f18f.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:719386752980:android:23af270c3f016fafa00841",
+        "android_client_info": {
+          "package_name": "org.iesch.firebasedam"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDVJu2rrCbmzcKdtIVbqZZ_Brq5ApT0W_8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
