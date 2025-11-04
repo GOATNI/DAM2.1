@@ -16,7 +16,7 @@
 
         <!-- Configurar LoginActivity como la actividad principal -->
         <activity
-            android:name=".LoginActivity"
+            android:name=".datastore.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

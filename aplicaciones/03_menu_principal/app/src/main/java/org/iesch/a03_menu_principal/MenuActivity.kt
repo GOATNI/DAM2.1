@@ -17,6 +17,8 @@ import org.iesch.a03_menu_principal.ApiRazas.RazasApiActivity
 import org.iesch.a03_menu_principal.Fragments.FragmentActivity
 import org.iesch.a03_menu_principal.Quiz.quizmain
 import org.iesch.a03_menu_principal.databinding.ActivityMenuBinding
+import org.iesch.a03_menu_principal.datastore.LoginActivity
+import org.iesch.a03_menu_principal.datastore.LoginDataStore
 import org.iesch.a03_menu_principal.settings.SettingsActivity
 import org.iesch.a03_menu_principal.superhero.RegisterActivity
 
