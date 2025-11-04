@@ -57,6 +57,9 @@
         <activity
             android:name=".ApiRazas.RazasApiActivity"
             android:exported="false" />
+        <activity
+            android:name=".preferences.UserPreferencesActivity"
+            android:exported="false" />
 
         <provider
             android:name="androidx.core.content.FileProvider"

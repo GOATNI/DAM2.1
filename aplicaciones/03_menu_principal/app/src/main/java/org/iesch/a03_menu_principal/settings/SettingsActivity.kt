@@ -1,56 +1,34 @@
 package org.iesch.a03_menu_principal.settings
 
-import android.content.Context
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.datastore.core.DataStore
-import androidx.datastore.preferences.core.Preferences
-import androidx.datastore.preferences.core.booleanPreferencesKey
-import androidx.datastore.preferences.core.edit
-import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import org.iesch.a03_menu_principal.R
 import org.iesch.a03_menu_principal.databinding.ActivitySettingsBinding
-
-private val Context.settingsDataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
+import org.iesch.a03_menu_principal.datastore.LoginDataStore
+import org.iesch.a03_menu_principal.preferences.UserPreferencesManager
 
 class SettingsActivity : AppCompatActivity() {
 
-    companion object {
-        private val KEY_DARKMODE = booleanPreferencesKey("darkmode_enabled")
-        private val KEY_BLUETOOTH = booleanPreferencesKey("bluetooth_enabled")
-        private val KEY_VIBRATION = booleanPreferencesKey("vibration_enabled")
-
-        // Método estático para aplicar el tema desde cualquier actividad
-        suspend fun applyTheme(context: Context) {
-            val preferences = context.settingsDataStore.data.first()
-            val isDarkMode = preferences[KEY_DARKMODE] ?: false
-            val mode = if (isDarkMode) AppCompatDelegate.MODE_NIGHT_YES else AppCompatDelegate.MODE_NIGHT_NO
-            AppCompatDelegate.setDefaultNightMode(mode)
-        }
-
-        // Función para limpiar todas las configuraciones
-        suspend fun clearSettings(context: Context) {
-            context.settingsDataStore.edit { preferences ->
-                preferences.clear()
-            }
-            // Restaurar modo claro por defecto
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-        }
-    }
-
     private lateinit var binding: ActivitySettingsBinding
+    private var currentUserEmail: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         // Aplicar tema antes de crear la vista
         lifecycleScope.launch {
-            applyTheme(this@SettingsActivity)
+            currentUserEmail = LoginDataStore.getEmailFlow(applicationContext).first()
+            currentUserEmail?.let { email ->
+                val isDarkMode = UserPreferencesManager.getDarkModeFlow(applicationContext, email).first()
+                val mode = if (isDarkMode) AppCompatDelegate.MODE_NIGHT_YES else AppCompatDelegate.MODE_NIGHT_NO
+                AppCompatDelegate.setDefaultNightMode(mode)
+                delegate.applyDayNight()
+            }
         }
 
         super.onCreate(savedInstanceState)
@@ -63,46 +41,75 @@ class SettingsActivity : AppCompatActivity() {
             insets
         }
 
-        // Cargar preferencias guardadas
+        // Obtener email del usuario actual y cargar preferencias
         lifecycleScope.launch {
-            val preferences = settingsDataStore.data.first()
-            binding.swDarkmode.isChecked = preferences[KEY_DARKMODE] ?: false
-            binding.swBluetooth.isChecked = preferences[KEY_BLUETOOTH] ?: false
-            binding.swVibracion.isChecked = preferences[KEY_VIBRATION] ?: true
+            currentUserEmail = LoginDataStore.getEmailFlow(applicationContext).first()
+            loadPreferences()
         }
 
         initUI()
     }
 
+    private suspend fun loadPreferences() {
+        currentUserEmail?.let { email ->
+            // Cargar valores guardados del usuario actual
+            val savedName = UserPreferencesManager.getNameFlow(applicationContext, email).first() ?: ""
+            val savedAge = UserPreferencesManager.getAgeFlow(applicationContext, email).first() ?: ""
+            val isDarkMode = UserPreferencesManager.getDarkModeFlow(applicationContext, email).first()
+            val notificationsEnabled = UserPreferencesManager.getNotificationsFlow(applicationContext, email).first()
+
+            // Actualizar UI
+            binding.editTextName.setText(savedName)
+            binding.editTextAge.setText(savedAge)
+            binding.switchDarkMode.isChecked = isDarkMode
+            binding.switchNotifications.isChecked = notificationsEnabled
+        }
+    }
+
     private fun initUI() {
-        binding.rsVolumen.addOnChangeListener { _, value, _ ->
-            // Manejo del volumen...
-        }
-
-        binding.swDarkmode.setOnCheckedChangeListener { _, isChecked ->
+        binding.buttonSaveName.setOnClickListener {
             lifecycleScope.launch {
-                settingsDataStore.edit { preferences ->
-                    preferences[KEY_DARKMODE] = isChecked
-                }
-                applyTheme(this@SettingsActivity)
-                recreate()
-            }
-        }
-
-        binding.swBluetooth.setOnCheckedChangeListener { _, isChecked ->
-            lifecycleScope.launch {
-                settingsDataStore.edit { preferences ->
-                    preferences[KEY_BLUETOOTH] = isChecked
+                currentUserEmail?.let { email ->
+                    val name = binding.editTextName.text.toString()
+                    UserPreferencesManager.saveName(applicationContext, email, name)
                 }
             }
         }
 
-        binding.swVibracion.setOnCheckedChangeListener { _, isChecked ->
+        binding.buttonSaveAge.setOnClickListener {
             lifecycleScope.launch {
-                settingsDataStore.edit { preferences ->
-                    preferences[KEY_VIBRATION] = isChecked
+                currentUserEmail?.let { email ->
+                    val age = binding.editTextAge.text.toString()
+                    UserPreferencesManager.saveAge(applicationContext, email, age)
                 }
             }
+        }
+
+        binding.switchDarkMode.setOnCheckedChangeListener { _, isChecked ->
+            lifecycleScope.launch {
+                currentUserEmail?.let { email ->
+                    // Guardar en UserPreferencesManager (compartido con UserPreferencesActivity)
+                    UserPreferencesManager.saveDarkMode(applicationContext, email, isChecked)
+
+                    // Aplicar tema inmediatamente
+                    val mode = if (isChecked) AppCompatDelegate.MODE_NIGHT_YES else AppCompatDelegate.MODE_NIGHT_NO
+                    AppCompatDelegate.setDefaultNightMode(mode)
+                    recreate()
+                }
+            }
+        }
+
+        binding.switchNotifications.setOnCheckedChangeListener { _, isChecked ->
+            lifecycleScope.launch {
+                currentUserEmail?.let { email ->
+                    // Guardar en UserPreferencesManager (compartido con UserPreferencesActivity)
+                    UserPreferencesManager.saveNotifications(applicationContext, email, isChecked)
+                }
+            }
+        }
+
+        binding.buttonVolver.setOnClickListener {
+            finish()
         }
     }
 }

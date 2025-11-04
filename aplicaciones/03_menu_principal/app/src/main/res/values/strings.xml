@@ -1,3 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">03_menu_principal</string>
+    <string name="app_name">03_Menu_Principal</string>
+    <string name="login_title">Iniciar Sesión</string>
+    <string name="hint_email">Email</string>
+    <string name="hint_password">Contraseña</string>
+    <string name="btn_login">Entrar</string>
 </resources>
+

@@ -8,6 +8,7 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
@@ -19,16 +20,25 @@ import org.iesch.a03_menu_principal.Quiz.quizmain
 import org.iesch.a03_menu_principal.databinding.ActivityMenuBinding
 import org.iesch.a03_menu_principal.datastore.LoginActivity
 import org.iesch.a03_menu_principal.datastore.LoginDataStore
+import org.iesch.a03_menu_principal.preferences.UserPreferencesActivity
+import org.iesch.a03_menu_principal.preferences.UserPreferencesManager
 import org.iesch.a03_menu_principal.settings.SettingsActivity
 import org.iesch.a03_menu_principal.superhero.RegisterActivity
 
 class MenuActivity : AppCompatActivity() {
     lateinit var binding: ActivityMenuBinding
+    private var currentUserEmail: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         // Aplicar tema antes de crear la vista
         lifecycleScope.launch {
-            SettingsActivity.applyTheme(this@MenuActivity)
+            currentUserEmail = LoginDataStore.getEmailFlow(applicationContext).first()
+            currentUserEmail?.let { email ->
+                val isDarkMode = UserPreferencesManager.getDarkModeFlow(applicationContext, email).first()
+                val mode = if (isDarkMode) AppCompatDelegate.MODE_NIGHT_YES else AppCompatDelegate.MODE_NIGHT_NO
+                AppCompatDelegate.setDefaultNightMode(mode)
+                delegate.applyDayNight()
+            }
         }
 
         super.onCreate(savedInstanceState)
@@ -41,7 +51,7 @@ class MenuActivity : AppCompatActivity() {
             insets
         }
 
-        // Si no hay sesión, mostramos diálogo de login simple (gestiona LoginDataStore internamente)
+        // Si no hay sesión, mostramos diálogo de login simple
         lifecycleScope.launch {
             val logged = LoginDataStore.isLoggedFlow(applicationContext).first()
             if (!logged) {
@@ -71,17 +81,31 @@ class MenuActivity : AppCompatActivity() {
         binding.btnsettings.setOnClickListener {
             irASettings()
         }
+        binding.btnUserPreferences.setOnClickListener {
+            irAUserPreferences()
+        }
 
-        // Logout button: clear LoginDataStore, SettingsDataStore and refresh la Activity
+        // Logout button: solo limpiar credenciales de login, mantener preferencias
         binding.btnLogout.setOnClickListener {
             lifecycleScope.launch {
-                // Clear both login credentials and settings
+                // Solo limpiar credenciales de login
                 LoginDataStore.clearCredentials(applicationContext)
-                SettingsActivity.clearSettings(applicationContext)
                 Toast.makeText(this@MenuActivity, "Sesión cerrada", Toast.LENGTH_SHORT).show()
                 // Volver a LoginActivity
                 startActivity(Intent(this@MenuActivity, LoginActivity::class.java))
                 finish()
+            }
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        // Recargar el tema cuando volvemos de Settings o UserPreferences
+        lifecycleScope.launch {
+            currentUserEmail?.let { email ->
+                val isDarkMode = UserPreferencesManager.getDarkModeFlow(applicationContext, email).first()
+                val mode = if (isDarkMode) AppCompatDelegate.MODE_NIGHT_YES else AppCompatDelegate.MODE_NIGHT_NO
+                AppCompatDelegate.setDefaultNightMode(mode)
             }
         }
     }
@@ -106,6 +130,7 @@ class MenuActivity : AppCompatActivity() {
                 } else {
                     lifecycleScope.launch {
                         LoginDataStore.saveCredentials(applicationContext, email, pass)
+                        currentUserEmail = email
                         binding.TVBienvenida.text = "Hola $email"
                     }
                 }
@@ -114,36 +139,38 @@ class MenuActivity : AppCompatActivity() {
 
         dialog.show()
     }
-}
 
+    private fun irASettings() {
+        val iraSettings = Intent(this, SettingsActivity::class.java)
+        startActivity(iraSettings)
+    }
 
+    private fun irAMenuFragments() {
+        val irAFragments = Intent(this, FragmentActivity::class.java)
+        startActivity(irAFragments)
+    }
 
+    private fun irARazasActivity() {
+        val irarazas = Intent(this, RazasApiActivity::class.java)
+        startActivity(irarazas)
+    }
 
-private fun MenuActivity.irASettings(){
-    val iraSettings = Intent(this, SettingsActivity::class.java)
-    startActivity(iraSettings)
-}
+    private fun iraquiz() {
+        val iraquizq = Intent(this, quizmain::class.java)
+        startActivity(iraquizq)
+    }
 
+    private fun calcularor() {
+        val iracalculadora = Intent(this, Calculadora::class.java)
+        startActivity(iracalculadora)
+    }
 
+    private fun superhero() {
+        val iracalculadora = Intent(this, RegisterActivity::class.java)
+        startActivity(iracalculadora)
+    }
 
-private fun MenuActivity.irAMenuFragments() {
-    val irAFragments = Intent(this, FragmentActivity::class.java)
-    startActivity(irAFragments)
-}
-private fun MenuActivity.irARazasActivity() {
-
-    val irarazas = Intent(this, RazasApiActivity::class.java)
-    startActivity(irarazas)
-}
-private fun MenuActivity.iraquiz(){
-    val iraquizq= Intent(this, quizmain::class.java)
-    startActivity(iraquizq)
-}
-private fun MenuActivity.calcularor(){
-    val iracalculadora = Intent(this, Calculadora::class.java)
-    startActivity(iracalculadora)
-}
-private fun MenuActivity.superhero(){
-    val iracalculadora = Intent(this, RegisterActivity::class.java)
-    startActivity(iracalculadora)
+    private fun irAUserPreferences() {
+        startActivity(Intent(this, UserPreferencesActivity::class.java))
+    }
 }

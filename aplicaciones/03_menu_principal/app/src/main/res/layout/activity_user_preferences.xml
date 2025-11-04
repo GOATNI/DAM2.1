@@ -68,13 +68,14 @@
         android:hint="Nombre"
         android:layout_marginBottom="8dp"/>
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/buttonSaveName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Guardar Nombre"
         android:layout_marginBottom="16dp"
-        style="@style/Widget.MaterialComponents.Button"/>
+        style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
+        app:cornerRadius="8dp"/>
 
     <EditText
         android:id="@+id/editTextAge"
@@ -84,13 +85,14 @@
         android:inputType="number"
         android:layout_marginBottom="8dp"/>
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/buttonSaveAge"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Guardar Edad"
         android:layout_marginBottom="16dp"
-        style="@style/Widget.MaterialComponents.Button"/>
+        style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
+        app:cornerRadius="8dp"/>
 
     <com.google.android.material.switchmaterial.SwitchMaterial
         android:id="@+id/switchDarkMode"
@@ -106,12 +108,13 @@
         android:text="Notificaciones"
         android:layout_marginBottom="16dp"/>
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/buttonVolver"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Volver"
         android:backgroundTint="#FF0000"
-        style="@style/Widget.MaterialComponents.Button"/>
+        style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
+        app:cornerRadius="8dp"/>
 
 </LinearLayout>

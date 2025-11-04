@@ -4,21 +4,19 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import org.iesch.a03_menu_principal.MenuActivity
 import org.iesch.a03_menu_principal.databinding.ActivityLoginBinding
-import org.iesch.a03_menu_principal.settings.SettingsActivity
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        // Aplicar tema antes de crear la vista
-        lifecycleScope.launch {
-            SettingsActivity.Companion.applyTheme(this@LoginActivity)
-        }
+        // FORZAR tema claro (blanco) SIEMPRE en el login
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
 
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
@@ -48,19 +46,12 @@ class LoginActivity : AppCompatActivity() {
                 startMenuActivity()
             }
         }
-
-        binding.btnSettings.setOnClickListener {
-            val intent = Intent(this, SettingsActivity::class.java)
-            startActivity(intent)
-        }
     }
 
     override fun onResume() {
         super.onResume()
-        // Volver a aplicar el tema cuando se regrese de Settings
-        lifecycleScope.launch {
-            SettingsActivity.Companion.applyTheme(this@LoginActivity)
-        }
+        // Asegurar que siempre esté en modo claro aunque vuelvas atrás
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
     }
 
     private fun startMenuActivity() {
