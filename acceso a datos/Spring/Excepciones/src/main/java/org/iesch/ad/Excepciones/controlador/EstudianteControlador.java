@@ -21,6 +21,7 @@ public class EstudianteControlador {
     EstudianteService estudianteService;
 
     @GetMapping
+    // @CrossOrigin(origins = "http://localhost")
     public ResponseEntity<List<EstudianteResponseDTO>> obtenerTodos () {
 
         List<EstudianteResponseDTO> studiantes = estudianteService.obtenerTodos();

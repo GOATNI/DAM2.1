@@ -92,78 +92,93 @@
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>📚 Lista de Estudiantes</h1>
-        
-        <button class="btn" onclick="cargarEstudiantes()">🔄 Recargar Estudiantes</button>
-        
-        <div id="error-message"></div>
-        <div id="loading" class="loading" style="display: none;">Cargando estudiantes...</div>
-        
-        <table id="tabla-estudiantes">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Nombre</th>
-                    <th>Apellidos</th>
-                </tr>
-            </thead>
-            <tbody id="tbody-estudiantes">
-                
-            </tbody>
-        </table>
-    </div>
-    <script>
+<div class="container">
+    <h1>📚 Lista de Estudiantes</h1>
 
-        //url de la api
-        const API_URL = "http://localhost:8080/api/estudiantes"
-        //funcion para cargar los estudianres
-        async function cargarEstudiantes() {
-            const tloading = document.getElementById(loading);
-            const errorMessage = document.getElementById(error-message);
-            const Body = document.getElementById(tbody-estudiantes);
-            //limiar mensaje 
-            errorMessage.innerHTML=' ';
-            Body.innerHTML=' ';
-            tloading.style.display ='block';
+    <button class="btn" onclick="cargarEstudiantes()">🔄 Recargar Estudiantes</button>
 
-            try {
-                //get a la api
-                const estudiantes =  await fetch(API_URL);
-                //ocultar loading
-                tloading.style.display = 'none'
-                if(estudiantes.lenght === 0){
-                    tbody.innerHTML = '<tr><td colspan ="3" class = "no-data"> no hay estudiantes.</td></tr>'
-                    return;
-                }
+    <div id="error-message"></div>
+    <div id="loading" class="loading" style="display: none;">Cargando estudiantes...</div>
 
-                estudiantes.forEach(estudiante => {
-                    const fila = document.createElement('tr');
-                    fil.innerHTML = `
-                    <td>${estudiante.id}</td>
-                    <td>${estudiante.nombre}</td>
-                    <td>${estudiante.apellidos}</td>
-                    `;
-                    Body.appendChild(fila);
-                })
-            } catch (error) {
-                tloading.style.display = "none";
+    <table id="tabla-estudiantes">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Apellidos</th>
 
-                errorMessage.innerHTML = `<div class="error"> <strong> error al cargar los datos </strong> ${error.message} </div>`;
-                console.error("error :"+error)
-                
+        </tr>
+        </thead>
+        <tbody id="tbody-estudiantes">
+        <!-- Los datos se cargarán aquí con JavaScript -->
+        </tbody>
+    </table>
+</div>
+
+<script>
+    //URL de la API
+    const API_URL  = "http://localhost:8080/api/estudiantes";
+
+    //Funcion para cargar los estudiantes
+    async function cargarEstudiantes() {
+        const loading = document.getElementById('loading');
+        const errorMessage = document.getElementById('error-message');
+        const tbody = document.getElementById('tbody-estudiantes');
+
+        //Limpiar mensajes anteriores
+        errorMessage.innerHTML='';
+        tbody.innerHTML='';
+        loading.style.display='block';
+
+        try{
+            //HAcer la petición get a la api
+            const response = await fetch(API_URL);
+
+            //VErificar si la respuesta es exitosa
+            if(!response.ok){
+                throw new Error (`Error HTTP: ${response.status}`)
             }
 
+            //Convertir a JSON
+
+            const estudiantes = await response.json();
+
+            //Ocultar el loading
+            loading.style.display = 'none';
+
+            //Si no hay estudiantes
+            if(estudiantes.length === 0) {
+                tbody.innerHTML= '<tr><td colspan="3" class="no-data"> no hay estudiantes registrados </td></tr>'
+
+                return;
+            }
+            //HAy datos, creamos las filas;
+            estudiantes.forEach(estudiante => {
+                const fila = document.createElement('tr');
+                fila.innerHTML = `
+                <td>${estudiante.id}</td>
+                <td>${estudiante.nombre}</td>
+                <td>${estudiante.apellidos}</td>`;
+                tbody.appendChild(fila);
+
+                });
+        }catch (error){
+            //OCulatar le loading
+               loading.style.display = 'none';
+
+               //Mostrar error:
+                  errorMessage.innerHTML=`<div class="error"> <strong> Error al cargar los datos </strong><br>
+                    ${error.message} <br>
+                    Asegurate que está corriendo el server.</div>`;
+                    console.error('Error: ', error);
         }
 
-        window.addEventListener("DOMContentLoaded",cargarEstudiantes)
+    }//ffuncion
 
+//Cargar los estudiantes
+    window.addEventListener('DOMContentLoaded', cargarEstudiantes);
 
+</script>
 
-
-    </script>
-
-
-   
 </body>
 </html>
