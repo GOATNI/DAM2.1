@@ -12,7 +12,20 @@
           "package_name": "org.iesch.firebasedam"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "719386752980-3qoc7phdifklh46v17r8ncrabdf7iget.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "org.iesch.firebasedam",
+            "certificate_hash": "bc0dc9ef50d773e407b98931223b42a690986310"
+          }
+        },
+        {
+          "client_id": "719386752980-jl5tuqoh1kr75urf90jf91v7pqfgo0jp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyDVJu2rrCbmzcKdtIVbqZZ_Brq5ApT0W_8"
@@ -20,7 +33,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "719386752980-jl5tuqoh1kr75urf90jf91v7pqfgo0jp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }

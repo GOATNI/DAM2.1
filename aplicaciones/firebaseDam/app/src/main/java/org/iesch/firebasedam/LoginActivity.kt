@@ -1,19 +1,28 @@
 package org.iesch.firebasedam
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.credentials.Credential
+import androidx.credentials.CredentialManager
+import androidx.credentials.CustomCredential
+import androidx.credentials.GetCredentialRequest
+import androidx.lifecycle.lifecycleScope
+import com.google.android.libraries.identity.googleid.GetGoogleIdOption
+import com.google.android.libraries.identity.googleid.GoogleIdTokenCredential
+import com.google.android.libraries.identity.googleid.GoogleIdTokenCredential.Companion.TYPE_GOOGLE_ID_TOKEN_CREDENTIAL
 import com.google.firebase.Firebase
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.analytics.analytics
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.auth
-
+import kotlinx.coroutines.launch
 import org.iesch.firebasedam.databinding.ActivityLoginBinding
 
 class LoginActivity : AppCompatActivity() {
@@ -50,7 +59,7 @@ class LoginActivity : AppCompatActivity() {
                     .addOnCompleteListener { logueo ->
                         if ( logueo.isSuccessful ){
                             // El usuario se ha logueado correctamente
-                            mostrarHomeActivity()
+                            mostrarHomeActivity( usuario, ProviderType.EMAILYCONTRASENA.toString() )
                         } else {
                             // Ha habido un error
                             mostrarError()
@@ -87,6 +96,64 @@ class LoginActivity : AppCompatActivity() {
             }
         }
 
+        binding.loginGoogleButton.setOnClickListener {
+            logueoConGoogle()
+        }
+
+    }
+
+    private fun logueoConGoogle() {
+        // Vamos a crearlo siguiendo la documentacion oficial
+        // Instanciamos una solicitud de inicio con Google
+        val googleIdOption = GetGoogleIdOption.Builder()
+            .setServerClientId(getString(R.string.web_client))
+            .setFilterByAuthorizedAccounts(true)
+            .build()
+        // Generamos la solicitud de credenciales
+        val request = GetCredentialRequest.Builder()
+            .addCredentialOption( googleIdOption )
+            .build()
+        // Obtenemos el CredentialManager y lanzamos la solicitud
+        lifecycleScope.launch {
+            try {
+                val credentialManager = CredentialManager.create( this@LoginActivity )
+                val result = credentialManager.getCredential(
+                    request = request,
+                    context = this@LoginActivity
+                )
+                handleSignIn(result.credential)
+            } catch (e: Exception ){
+                Log.e("DAM", "Error al obtener las credenciales: ${e.message}")
+            }
+        }
+    }
+
+    private fun handleSignIn(credential: Credential) {
+        // Check if credential is of type Google ID
+        if (credential is CustomCredential && credential.type == TYPE_GOOGLE_ID_TOKEN_CREDENTIAL) {
+            // Create Google ID Token
+            val googleIdTokenCredential = GoogleIdTokenCredential.createFrom(credential.data)
+
+            // Sign in to Firebase with using the token
+            firebaseAuthWithGoogle(googleIdTokenCredential.idToken)
+        } else {
+            Log.w("DAM", "Credential is not of type Google ID!")
+        }
+    }
+
+    private fun firebaseAuthWithGoogle(idToken: String) {
+        val credential = GoogleAuthProvider.getCredential(idToken, null)
+        auth.signInWithCredential(credential)
+            .addOnCompleteListener(this) { task ->
+                if (task.isSuccessful) {
+                    // Aqui ya nos hemos logueado con Google de manera exitosa
+                    Log.d("DAM", "signInWithCredential:success")
+                    val user = auth.currentUser
+                    mostrarHomeActivity( user?.email.toString(), ProviderType.GOOGLE.toString() )
+                } else {
+                    Log.e("DAM", "Error al loguearnos con Google")
+                }
+            }
     }
 
     private fun mostrarRegistroCorrecto() {
@@ -119,23 +186,28 @@ class LoginActivity : AppCompatActivity() {
         dialog.show()
     }
 
-    private fun mostrarHomeActivity() {
+    private fun mostrarHomeActivity( usuario: String, provider: String ) {
         val intent = Intent(this, HomeActivity::class.java)
+        intent.putExtra("usuario", usuario)
+        intent.putExtra("provider", provider)
         startActivity( intent )
-        finish()
+
     }
-    /*
-        override fun onStart() {
-            super.onStart()
-            // Compruebo si el usuario ya ha accedido
-            val usuarioActual = auth.currentUser
-            if (usuarioActual != null) {
-                // Si el usuario actial es diferente de null, estará logueado
-                val intent = Intent( this, HomeActivity::class.java)
-                startActivity( intent )
-                finish()
+
+    override fun onStart() {
+        super.onStart()
+        // Compruebo si el usuario ya ha accedido
+        val usuarioActual = auth.currentUser
+        if (usuarioActual != null) {
+            // Si el usuario actial es diferente de null, estará logueado
+            val intent = Intent( this, HomeActivity::class.java)
+            val nombre = usuarioActual.let {
+                it.email
             }
-        }*/
+            intent.putExtra("usuario", nombre)
+            startActivity( intent )
+        }
+    }
 
     private fun iniciarAnalytics() {
         firebaseAnalytics = Firebase.analytics
