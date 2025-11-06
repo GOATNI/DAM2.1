@@ -1,0 +1,21 @@
+meta {
+  name: updatecoche copy
+  type: http
+  seq: 5
+}
+
+put {
+  url: http://127.0.0.1:8080/api/coche/1
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "marca" : "Tesla",
+    "modelo" : "3",
+    "matricula" : "8746kjh",
+    "cilindrada" : 0,
+    "potencia"   : 321
+  }
+}

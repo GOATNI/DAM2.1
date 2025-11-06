@@ -1,0 +1,21 @@
+meta {
+  name: guardarcoche
+  type: http
+  seq: 1
+}
+
+post {
+  url: http://127.0.0.1:8080/api/coche
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "marca" : "Seat",
+    "modelo" : "Exes",
+    "matricula" : "8746kjh",
+    "cilindrada" : 1854.61,
+    "potencia"   : 110
+  }
+}
