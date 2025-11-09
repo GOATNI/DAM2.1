@@ -1,41 +1,41 @@
 {
   "project_info": {
-    "project_number": "97860438603",
-    "project_id": "menuapp-79f60",
-    "storage_bucket": "menuapp-79f60.firebasestorage.app"
+    "project_number": "885007185843",
+    "project_id": "menu-5ed05",
+    "storage_bucket": "menu-5ed05.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:97860438603:android:67fd8bee16fbfc25589bce",
+        "mobilesdk_app_id": "1:885007185843:android:4c966ad3f2ac19ab9a3dc6",
         "android_client_info": {
-          "package_name": "iesch.org"
+          "package_name": "org.iesch.a03_menu_principal"
         }
       },
       "oauth_client": [
         {
-          "client_id": "97860438603-t9e3r98lvdguc28lnfspr1vu3fgjvpl2.apps.googleusercontent.com",
+          "client_id": "885007185843-umhbigvp0g4fsprrca9suacmif8nan47.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "iesch.org",
+            "package_name": "org.iesch.a03_menu_principal",
             "certificate_hash": "f120b07a55b6ac683b89303f8907b649b7d41b9a"
           }
         },
         {
-          "client_id": "97860438603-1ulq6t3c1n84p7fgmrmkgkq7dekbeehu.apps.googleusercontent.com",
+          "client_id": "885007185843-nv36voo8jd1unb0refsdrkqkgkoqs97r.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBMNUzAz6xsfQNaos_2T0bGaIL_WAPK2gw"
+          "current_key": "AIzaSyDSvKHngy67xBPljT8egZqKaEtrBYUCAd8"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "97860438603-1ulq6t3c1n84p7fgmrmkgkq7dekbeehu.apps.googleusercontent.com",
+              "client_id": "885007185843-nv36voo8jd1unb0refsdrkqkgkoqs97r.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

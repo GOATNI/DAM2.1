@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import org.iesch.a03_menu_principal.ApiRazas.RazasApiActivity
@@ -51,18 +52,21 @@ class MenuActivity : AppCompatActivity() {
             insets
         }
 
-        // Si no hay sesión, mostramos diálogo de login simple
+        // Verificar sesión y mostrar bienvenida
         lifecycleScope.launch {
             val logged = LoginDataStore.isLoggedFlow(applicationContext).first()
             if (!logged) {
-                showLoginDialog()
+                // Si no hay sesión, redirigir a LoginActivity
+                startActivity(Intent(this@MenuActivity, LoginActivity::class.java))
+                finish()
                 return@launch
             }
-            // si está logueado, mostramos el email/nombre guardado
+            // Si está logueado, mostrar el email/nombre guardado
             val email = LoginDataStore.getEmailFlow(applicationContext).first() ?: "usuario"
             binding.TVBienvenida.text = "Hola $email"
         }
 
+        // Configurar botones de navegación
         binding.btnRazas.setOnClickListener {
             irARazasActivity()
         }
@@ -85,14 +89,28 @@ class MenuActivity : AppCompatActivity() {
             irAUserPreferences()
         }
 
-        // Logout button: solo limpiar credenciales de login, mantener preferencias
+        // LOGOUT: Limpia SOLO credenciales, NO preferencias
+        // Las preferencias de tema, idioma, etc. se mantienen en UserPreferencesManager
         binding.btnLogout.setOnClickListener {
             lifecycleScope.launch {
-                // Solo limpiar credenciales de login
+                // Cerrar sesión de Firebase
+                FirebaseAuth.getInstance().signOut()
+
+                // Limpiar SOLO credenciales de login
+                // IMPORTANTE: Las preferencias del usuario (tema, etc.) NO se borran
                 LoginDataStore.clearCredentials(applicationContext)
-                Toast.makeText(this@MenuActivity, "Sesión cerrada", Toast.LENGTH_SHORT).show()
+
+                Toast.makeText(
+                    this@MenuActivity,
+                    "Sesión cerrada. Tus preferencias se han guardado.",
+                    Toast.LENGTH_SHORT
+                ).show()
+
                 // Volver a LoginActivity
-                startActivity(Intent(this@MenuActivity, LoginActivity::class.java))
+                val intent = Intent(this@MenuActivity, LoginActivity::class.java).apply {
+                    flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                }
+                startActivity(intent)
                 finish()
             }
         }
@@ -108,36 +126,6 @@ class MenuActivity : AppCompatActivity() {
                 AppCompatDelegate.setDefaultNightMode(mode)
             }
         }
-    }
-
-    private fun showLoginDialog() {
-        val dlgView = LayoutInflater.from(this).inflate(R.layout.dialog_login, null)
-        val etEmail = dlgView.findViewById<EditText>(R.id.dlg_etEmail)
-        val etPassword = dlgView.findViewById<EditText>(R.id.dlg_etPassword)
-
-        val dialog = AlertDialog.Builder(this)
-            .setView(dlgView)
-            .setCancelable(false)
-            .setPositiveButton("Entrar") { d, _ ->
-                // validar y guardar
-                val email = etEmail.text.toString().trim()
-                val pass = etPassword.text.toString().trim()
-                if (email.isEmpty() || pass.isEmpty()) {
-                    Toast.makeText(this, "Completa todos los campos", Toast.LENGTH_SHORT).show()
-                    // volver a mostrar dialogo
-                    d.dismiss()
-                    showLoginDialog()
-                } else {
-                    lifecycleScope.launch {
-                        LoginDataStore.saveCredentials(applicationContext, email, pass)
-                        currentUserEmail = email
-                        binding.TVBienvenida.text = "Hola $email"
-                    }
-                }
-            }
-            .create()
-
-        dialog.show()
     }
 
     private fun irASettings() {

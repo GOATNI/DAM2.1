@@ -1,9 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">03_Menu_Principal</string>
-    <string name="login_title">Iniciar Sesión</string>
-    <string name="hint_email">Email</string>
-    <string name="hint_password">Contraseña</string>
-    <string name="btn_login">Entrar</string>
-</resources>
+    <!-- Títulos -->
+    <string name="app_name">Menu Principal</string>
+    <string name="login_title">Bienvenido</string>
+    <string name="login_subtitle">Inicia sesión para continuar</string>
 
+    <!-- Firebase Web Client ID para Google Sign-In -->
+    <string name="web_client">885007185843-nv36voo8jd1unb0refsdrkqkgkoqs97r.apps.googleusercontent.com</string>
+
+    <!-- Campos de entrada -->
+    <string name="hint_email">Correo electrónico</string>
+    <string name="hint_password">Contraseña</string>
+
+    <!-- Botones -->
+    <string name="btn_login">Iniciar Sesión</string>
+    <string name="btn_login_google">Continuar con Google</string>
+    <string name="btn_register">Registrarse</string>
+
+    <!-- Enlaces -->
+    <string name="forgot_password">¿Olvidaste tu contraseña?</string>
+    <string name="no_account">¿No tienes cuenta?</string>
+    <string name="register_here">Regístrate aquí</string>
+
+    <!-- Divisor -->
+    <string name="or">O</string>
+
+    <!-- Mensajes de error -->
+    <string name="error_empty_fields">Por favor, completa todos los campos</string>
+    <string name="error_login">Error al iniciar sesión. Verifica tu email y contraseña.</string>
+    <string name="error_register">Error al registrar usuario. Intenta con otro email.</string>
+    <string name="error_google">Error al iniciar sesión con Google</string>
+
+    <!-- Mensajes de éxito -->
+    <string name="success_register">Usuario registrado correctamente. Ya puedes iniciar sesión.</string>
+    <string name="success_password_reset">Se ha enviado un correo para restablecer tu contraseña</string>
+
+    <!-- Diálogos -->
+    <string name="dialog_error_title">Error</string>
+    <string name="dialog_success_title">Éxito</string>
+    <string name="dialog_accept">Aceptar</string>
+    <string name="dialog_cancel">Cancelar</string>
+
+    <!-- Reset Password -->
+    <string name="reset_password_title">Restablecer Contraseña</string>
+    <string name="reset_password_message">Ingresa tu correo electrónico para recibir un enlace de restablecimiento</string>
+</resources>
