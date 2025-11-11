@@ -1,11 +1,16 @@
 package org.iesch.firebasedam
 
+import android.Manifest
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.credentials.Credential
@@ -22,16 +27,32 @@ import com.google.firebase.analytics.analytics
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.auth
+import com.google.firebase.messaging.messaging
+import com.google.firebase.remoteconfig.FirebaseRemoteConfig
+import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings
+import com.google.firebase.remoteconfig.remoteConfig
+import com.google.firebase.remoteconfig.remoteConfigSettings
 import kotlinx.coroutines.launch
 import org.iesch.firebasedam.databinding.ActivityLoginBinding
+
+
 
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityLoginBinding
-
     private lateinit var firebaseAnalytics: FirebaseAnalytics
     private lateinit var auth: FirebaseAuth
 
+    //Launcher para solicitar permisos
+    private val requestPermissionLauncher = registerForActivityResult(
+        ActivityResultContracts.RequestPermission(),
+    ) { isGranted: Boolean ->
+        if (isGranted) {
+            Log.d("FCM", "Permiso de notificaciones concedido")
+        } else {
+            Log.d("FCM", "Permiso de notificaciones denegado")
+        }
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -42,58 +63,43 @@ class LoginActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-        iniciarAnalytics()
-        // 2 - Iniciamosla instancia de Firebase auth
         // Initialize Firebase Auth
         auth = Firebase.auth
+        // Analytics
+        iniciarAnalytics()
+        // Solicitar PErmisos de Notificaciones
+        solicitarPermisosPush()
+        // Notificaciones Push
+        notificacionesPush()
+
+        // Iniciamos los listeners para los botones
+        initUI()
+
+        //config remort
+        configuracionRemota();
+
+    }
+
+    private fun configuracionRemota() {
+        //lo recomendable es definir un valor por defecto para todos estos por defecto
+        val remoteConfig: FirebaseRemoteConfig = Firebase.remoteConfig
+        val configSettings = remoteConfigSettings {
+            FirebaseRemoteConfigSettings.Builder().minimumFetchIntervalInSeconds
+        }
+       remoteConfig.setConfigSettingsAsync(configSettings)
+
+
+
+    }
+
+    private fun initUI() {
 
         // Configuramos los listeners de los botones
         binding.loginButton.setOnClickListener {
-            // Comprobamos si hemos introducido email y contraseña
-            if ( binding.emailEditText.text.isNotEmpty() && binding.passwordEditText.text.isNotEmpty() ){
-                // Nos autenticamos con email y contraseña
-                val usuario = binding.emailEditText.text.toString()
-                val password = binding.passwordEditText.text.toString()
-                auth.signInWithEmailAndPassword( usuario, password )
-                    // Añadimos un listener para comprobar si el usuario se ha logueado correctamente o no
-                    .addOnCompleteListener { logueo ->
-                        if ( logueo.isSuccessful ){
-                            // El usuario se ha logueado correctamente
-                            mostrarHomeActivity( usuario, ProviderType.EMAILYCONTRASENA.toString() )
-                        } else {
-                            // Ha habido un error
-                            mostrarError()
-                        }
-                    }
-
-            } else {
-                // Avisamos al usuario que ha de rellenar los campos
-                avisoUsuario()
-            }
+            logueoConUsuarioYContrasena()
         }
-
         binding.registerButton.setOnClickListener {
-            // Comprobamos si hemos introducido email y contraseña
-            if ( binding.emailEditText.text.isNotEmpty() && binding.passwordEditText.text.isNotEmpty() ){
-                // Nos autenticamos con email y contraseña
-                val usuario = binding.emailEditText.text.toString()
-                val password = binding.passwordEditText.text.toString()
-                auth.createUserWithEmailAndPassword( usuario, password )
-                    // Añadimos un listener para comprobar si el usuario se ha registrado correctamente o no
-                    .addOnCompleteListener { registro ->
-                        if ( registro.isSuccessful ){
-                            // El usuario se ha registrado correctamente
-                            mostrarRegistroCorrecto()
-                        } else {
-                            // Ha habido un error
-                            mostrarError()
-                        }
-                    }
-
-            } else {
-                // Avisamos al usuario que ha de rellenar los campos
-                avisoUsuario()
-            }
+            registroConUsuarioYContrasena()
         }
 
         binding.loginGoogleButton.setOnClickListener {
@@ -102,12 +108,100 @@ class LoginActivity : AppCompatActivity() {
 
     }
 
+    private fun logueoConUsuarioYContrasena() {
+        // Comprobamos si hemos introducido email y contraseña
+        if ( binding.emailEditText.text.isNotEmpty() && binding.passwordEditText.text.isNotEmpty() ){
+            // Nos autenticamos con email y contraseña
+            val usuario = binding.emailEditText.text.toString()
+            val password = binding.passwordEditText.text.toString()
+            auth.signInWithEmailAndPassword( usuario, password )
+                // Añadimos un listener para comprobar si el usuario se ha logueado correctamente o no
+                .addOnCompleteListener { logueo ->
+                    if ( logueo.isSuccessful ){
+                        // El usuario se ha logueado correctamente
+                        mostrarHomeActivity( usuario, ProviderType.EMAILYCONTRASENA.toString() )
+                    } else {
+                        // Ha habido un error
+                        mostrarError()
+                    }
+                }
+        } else {
+            // Avisamos al usuario que ha de rellenar los campos
+            avisoUsuario()
+        }
+    }
+
+    private fun registroConUsuarioYContrasena() {
+        // Comprobamos si hemos introducido email y contraseña
+        if ( binding.emailEditText.text.isNotEmpty() && binding.passwordEditText.text.isNotEmpty() ){
+            // Nos autenticamos con email y contraseña
+            val usuario = binding.emailEditText.text.toString()
+            val password = binding.passwordEditText.text.toString()
+            auth.createUserWithEmailAndPassword( usuario, password )
+                // Añadimos un listener para comprobar si el usuario se ha registrado correctamente o no
+                .addOnCompleteListener { registro ->
+                    if ( registro.isSuccessful ){
+                        // El usuario se ha registrado correctamente
+                        mostrarRegistroCorrecto()
+                    } else {
+                        // Ha habido un error
+                        mostrarError()
+                    }
+                }
+
+        } else {
+            // Avisamos al usuario que ha de rellenar los campos
+            avisoUsuario()
+        }
+    }
+
+    private fun solicitarPermisosPush() {
+        // Solo necesitamos solicitar permiso en Android 13 (API 33) o superior
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            when {
+                ContextCompat.checkSelfPermission(
+                    this,
+                    Manifest.permission.POST_NOTIFICATIONS
+                ) == PackageManager.PERMISSION_GRANTED -> {
+                    // El permiso ya está concedido
+                    Log.d("FCM", "Permiso de notificaciones ya concedido")
+                }
+                else -> {
+                    // Solicitar el permiso
+                    requestPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
+                }
+            }
+        }
+    }
+
+    private fun notificacionesPush() {
+        // Vamos a obtener el token de registro
+        Firebase.messaging.token.addOnCompleteListener { task ->
+            if (task.isSuccessful){
+                val token = task.result
+                Log.d("FCM", "Token de registro: $token")
+            } else {
+                Log.d("FCM", "Error al obtener el token de registro")
+            }
+        }
+
+        // Me puedo suscribir por temas
+        Firebase.messaging.subscribeToTopic("RealMadrid")
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful ){
+                    Log.d("FCM", "Suscrito a Real Madrid")
+                } else {
+                    Log.d("FCM", "Error en la suscripcion a Real Madrid")
+                }
+            }
+    }
+
     private fun logueoConGoogle() {
         // Vamos a crearlo siguiendo la documentacion oficial
         // Instanciamos una solicitud de inicio con Google
         val googleIdOption = GetGoogleIdOption.Builder()
             .setServerClientId(getString(R.string.web_client))
-            .setFilterByAuthorizedAccounts(true)
+            .setFilterByAuthorizedAccounts(false)
             .build()
         // Generamos la solicitud de credenciales
         val request = GetCredentialRequest.Builder()
@@ -216,3 +310,5 @@ class LoginActivity : AppCompatActivity() {
         firebaseAnalytics.logEvent("LoginScreen", bundle)
     }
 }
+
+

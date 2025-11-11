@@ -7,6 +7,9 @@
     <color name="naranja_firebase">#FF5722</color>
     <color name="azul_firebase">#03A9F4</color>
     <color name="gris_firebase">#EAEBF1</color>
+    <color name="bg1">#0F2CCA</color>
+    <color name="bg2">#8DD726</color>
+    <color name="bg3">#FB2F1F</color>
 
 
 </resources>
