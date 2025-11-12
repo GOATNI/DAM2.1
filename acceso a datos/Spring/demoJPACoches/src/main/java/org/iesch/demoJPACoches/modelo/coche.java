@@ -22,5 +22,6 @@ public class coche {
     private String matricula;
     private float cilindrada;
     private int potencia;
+    private String color;
 
 }

@@ -46,5 +46,18 @@ public class CocheControlador {
         return ResponseEntity.noContent().build();
     }
 
+    @GetMapping("/buscarpor/{color}")
+    public  ResponseEntity<List<coche>> porcolor(@PathVariable String color){
+
+        return ResponseEntity.ok(cocheService.cochesporcolor(color));
+
+    }
+    @GetMapping("/buscarpor/{color}/{marca}")
+    public  ResponseEntity<List<coche>> porcolor(@PathVariable String color, @PathVariable String marca ){
+
+        return ResponseEntity.ok(cocheService.cochesporcolorymarca(color,marca));
+
+    }
+
 
 }

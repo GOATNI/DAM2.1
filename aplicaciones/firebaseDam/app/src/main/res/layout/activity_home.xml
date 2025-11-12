@@ -24,7 +24,7 @@
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:ems="10"
-        tools:text="Any@gmail.com"
+        tools:text="any@gmail.com"
         />
 
 
@@ -44,11 +44,85 @@
         android:layout_width="match_parent"
         android:layout_height="8dp" />
 
+    <EditText
+        android:id="@+id/addressEditText"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:ems="10"
+        android:hint="Calle, numero, piso"
+        />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="8dp" />
+    <EditText
+        android:id="@+id/phoneEditText"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:ems="10"
+        android:hint="Teléfono"
+        android:inputType="number"
+        />
+
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="8dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal">
+      <Button
+          android:id="@+id/recuperarButton"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_weight="1"
+          android:backgroundTint="@color/azul_firebase"
+          android:text="Recuperar" />
+    </LinearLayout>
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="8dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+      <Button
+          android:id="@+id/guardarButton"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_weight="1"
+          android:backgroundTint="@color/azul_firebase"
+          android:text="Guardar" />
+    </LinearLayout>
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="8dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+      <Button
+          android:id="@+id/eliminarButton"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_weight="1"
+          android:backgroundTint="@color/azul_firebase"
+          android:text="Eliminar" />
+    </LinearLayout>
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="8dp" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
       <Button
           android:id="@+id/logoutButton"
           android:layout_width="match_parent"
@@ -63,23 +137,28 @@
 
 
     <LinearLayout
+
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal">
+
       <Button
           android:id="@+id/optionalButton"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:layout_weight="1"
-          android:backgroundTint="@color/amarillo_firebase"
+          android:backgroundTint="@color/naranja_firebase"
           android:text="Menu especial" />
+
     </LinearLayout>
+
     <Space
         android:layout_width="match_parent"
         android:layout_height="8dp" />
 
-  </LinearLayout>
 
+
+  </LinearLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

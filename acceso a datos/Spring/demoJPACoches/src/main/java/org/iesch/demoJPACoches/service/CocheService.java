@@ -3,6 +3,9 @@ package org.iesch.demoJPACoches.service;
 import org.iesch.demoJPACoches.modelo.coche;
 import org.iesch.demoJPACoches.repositorio.CocheRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.NativeQuery;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -36,6 +39,15 @@ public class CocheService {
     public coche delete1(Long id) {
         coche cochebbdd = cocheRepositorio.findById(id).get();
         cocheRepositorio.delete(cochebbdd);
-        return cochebbdd ;
+        return null ;
     }
+
+    public List<coche> cochesporcolor(String color) {
+        return cocheRepositorio.findBycolor(color);
+    }
+
+    public List<coche> cochesporcolorymarca(String color, String marca) {
+        return cocheRepositorio.findBycolorandmarca(color,marca);
+    }
+
 }

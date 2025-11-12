@@ -1,22 +1,18 @@
 package org.iesch.firebasedam.Kotlin
 
-import android.R
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
+import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
-import android.widget.Toast
 import androidx.core.app.NotificationCompat
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import org.iesch.firebasedam.LoginActivity
-
-
-
 
 class MyFirebaseMessagingService : FirebaseMessagingService() {
 
@@ -40,7 +36,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
 
                 //Toast.makeText(this, message.notification?.title, Toast.LENGTH_LONG).show()
                 val intent = Intent(this, LoginActivity::class.java).apply {
-                     (Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                    flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                 }
                 val pendingIntent = PendingIntent.getActivity(
                     this,
@@ -49,10 +45,10 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
                     PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
                 )
 
-                val toast = Toast.makeText(
+                val toast = android.widget.Toast.makeText(
                     applicationContext,
                     "Título: ${it.title}\nCuerpo: ${it.body}",
-                    Toast.LENGTH_LONG
+                    android.widget.Toast.LENGTH_LONG
                 )
                 toast.show()
             }
@@ -71,7 +67,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
 
         // Intent para abrir la app al hacer clic
         val intent = Intent(this, LoginActivity::class.java).apply {
-             Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         }
         val pendingIntent = PendingIntent.getActivity(
             this,
@@ -82,7 +78,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
 
         // Crear notificación
         val notification = NotificationCompat.Builder(this, channelId)
-            .setSmallIcon(R.drawable.ic_dialog_info)
+            .setSmallIcon(android.R.drawable.ic_dialog_info)
             .setContentTitle(titulo)
             .setContentText(mensaje)
             .setPriority(NotificationCompat.PRIORITY_HIGH)
@@ -90,8 +86,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
             .setContentIntent(pendingIntent)
             .build()
 
-
-        val notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
+        val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
         // Crear canal de notificación para Android 8.0+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -103,13 +98,10 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
                 description = "Canal para notificaciones de Firebase"
             }
             notificationManager.createNotificationChannel(channel)
-
         }
-
 
         notificationManager.notify(notificationId, notification)
         Log.d("FCM", "Notificación mostrada: $titulo - $mensaje")
     }
-
 
 }
