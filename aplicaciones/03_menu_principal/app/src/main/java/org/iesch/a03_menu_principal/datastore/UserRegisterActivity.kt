@@ -164,9 +164,9 @@ class UserRegisterActivity : AppCompatActivity() {
             }
     }
 
-    // ============================================
+
     // NAVEGACIÓN
-    // ============================================
+
 
     private fun volverALogin() {
         finish() // Simplemente cierra esta actividad y vuelve al login
@@ -180,9 +180,9 @@ class UserRegisterActivity : AppCompatActivity() {
         finish()
     }
 
-    // ============================================
+
     // DIÁLOGOS
-    // ============================================
+
 
     private fun mostrarError(mensaje: String) {
         AlertDialog.Builder(this)
