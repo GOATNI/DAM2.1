@@ -1,0 +1,28 @@
+meta {
+  name: updateproducto
+  type: http
+  seq: 4
+}
+
+put {
+  url: http://localhost:8081/api/tienda/productos/6
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "id": 6,
+    "name": "Auriculares 2641",
+    "price": "59.99",
+    "descripcion": "Auriculares Bluetooth con cancelación pasiva de ruido.",
+    "category": "Electrónica",
+    "stock": "120"
+  }
+  
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

@@ -1,0 +1,16 @@
+meta {
+  name: getproductos
+  type: http
+  seq: 1
+}
+
+get {
+  url: http://localhost:8081/api/tienda/productos
+  body: none
+  auth: inherit
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}
