@@ -22,9 +22,10 @@ import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
 import com.google.firebase.auth.FirebaseAuthInvalidUserException
-import com.google.firebase.auth.FirebaseAuthUserCollisionException
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.auth
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.firestore
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import org.iesch.a03_menu_principal.MenuActivity
@@ -39,17 +40,17 @@ enum class ProviderType {
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
     private lateinit var auth: FirebaseAuth
+    private lateinit var firestore: FirebaseFirestore
 
     override fun onCreate(savedInstanceState: Bundle?) {
         // FORZAR tema claro (blanco) SIEMPRE en el login
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Inicializar Firebase Auth
+        // Inicializar Firebase Auth y Firestore
         auth = Firebase.auth
+        firestore = Firebase.firestore
 
         // Comprobar si ya hay sesión activa
         verificarSesionActiva()
@@ -69,9 +70,10 @@ class LoginActivity : AppCompatActivity() {
             logueoConGoogle()
         }
 
-        // Registro de nuevo usuario
+        // Ir a pantalla de registro (ahora es TextView)
         binding.registerButton.setOnClickListener {
-            mostrarDialogoRegistro()
+            val intent = Intent(this, UserRegisterActivity::class.java)
+            startActivity(intent)
         }
     }
 
@@ -82,12 +84,11 @@ class LoginActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
     }
 
-    // ============================================
+
     // VALIDACIÓN
-    // ============================================
+
 
     private fun validarCampos(email: String, password: String): Boolean {
         return when {
@@ -111,9 +112,9 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    // ============================================
+
     // SESIÓN ACTIVA
-    // ============================================
+
 
     private fun verificarSesionActiva() {
         lifecycleScope.launch {
@@ -126,9 +127,8 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    // ============================================
     // LOGIN CON EMAIL Y PASSWORD
-    // ============================================
+
 
     private fun loginConEmailPassword(email: String, password: String) {
         binding.loginButton.isEnabled = false
@@ -143,7 +143,7 @@ class LoginActivity : AppCompatActivity() {
                         LoginDataStore.saveCredentials(
                             context = applicationContext,
                             email = email,
-                            password = password,
+                            password = "", // Por seguridad
                             provider = ProviderType.EMAILYCONTRASENA.name
                         )
                         startMenuActivity()
@@ -160,62 +160,17 @@ class LoginActivity : AppCompatActivity() {
             }
     }
 
-    // ============================================
-    // REGISTRO (OPCIONAL)
-    // ============================================
 
-    private fun mostrarDialogoRegistro() {
-        val builder = AlertDialog.Builder(this)
-        builder.setTitle("Registrar Nueva Cuenta")
-        builder.setMessage("¿Deseas crear una cuenta con estos datos?")
-
-        builder.setPositiveButton("Registrar") { _, _ ->
-            val email = binding.emailEditText.text.toString().trim()
-            val password = binding.passwordEditText.text.toString().trim()
-
-            if (validarCampos(email, password)) {
-                registrarUsuario(email, password)
-            }
-        }
-
-        builder.setNegativeButton("Cancelar", null)
-        builder.create().show()
-    }
-
-    private fun registrarUsuario(email: String, password: String) {
-        binding.loginButton.isEnabled = false
-
-        auth.createUserWithEmailAndPassword(email, password)
-            .addOnCompleteListener(this) { task ->
-                binding.loginButton.isEnabled = true
-
-                if (task.isSuccessful) {
-                    Log.d("LoginActivity", "createUserWithEmail:success")
-                    mostrarExito("Usuario registrado correctamente. Ya puedes iniciar sesión.")
-                    binding.passwordEditText.text?.clear()
-                } else {
-                    Log.w("LoginActivity", "createUserWithEmail:failure", task.exception)
-                    val errorMessage = when (task.exception) {
-                        is FirebaseAuthUserCollisionException -> "Este correo ya está registrado"
-                        else -> "Error al registrar usuario. Intenta con otra contraseña."
-                    }
-                    mostrarError(errorMessage)
-                }
-            }
-    }
-
-    // ============================================
     // LOGIN CON GOOGLE
-    // ============================================
+
 
     private fun logueoConGoogle() {
         Log.d("LoginActivity", "Iniciando login con Google...")
 
-        // Construir opciones de Google ID
         val googleIdOption = GetGoogleIdOption.Builder()
             .setServerClientId(getString(R.string.web_client))
-            .setFilterByAuthorizedAccounts(false) // Permite seleccionar cualquier cuenta
-            .setAutoSelectEnabled(false) // Fuerza mostrar el selector de cuentas
+            .setFilterByAuthorizedAccounts(false)
+            .setAutoSelectEnabled(false)
             .build()
 
         val request = GetCredentialRequest.Builder()
@@ -233,19 +188,15 @@ class LoginActivity : AppCompatActivity() {
                 Log.d("LoginActivity", "Credenciales obtenidas exitosamente")
                 handleSignIn(result.credential)
             } catch (e: NoCredentialException) {
-                // No hay cuentas de Google disponibles en el dispositivo
                 Log.e("LoginActivity", "NoCredentialException: ${e.message}")
                 mostrarDialogoNoGoogleAccount()
             } catch (e: GetCredentialCancellationException) {
-                // El usuario canceló la selección de cuenta
                 Log.w("LoginActivity", "Usuario canceló el login con Google")
                 Toast.makeText(this@LoginActivity, "Login cancelado", Toast.LENGTH_SHORT).show()
             } catch (e: GetCredentialException) {
-                // Error general al obtener credenciales
                 Log.e("LoginActivity", "GetCredentialException: ${e.message}", e)
                 mostrarError("Error al obtener credenciales de Google.\n\nAsegúrate de tener una cuenta de Google configurada en tu dispositivo.")
             } catch (e: Exception) {
-                // Cualquier otro error
                 Log.e("LoginActivity", "Error inesperado: ${e.message}", e)
                 mostrarError("Error inesperado al iniciar sesión con Google")
             }
@@ -279,34 +230,60 @@ class LoginActivity : AppCompatActivity() {
                     Log.d("LoginActivity", "signInWithCredential:success")
                     val user = auth.currentUser
                     val email = user?.email ?: ""
+                    val userId = user?.uid ?: ""
 
-                    lifecycleScope.launch {
-                        LoginDataStore.saveCredentials(
-                            context = applicationContext,
-                            email = email,
-                            password = "", // No password for Google login
-                            provider = ProviderType.GOOGLE.name
-                        )
-                        Toast.makeText(
-                            this@LoginActivity,
-                            "¡Bienvenido, $email!",
-                            Toast.LENGTH_SHORT
-                        ).show()
-                        startMenuActivity()
-                    }
+                    // Verificar si el usuario ya existe en Firestore
+                    firestore.collection("users").document(userId).get()
+                        .addOnSuccessListener { document ->
+                            if (!document.exists()) {
+                                // Usuario nuevo de Google, crear entrada en Firestore
+                                val userData = hashMapOf(
+                                    "nombre" to (user?.displayName ?: "Usuario Google"),
+                                    "email" to email,
+                                    "fechaRegistro" to com.google.firebase.Timestamp.now()
+                                )
+                                firestore.collection("users").document(userId).set(userData)
+                            }
+
+                            lifecycleScope.launch {
+                                LoginDataStore.saveCredentials(
+                                    context = applicationContext,
+                                    email = email,
+                                    password = "",
+                                    provider = ProviderType.GOOGLE.name
+                                )
+                                Toast.makeText(
+                                    this@LoginActivity,
+                                    "¡Bienvenido, $email!",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                                startMenuActivity()
+                            }
+                        }
+                        .addOnFailureListener { e ->
+                            Log.e("LoginActivity", "Error verificando usuario en Firestore", e)
+                            // Continuar con el login aunque falle Firestore
+                            lifecycleScope.launch {
+                                LoginDataStore.saveCredentials(
+                                    context = applicationContext,
+                                    email = email,
+                                    password = "",
+                                    provider = ProviderType.GOOGLE.name
+                                )
+                                startMenuActivity()
+                            }
+                        }
                 } else {
                     Log.e("LoginActivity", "Error al autenticar con Firebase", task.exception)
-                    val errorMessage = when (task.exception?.message) {
-                        else -> "Error al iniciar sesión con Google.\n\n${task.exception?.message}"
-                    }
+                    val errorMessage = "Error al iniciar sesión con Google.\n\n${task.exception?.message}"
                     mostrarError(errorMessage)
                 }
             }
     }
 
-    // ============================================
+
     // DIÁLOGO ESPECIAL PARA NO GOOGLE ACCOUNT
-    // ============================================
+
 
     private fun mostrarDialogoNoGoogleAccount() {
         AlertDialog.Builder(this)
@@ -328,9 +305,8 @@ class LoginActivity : AppCompatActivity() {
             .show()
     }
 
-    // ============================================
     // NAVEGACIÓN
-    // ============================================
+
 
     private fun startMenuActivity() {
         val intent = Intent(this, MenuActivity::class.java).apply {
@@ -340,22 +316,13 @@ class LoginActivity : AppCompatActivity() {
         finish()
     }
 
-    // ============================================
+
     // DIÁLOGOS
-    // ============================================
+
 
     private fun mostrarError(mensaje: String) {
         AlertDialog.Builder(this)
             .setTitle("Error")
-            .setMessage(mensaje)
-            .setPositiveButton("Aceptar", null)
-            .create()
-            .show()
-    }
-
-    private fun mostrarExito(mensaje: String) {
-        AlertDialog.Builder(this)
-            .setTitle("Éxito")
             .setMessage(mensaje)
             .setPositiveButton("Aceptar", null)
             .create()

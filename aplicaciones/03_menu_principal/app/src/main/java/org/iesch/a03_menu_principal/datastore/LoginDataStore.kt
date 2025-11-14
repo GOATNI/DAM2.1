@@ -18,25 +18,29 @@ object LoginDataStore {
     private val KEY_PASSWORD = stringPreferencesKey("password")
     private val KEY_PROVIDER = stringPreferencesKey("provider")
     private val KEY_LOGGED = booleanPreferencesKey("logged_in")
+    private val KEY_USER_ID = stringPreferencesKey("user_id")
 
     /**
      * Guarda las credenciales del usuario y el proveedor de autenticación
-     * @param context Contexto de la aplicación
-     * @param email Email del usuario
-     * @param password Contraseña (vacío para Google login)
-     * @param provider Tipo de proveedor (EMAILYCONTRASENA o GOOGLE)
+     * context Contexto de la aplicación
+     * email Email del usuario
+     * password Contraseña (vacío para Google login)
+     * provider Tipo de proveedor (EMAILYCONTRASENA o GOOGLE)
+     * userId ID del usuario en Firebase (opcional)
      */
     suspend fun saveCredentials(
         context: Context,
         email: String,
         password: String,
-        provider: String
+        provider: String,
+        userId: String? = null
     ) {
         context.loginDataStore.edit { prefs ->
             prefs[KEY_EMAIL] = email
             prefs[KEY_PASSWORD] = password
             prefs[KEY_PROVIDER] = provider
             prefs[KEY_LOGGED] = true
+            userId?.let { prefs[KEY_USER_ID] = it }
         }
     }
 
@@ -65,6 +69,14 @@ object LoginDataStore {
         }
 
     /**
+     * Obtiene el ID del usuario
+     */
+    fun getUserIdFlow(context: Context): Flow<String?> =
+        context.loginDataStore.data.map { prefs ->
+            prefs[KEY_USER_ID]
+        }
+
+    /**
      * Limpia solo las credenciales de login
      * IMPORTANTE: No toca las preferencias del usuario (tema, idioma, etc.)
      * que están en UserPreferencesManager
@@ -74,6 +86,7 @@ object LoginDataStore {
             prefs.remove(KEY_EMAIL)
             prefs.remove(KEY_PASSWORD)
             prefs.remove(KEY_PROVIDER)
+            prefs.remove(KEY_USER_ID)
             prefs[KEY_LOGGED] = false
         }
     }

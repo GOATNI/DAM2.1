@@ -14,37 +14,59 @@
         android:supportsRtl="true"
         android:theme="@style/Base.Theme._03_Menu_Principal">
 
-        <!-- Configurar LoginActivity como la actividad principal -->
+        <!-- Login Activity - TEMA CLARO (Actividad principal/launcher) -->
         <activity
             android:name=".datastore.LoginActivity"
-            android:exported="true">
+            android:exported="true"
+            android:theme="@style/Theme.Login"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
+        <!-- User Register Activity - TEMA CLARO -->
+        <activity
+            android:name=".datastore.UserRegisterActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Login"
+            android:screenOrientation="fullSensor" />
+
+        <!-- Menu Activity -->
         <activity
             android:name=".MenuActivity"
             android:exported="false" />
+
+        <!-- Cine -->
         <activity
             android:name=".cine.ListaPeliculasActivity"
             android:exported="false" />
+
+        <!-- Settings -->
         <activity
             android:name=".settings.SettingsActivity"
             android:exported="false" />
+
+        <!-- Fragments -->
         <activity
             android:name=".Fragments.FragmentActivity"
             android:exported="false" />
+
+        <!-- Superhero -->
         <activity
             android:name=".superhero.detalle.DetalleHeroeActivity"
             android:exported="false" />
         <activity
             android:name=".superhero.RegisterActivity"
             android:exported="false" />
+
+        <!-- Calculadora -->
         <activity
             android:name=".Calculadora"
             android:exported="false" />
+
+        <!-- Quiz -->
         <activity
             android:name=".Quiz.quizmain"
             android:exported="false" />
@@ -54,13 +76,18 @@
         <activity
             android:name=".Quiz.Finish"
             android:exported="false" />
+
+        <!-- API Razas -->
         <activity
             android:name=".ApiRazas.RazasApiActivity"
             android:exported="false" />
+
+        <!-- Preferences -->
         <activity
             android:name=".preferences.UserPreferencesActivity"
             android:exported="false" />
 
+        <!-- File Provider -->
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.provider"
