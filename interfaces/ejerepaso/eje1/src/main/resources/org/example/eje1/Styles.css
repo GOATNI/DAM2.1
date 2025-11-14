@@ -1,0 +1,82 @@
+.check-box .box {
+    -fx-text-fill: #8fb5e1
+}
+.check-box:selected .mark {
+    -fx-border-color: #eddfa2;
+    -fx-background-color: #ea9999;
+    -fx-background-radius: 10px;
+}
+.check-box:selected .box {
+    -fx-border-color: #2be1ce;
+}
+.radio-button {
+    -fx-text-fill: #333333;
+}
+
+.radio-button .radio {
+    -fx-border-color: #efeeeb;
+    -fx-background-color: #271515;
+
+}
+
+.radio-button:selected .radio {
+    -fx-border-color: #91bdf1;
+}
+
+.radio-button:selected .dot {
+    -fx-background-color: #58cabc;
+    -fx-background-radius: 10px;
+}
+
+
+
+.slider .track {
+    -fx-control-inner-background: #d1d1d0;
+    -fx-background-color: linear-gradient(to top, derive(-fx-control-inner-background, -10%), derive(-fx-control-inner-background, 10%));
+    -fx-background-insets: 0;
+    -fx-background-radius: 2px;
+}
+
+.slider .thumb {
+    -fx-background-color: #da1bcc;
+    -fx-background-radius: 10px;
+    -fx-padding: 8px;
+}
+
+
+
+.toggle-button {
+    -fx-background-color: #cc6868;
+    -fx-border-color: #000000;
+    -fx-text-fill: #e1dde1;
+    -fx-background-radius: 4px;
+    -fx-border-radius: 4px;
+}
+
+.toggle-button:selected {
+    -fx-background-color: #61df0f;
+    -fx-text-fill: #000000;
+    -fx-border-color: #b3a58e;
+}
+
+
+
+.progress-bar .track {
+    -fx-background-color: #2fcd74;
+    -fx-background-radius: 4px;
+}
+
+.progress-bar .bar {
+    -fx-background-color: #048014;
+    -fx-background-insets: 0;
+    -fx-background-radius: 4px;
+}
+
+
+
+.progress-indicator {
+    -fx-progress-color: #FF0000;
+}
+
+
+
