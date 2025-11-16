@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 13 - Formato de Fecha Largo</title>
+    <script>
+        function formatoLargo(fecha) {
+            const diasSemana = ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
+            const meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+
+            const diaSemana = diasSemana[fecha.getDay()];
+            const dia = fecha.getDate();
+            const mes = meses[fecha.getMonth()];
+            const anio = fecha.getFullYear();
+
+            return `${diaSemana}, ${dia} de ${mes} de ${anio}`;
+        }
+
+        function mostrarFecha() {
+            // Usamos una fecha de ejemplo como pide el enunciado
+            const fechaEjemplo = new Date(2015, 10, 26); // 26 de Noviembre de 2015
+            const fechaFormateada = formatoLargo(fechaEjemplo);
+
+            // También podemos hacerlo con la fecha actual
+            const fechaActual = new Date();
+            const fechaActualFormateada = formatoLargo(fechaActual);
+
+            document.getElementById('resultado').innerHTML = 
+                `<h2>Fecha de Ejemplo</h2>
+                 <p>Objeto Date: <code>new Date(2015, 10, 26)</code></p>
+                 <p>Resultado: <strong>${fechaFormateada}</strong></p>
+                 <hr>
+                 <h2>Fecha Actual</h2>
+                 <p>Objeto Date: <code>new Date()</code></p>
+                 <p>Resultado: <strong>${fechaActualFormateada}</strong></p>`;
+        }
+    </script>
+</head>
+<body onload="mostrarFecha()">
+    <h1>Formato de Fecha Largo</h1>
+    <div id="resultado"></div>
+</body>
+</html>

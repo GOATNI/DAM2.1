@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 2 - Validación de Email</title>
+    <style>
+        .error {
+            color: red;
+            font-size: 0.8em;
+        }
+        .valid {
+            border: 2px solid green;
+        }
+        .invalid {
+            border: 2px solid red;
+        }
+    </style>
+</head>
+<body>
+    <h1>Validación de Email en Formulario</h1>
+    <form id="emailForm">
+        <label for="emailInput">Introduce tu Email:</label>
+        <input type="text" id="emailInput" name="email" placeholder="ejemplo@dominio.com" required>
+        <span id="emailError" class="error"></span>
+        <br><br>
+        <button type="submit">Enviar</button>
+    </form>
+
+    <h2>Gestionar Servidores Admitidos</h2>
+    <form id="addServerForm">
+        <label for="serverInput">Añadir nuevo dominio:</label>
+        <input type="text" id="serverInput" name="server" placeholder="ej: midominio.com" required>
+        <button type="submit" id="addServerButton">Añadir Dominio</button>
+        <span id="serverError" class="error"></span>
+    </form>
+
+    <h3>Lista de Servidores Admitidos:</h3>
+    <ul id="serverList"></ul>
+
+    <script src="ejercicio2.js"></script>
+</body>
+</html>

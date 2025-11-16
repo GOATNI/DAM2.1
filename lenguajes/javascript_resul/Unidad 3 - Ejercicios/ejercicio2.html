@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 2 - Validar DNI</title>
+    <script>
+        function validarDNI() {
+            const letras = ['T', 'R', 'W', 'A', 'G', 'M', 'Y', 'F', 'P', 'D', 'X', 'B', 'N', 'J', 'Z', 'S', 'Q', 'V', 'H', 'L', 'C', 'K', 'E', 'T'];
+            let dniInput = prompt("Introduce tu DNI (número y letra, por ejemplo, 12345678A):");
+
+            if (!dniInput) {
+                document.getElementById('resultado').innerHTML = "<p>No se introdujo ningún DNI.</p>";
+                return;
+            }
+
+            dniInput = dniInput.toUpperCase();
+            const numeroDNI = dniInput.substring(0, dniInput.length - 1);
+            const letraDNI = dniInput.substring(dniInput.length - 1);
+
+            if (!/^\d{8}$/.test(numeroDNI) || !/^[A-Z]$/.test(letraDNI)) {
+                document.getElementById('resultado').innerHTML = `<p>El formato del DNI "${dniInput}" no es válido. Debe tener 8 números y una letra.</p>`;
+                return;
+            }
+
+            const resto = numeroDNI % 23;
+            const letraCalculada = letras[resto];
+
+            if (letraCalculada === letraDNI) {
+                document.getElementById('resultado').innerHTML = `<p>El DNI "${dniInput}" es válido.</p>`;
+            } else {
+                document.getElementById('resultado').innerHTML = `<p>El DNI "${dniInput}" no es válido. La letra correcta es ${letraCalculada}.</p>`;
+            }
+        }
+    </script>
+</head>
+<body onload="validarDNI()">
+    <h1>Validación de DNI</h1>
+    <div id="resultado"></div>
+</body>
+</html>

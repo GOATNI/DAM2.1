@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 10 - Validar Fecha</title>
+    <script>
+        function validarFecha() {
+            let fechaStr = prompt("Introduce una fecha en formato dd-mm-aaaa:");
+
+            if (!fechaStr) {
+                document.getElementById('resultado').innerHTML = "<p>No se introdujo ninguna fecha.</p>";
+                return;
+            }
+
+            const formatoValido = /^\d{2}-\d{2}-\d{4}$/.test(fechaStr);
+            if (!formatoValido) {
+                document.getElementById('resultado').innerHTML = `<p>El formato de la fecha "${fechaStr}" es incorrecto. Debe ser dd-mm-aaaa.</p>`;
+                return;
+            }
+
+            const partes = fechaStr.split('-');
+            const dia = parseInt(partes[0], 10);
+            const mes = parseInt(partes[1], 10);
+            const anio = parseInt(partes[2], 10);
+
+            if (mes < 1 || mes > 12) {
+                document.getElementById('resultado').innerHTML = `<p>La fecha "${fechaStr}" no es válida (mes incorrecto).</p>`;
+                return;
+            }
+
+            const diasEnMes = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+            
+            // Comprobar año bisiesto
+            const esBisiesto = (anio % 4 === 0 && anio % 100 !== 0) || (anio % 400 === 0);
+            if (esBisiesto) {
+                diasEnMes[1] = 29;
+            }
+
+            if (dia < 1 || dia > diasEnMes[mes - 1]) {
+                document.getElementById('resultado').innerHTML = `<p>La fecha "${fechaStr}" no es válida (día incorrecto para el mes).</p>`;
+                return;
+            }
+
+            document.getElementById('resultado').innerHTML = `<p>La fecha "${fechaStr}" es correcta.</p>`;
+        }
+    </script>
+</head>
+<body onload="validarFecha()">
+    <h1>Validador de Fechas (sin objeto Date)</h1>
+    <div id="resultado"></div>
+</body>
+</html>

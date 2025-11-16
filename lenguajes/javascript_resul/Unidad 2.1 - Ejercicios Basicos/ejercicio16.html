@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 16: Horario Escolar</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+        }
+        table {
+            border-collapse: collapse;
+            width: 90%;
+            max-width: 800px;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: center;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .time-slot {
+            font-weight: bold;
+            background-color: #e0e0e0;
+        }
+        .date-header {
+            background-color: #cceeff;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Ejercicio 16: Horario Escolar</h1>
+
+    <div id="horario-container"></div>
+
+    <script>
+        // 16. Crea un script que genere un horario similar a este:
+        // let horario=[
+        //             ["IPPE", "PROY", "IPPE", "AD", "SGE"],
+        //             ["DI", "SGE", "AD", "AD", "SGE"],
+        //             ["DI", "SGE", "AD", "AD", "SASP"],
+        //             ["RECREO","RECREO","RECREO","RECREO","RECREO"],
+        //             ["DWC", "PMDM", "PMDM", "PROY", "DI"],
+        //             ["DWC", "PMDM", "PMDM", "PSP", "DI"],
+        //             ["DWC", "PMDM", "PMDM", "PSP", "DI"]
+        //         ];
+        // - Usa un array bidimensional para guardar los datos que vas a mostrar. Sin horas ni días.
+        // - Usa objetos Date para mostrar las fechas.
+        // - Las horas de la primera columna, se deben de calcular.
+
+        let horarioMaterias = [
+            ["IPPE", "PROY", "IPPE", "AD", "SGE"],
+            ["DI", "SGE", "AD", "AD", "SGE"],
+            ["DI", "SGE", "AD", "AD", "SASP"],
+            ["RECREO", "RECREO", "RECREO", "RECREO", "RECREO"],
+            ["DWC", "PMDM", "PMDM", "PROY", "DI"],
+            ["DWC", "PMDM", "PMDM", "PSP", "DI"],
+            ["DWC", "PMDM", "PMDM", "PSP", "DI"]
+        ];
+
+        const diasSemana = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes"];
+        const horaInicio = 8; // 8 AM
+        const duracionClaseMinutos = 55;
+        const duracionRecreoMinutos = 30;
+
+        function formatTime(hour, minute) {
+            return `${String(hour).padStart(2, '0')}:${String(minute).padStart(2, '0')}`;
+        }
+
+        function generarHorario() {
+            let horarioHTML = "<table><thead><tr>";
+            horarioHTML += "<th>Hora</th>"; // Columna para las horas
+
+            // Encabezados de días de la semana con fechas
+            let hoy = new Date();
+            let diaActual = hoy.getDay(); // 0 = Domingo, 1 = Lunes, ..., 6 = Sábado
+            let diff = hoy.getDate() - diaActual + (diaActual === 0 ? -6 : 1); // Ajustar al lunes de esta semana
+            let lunesDeEstaSemana = new Date(hoy.setDate(diff));
+
+            for (let i = 0; i < diasSemana.length; i++) {
+                let fechaDia = new Date(lunesDeEstaSemana);
+                fechaDia.setDate(lunesDeEstaSemana.getDate() + i);
+                let dia = String(fechaDia.getDate()).padStart(2, '0');
+                let mes = String(fechaDia.getMonth() + 1).padStart(2, '0'); // getMonth() es 0-indexado
+                horarioHTML += `<th class="date-header">${diasSemana[i]}<br>${dia}/${mes}</th>`;
+            }
+            horarioHTML += "</tr></thead><tbody>";
+
+            let currentHour = horaInicio;
+            let currentMinute = 0;
+
+            for (let i = 0; i < horarioMaterias.length; i++) {
+                horarioHTML += "<tr>";
+
+                // Calcular y añadir la hora de la fila
+                let horaInicioSlot = formatTime(currentHour, currentMinute);
+                let duracion = (i === 3) ? duracionRecreoMinutos : duracionClaseMinutos; // Recreo es la 4ª fila (index 3)
+                currentMinute += duracion;
+                if (currentMinute >= 60) {
+                    currentHour += Math.floor(currentMinute / 60);
+                    currentMinute %= 60;
+                }
+                let horaFinSlot = formatTime(currentHour, currentMinute);
+                horarioHTML += `<td class="time-slot">${horaInicioSlot} - ${horaFinSlot}</td>`;
+
+                // Añadir las materias/actividades
+                for (let j = 0; j < horarioMaterias[i].length; j++) {
+                    horarioHTML += `<td>${horarioMaterias[i][j]}</td>`;
+                }
+                horarioHTML += "</tr>";
+            }
+
+            horarioHTML += "</tbody></table>";
+            document.getElementById("horario-container").innerHTML = horarioHTML;
+        }
+
+        generarHorario();
+    </script>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 19</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: auto;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>Ejercicio 19: Generar Tabla</h1>
+
+    <script>
+        // 19. Crea un script que dado un par de números (filas y columnas)
+        //     escriba una tabla como la del ejemplo
+        //     Ej filas=4; columnas =5
+        //     [Image of a table with 4 rows and 5 columns, with cells numbered sequentially from 1 to 20]
+
+        let filasStr = prompt("Introduce el número de filas:");
+        let columnasStr = prompt("Introduce el número de columnas:");
+
+        let filas = parseInt(filasStr);
+        let columnas = parseInt(columnasStr);
+
+        if (isNaN(filas) || isNaN(columnas) || filas <= 0 || columnas <= 0 || !Number.isInteger(filas) || !Number.isInteger(columnas)) {
+            document.write("<p>Por favor, introduce números enteros positivos válidos para filas y columnas.</p>");
+        } else {
+            document.write("<h2>Tabla de " + filas + "x" + columnas + "</h2>");
+            document.write("<table>");
+            let contador = 1;
+            for (let i = 0; i < filas; i++) {
+                document.write("<tr>");
+                for (let j = 0; j < columnas; j++) {
+                    document.write("<td>" + contador + "</td>");
+                    contador++;
+                }
+                document.write("</tr>");
+            }
+            document.write("</table>");
+        }
+    </script>
+</body>
+</html>

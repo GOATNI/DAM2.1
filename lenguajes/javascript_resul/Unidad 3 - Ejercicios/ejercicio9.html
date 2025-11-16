@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 9 - Capitalizar Palabras</title>
+    <script>
+        function capitalizarFrase() {
+            let frase = prompt("Introduce una frase:");
+
+            if (!frase) {
+                document.getElementById('resultado').innerHTML = "<p>No se introdujo ninguna frase.</p>";
+                return;
+            }
+
+            const palabras = frase.toLowerCase().split(' ');
+            const palabrasCapitalizadas = palabras.map(palabra => {
+                if (palabra.length > 0) {
+                    return palabra.charAt(0).toUpperCase() + palabra.slice(1);
+                }
+                return '';
+            });
+
+            const fraseCapitalizada = palabrasCapitalizadas.join(' ');
+
+            document.getElementById('resultado').innerHTML = 
+                `<p>Frase original: "${frase}"</p>
+                 <p>Frase capitalizada: "<strong>${fraseCapitalizada}</strong>"</p>`;
+        }
+    </script>
+</head>
+<body onload="capitalizarFrase()">
+    <h1>Capitalizador de Frases</h1>
+    <div id="resultado"></div>
+</body>
+</html>

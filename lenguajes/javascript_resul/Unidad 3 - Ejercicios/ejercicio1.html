@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 1 - Media de un vector</title>
+    <script>
+        function calcularMedia() {
+            let numeros = [];
+            let input;
+            let suma = 0;
+
+            while (true) {
+                input = prompt("Introduce un número entero (o 0 para terminar):");
+                let numero = parseInt(input);
+
+                if (isNaN(numero)) {
+                    alert("Por favor, introduce un número válido.");
+                    continue;
+                }
+
+                if (numero === 0) {
+                    break;
+                }
+
+                numeros.push(numero);
+            }
+
+            if (numeros.length === 0) {
+                document.getElementById('resultado').innerHTML = "<p>No se introdujeron números para calcular la media.</p>";
+                return;
+            }
+
+            for (let i = 0; i < numeros.length; i++) {
+                suma += numeros[i];
+            }
+
+            let media = suma / numeros.length;
+
+            document.getElementById('resultado').innerHTML = 
+                `<p>Los números introducidos son: ${numeros.join(', ')}</p>
+                 <p>La media aritmética es: ${media.toFixed(2)}</p>`;
+        }
+    </script>
+</head>
+<body onload="calcularMedia()">
+    <h1>Cálculo de la media de un vector de números</h1>
+    <div id="resultado"></div>
+</body>
+</html>

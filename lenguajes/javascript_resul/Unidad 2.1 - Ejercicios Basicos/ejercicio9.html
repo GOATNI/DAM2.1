@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 9: Capitalizar Frase</title>
+</head>
+<body>
+    <h1>Ejercicio 9: Capitalizar la Primera Letra de Cada Palabra</h1>
+
+    <div id="resultado"></div>
+
+    <script>
+        // 9. Crear un script que solicite una frase y convierta a mayúsculas
+        //    la primera letra de cada palabra y a minúsculas el resto.
+
+        function capitalizarFrase() {
+            let frase = prompt("Introduce una frase:");
+            let resultadoDiv = document.getElementById("resultado");
+
+            if (frase === null || frase.trim() === "") {
+                resultadoDiv.innerHTML = "<p>No se introdujo ninguna frase.</p>";
+                return;
+            }
+
+            const palabras = frase.split(' ');
+            const fraseCapitalizada = palabras.map(palabra => {
+                if (palabra.length === 0) {
+                    return '';
+                }
+                return palabra.charAt(0).toUpperCase() + palabra.slice(1).toLowerCase();
+            }).join(' ');
+
+            resultadoDiv.innerHTML = `<p>Frase original: "<strong>${frase}</strong>"</p>
+                                      <p>Frase capitalizada: "<strong>${fraseCapitalizada}</strong>"</p>`;
+        }
+
+        capitalizarFrase();
+    </script>
+</body>
+</html>

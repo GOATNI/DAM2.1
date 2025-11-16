@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 4 - Selects Dependientes</title>
+    <style>
+        .error {
+            color: red;
+            font-size: 0.8em;
+        }
+    </style>
+</head>
+<body>
+    <h1>Selects Dependientes en Formulario</h1>
+    <form id="selectForm">
+        <label for="provinciaSelect">Provincia:</label>
+        <select id="provinciaSelect" name="provincia">
+            <option value="">Selecciona una provincia</option>
+            <option value="Huesca">Huesca</option>
+            <option value="Zaragoza">Zaragoza</option>
+            <option value="Teruel">Teruel</option>
+        </select>
+        <span id="provinciaError" class="error"></span>
+        <br><br>
+        <label for="localidadSelect">Localidad:</label>
+        <select id="localidadSelect" name="localidad">
+            <option value="">Selecciona una localidad</option>
+        </select>
+        <span id="localidadError" class="error"></span>
+        <br><br>
+        <button type="submit">Enviar</button>
+    </form>
+
+    <script src="ejercicio4.js"></script>
+</body>
+</html>

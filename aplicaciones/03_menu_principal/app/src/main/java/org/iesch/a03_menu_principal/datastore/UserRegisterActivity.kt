@@ -54,9 +54,9 @@ class UserRegisterActivity : AppCompatActivity() {
         super.onResume()
     }
 
-    // ============================================
+
     // VALIDACIÓN
-    // ============================================
+
 
     private fun validarCampos(nombre: String, email: String, password: String): Boolean {
         return when {
@@ -88,9 +88,9 @@ class UserRegisterActivity : AppCompatActivity() {
         }
     }
 
-    // ============================================
+
     // REGISTRO
-    // ============================================
+
 
     private fun registrarUsuario(nombre: String, email: String, password: String) {
         // Deshabilitar botón mientras se procesa
@@ -160,9 +160,9 @@ class UserRegisterActivity : AppCompatActivity() {
             }
     }
 
-    // ============================================
+
     // NAVEGACIÓN
-    // ============================================
+
 
     private fun volverALogin() {
         finish() // Simplemente cierra esta actividad y vuelve al login
@@ -176,9 +176,9 @@ class UserRegisterActivity : AppCompatActivity() {
         finish()
     }
 
-    // ============================================
+
     // DIÁLOGOS
-    // ============================================
+
 
     private fun mostrarError(mensaje: String) {
         AlertDialog.Builder(this)

@@ -86,9 +86,9 @@ class LoginActivity : AppCompatActivity() {
         super.onResume()
     }
 
-    // ============================================
+
     // VALIDACIÓN
-    // ============================================
+
 
     private fun validarCampos(email: String, password: String): Boolean {
         return when {
@@ -112,9 +112,9 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    // ============================================
+
     // SESIÓN ACTIVA
-    // ============================================
+
 
     private fun verificarSesionActiva() {
         lifecycleScope.launch {
@@ -127,9 +127,9 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    // ============================================
+
     // LOGIN CON EMAIL Y PASSWORD
-    // ============================================
+
 
     private fun loginConEmailPassword(email: String, password: String) {
         binding.loginButton.isEnabled = false
@@ -161,9 +161,9 @@ class LoginActivity : AppCompatActivity() {
             }
     }
 
-    // ============================================
+
     // LOGIN CON GOOGLE
-    // ============================================
+
 
     private fun logueoConGoogle() {
         Log.d("LoginActivity", "Iniciando login con Google...")
@@ -282,9 +282,9 @@ class LoginActivity : AppCompatActivity() {
             }
     }
 
-    // ============================================
+
     // DIÁLOGO ESPECIAL PARA NO GOOGLE ACCOUNT
-    // ============================================
+
 
     private fun mostrarDialogoNoGoogleAccount() {
         AlertDialog.Builder(this)
@@ -306,9 +306,9 @@ class LoginActivity : AppCompatActivity() {
             .show()
     }
 
-    // ============================================
+
     // NAVEGACIÓN
-    // ============================================
+
 
     private fun startMenuActivity() {
         val intent = Intent(this, MenuActivity::class.java).apply {

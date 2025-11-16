@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 10: Validar Fecha (sin Date Object)</title>
+</head>
+<body>
+    <h1>Ejercicio 10: Validar Fecha (sin Objeto Date)</h1>
+
+    <div id="resultado"></div>
+
+    <script>
+        // 10. Crear un script que compruebe una fecha en formato dd-mm-aaaa es correcta.
+        //     No uses un objeto Date.
+
+        function esBisiesto(year) {
+            return (year % 4 === 0 && year % 100 !== 0) || (year % 400 === 0);
+        }
+
+        function validarFecha() {
+            let fechaStr = prompt("Introduce una fecha en formato dd-mm-aaaa (ej: 29-02-2024):");
+            let resultadoDiv = document.getElementById("resultado");
+
+            if (fechaStr === null || fechaStr.trim() === "") {
+                resultadoDiv.innerHTML = "<p>No se introdujo ninguna fecha.</p>";
+                return;
+            }
+
+            const partes = fechaStr.split('-');
+
+            if (partes.length !== 3) {
+                resultadoDiv.innerHTML = `<p>Formato de fecha incorrecto para "${fechaStr}". Debe ser dd-mm-aaaa.</p>`;
+                return;
+            }
+
+            const dia = parseInt(partes[0]);
+            const mes = parseInt(partes[1]);
+            const anio = parseInt(partes[2]);
+
+            if (isNaN(dia) || isNaN(mes) || isNaN(anio)) {
+                resultadoDiv.innerHTML = `<p>Los componentes de la fecha "${fechaStr}" no son números válidos.</p>`;
+                return;
+            }
+
+            // Validar año
+            if (anio < 1000 || anio > 9999) { // Rango razonable para un año
+                resultadoDiv.innerHTML = `<p>Año "${anio}" fuera de rango válido.</p>`;
+                return;
+            }
+
+            // Validar mes
+            if (mes < 1 || mes > 12) {
+                resultadoDiv.innerHTML = `<p>Mes "${mes}" no es válido (debe ser entre 1 y 12).</p>`;
+                return;
+            }
+
+            // Validar día
+            const diasEnMes = [0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]; // Mes 0 no usado
+
+            if (esBisiesto(anio)) {
+                diasEnMes[2] = 29; // Febrero en año bisiesto
+            }
+
+            if (dia < 1 || dia > diasEnMes[mes]) {
+                resultadoDiv.innerHTML = `<p>Día "${dia}" no es válido para el mes "${mes}" y año "${anio}".</p>`;
+                return;
+            }
+
+            resultadoDiv.innerHTML = `<p>La fecha "<strong>${fechaStr}</strong>" es <strong>CORRECTA</strong>.</p>`;
+        }
+
+        validarFecha();
+    </script>
+</body>
+</html>

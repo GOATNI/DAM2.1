@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 9 - Arrastrar y soltar</title>
+    <style>
+        #papel {
+            width: 100px;
+            height: 100px;
+            background-color: lightgray;
+            border: 2px solid gray;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: grab;
+            margin: 20px;
+            font-weight: bold;
+            user-select: none; /* Evita la selección de texto al arrastrar */
+        }
+        #papel:active {
+            cursor: grabbing;
+        }
+        #papel.dragging {
+            opacity: 0.5;
+        }
+
+        #papelera {
+            width: 150px;
+            height: 150px;
+            background-color: #f0f0f0;
+            border: 2px dashed #ccc;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 20px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+        #papelera.drag-over {
+            background-color: #e0ffe0;
+            border-color: green;
+        }
+        #papelera.llena {
+            background-color: #ffdddd;
+            border-color: red;
+        }
+    </style>
+</head>
+<body>
+    <h1>Arrastrar y Soltar Papel en Papelera</h1>
+    <div id="papel" draggable="true">Papel</div>
+    <div id="papelera">Papelera Vacía</div>
+
+    <script src="ejercicio9.js"></script>
+</body>
+</html>
