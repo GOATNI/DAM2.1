@@ -6,7 +6,6 @@ import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.app.AppCompatDelegate
 import androidx.credentials.Credential
 import androidx.credentials.CredentialManager
 import androidx.credentials.CustomCredential
@@ -31,6 +30,8 @@ import kotlinx.coroutines.launch
 import org.iesch.a03_menu_principal.MenuActivity
 import org.iesch.a03_menu_principal.R
 import org.iesch.a03_menu_principal.databinding.ActivityLoginBinding
+import org.iesch.a03_menu_principal.notifications.FCMTokenManager
+
 
 enum class ProviderType {
     EMAILYCONTRASENA,
@@ -43,7 +44,6 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var firestore: FirebaseFirestore
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        // FORZAR tema claro (blanco) SIEMPRE en el login
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -86,9 +86,9 @@ class LoginActivity : AppCompatActivity() {
         super.onResume()
     }
 
-
+    // ============================================
     // VALIDACIÓN
-
+    // ============================================
 
     private fun validarCampos(email: String, password: String): Boolean {
         return when {
@@ -112,9 +112,9 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-
+    // ============================================
     // SESIÓN ACTIVA
-
+    // ============================================
 
     private fun verificarSesionActiva() {
         lifecycleScope.launch {
@@ -127,8 +127,9 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
+    // ============================================
     // LOGIN CON EMAIL Y PASSWORD
-
+    // ============================================
 
     private fun loginConEmailPassword(email: String, password: String) {
         binding.loginButton.isEnabled = false
@@ -160,9 +161,9 @@ class LoginActivity : AppCompatActivity() {
             }
     }
 
-
+    // ============================================
     // LOGIN CON GOOGLE
-
+    // ============================================
 
     private fun logueoConGoogle() {
         Log.d("LoginActivity", "Iniciando login con Google...")
@@ -281,9 +282,9 @@ class LoginActivity : AppCompatActivity() {
             }
     }
 
-
+    // ============================================
     // DIÁLOGO ESPECIAL PARA NO GOOGLE ACCOUNT
-
+    // ============================================
 
     private fun mostrarDialogoNoGoogleAccount() {
         AlertDialog.Builder(this)
@@ -305,8 +306,9 @@ class LoginActivity : AppCompatActivity() {
             .show()
     }
 
+    // ============================================
     // NAVEGACIÓN
-
+    // ============================================
 
     private fun startMenuActivity() {
         val intent = Intent(this, MenuActivity::class.java).apply {
@@ -315,7 +317,6 @@ class LoginActivity : AppCompatActivity() {
         startActivity(intent)
         finish()
     }
-
 
     // DIÁLOGOS
 
