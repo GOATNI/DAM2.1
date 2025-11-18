@@ -274,7 +274,7 @@
                         app:layout_constraintTop_toTopOf="parent"
                         app:srcCompat="@drawable/btn_4" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
-                
+
 
             </LinearLayout>
 
@@ -304,7 +304,7 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:srcCompat="@drawable/bottom_btn3" />
+                        app:srcCompat="@drawable/fragment" />
 
                     <ImageView
                         android:id="@+id/ic_trans_fragment"
@@ -382,15 +382,16 @@
                     android:layout_weight="0.5"
                     android:background="@drawable/btn_background_3"
                     android:clickable="true">
+
                     <ImageView
                         android:id="@+id/ic_pelicula"
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
+                        android:layout_width="91dp"
+                        android:layout_height="93dp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:srcCompat="@drawable/bottom_btn3" />
+                        app:srcCompat="@drawable/listapeliculas" />
 
                     <TextView
                         android:id="@+id/tv_pelicula"
@@ -439,7 +440,7 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
 
-                        app:srcCompat="@drawable/settings" />
+                        app:srcCompat="@drawable/maps" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </LinearLayout>
