@@ -49,6 +49,7 @@ dependencies {
     implementation("com.google.firebase:firebase-analytics")
     implementation("com.google.firebase:firebase-firestore-ktx")
     implementation("com.google.firebase:firebase-messaging-ktx")
+    implementation("com.google.firebase:firebase-config-ktx")
 
     // GOOGLE SIGN IN (Credential Manager)
     implementation("com.google.android.libraries.identity.googleid:googleid:1.1.1")

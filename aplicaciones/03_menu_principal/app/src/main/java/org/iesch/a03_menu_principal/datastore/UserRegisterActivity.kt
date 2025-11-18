@@ -18,6 +18,7 @@ import kotlinx.coroutines.launch
 import org.iesch.a03_menu_principal.MenuActivity
 import org.iesch.a03_menu_principal.databinding.ActivityRegisterBinding
 import org.iesch.a03_menu_principal.databinding.ActivityUserRegisterBinding
+import org.iesch.a03_menu_principal.notifications.FCMTokenManager
 
 class UserRegisterActivity : AppCompatActivity() {
     private lateinit var binding: ActivityUserRegisterBinding
@@ -54,7 +55,7 @@ class UserRegisterActivity : AppCompatActivity() {
         super.onResume()
     }
 
-
+    
     // VALIDACIÓN
 
 
@@ -139,9 +140,13 @@ class UserRegisterActivity : AppCompatActivity() {
                     LoginDataStore.saveCredentials(
                         context = applicationContext,
                         email = email,
-                        password = "", // Por seguridad, no guardamos la contraseña en plain text
-                        provider = ProviderType.EMAILYCONTRASENA.name
+                        password = "",
+                        provider = ProviderType.EMAILYCONTRASENA.name,
+                        userId = userId
                     )
+
+                    // Obtener y guardar el token FCM en Firestore
+                    FCMTokenManager.refreshAndSaveToken(userId)
 
                     Toast.makeText(
                         this@UserRegisterActivity,

@@ -6,6 +6,7 @@ import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.credentials.Credential
 import androidx.credentials.CredentialManager
 import androidx.credentials.CustomCredential
@@ -29,9 +30,9 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import org.iesch.a03_menu_principal.MenuActivity
 import org.iesch.a03_menu_principal.R
-import org.iesch.a03_menu_principal.databinding.ActivityLoginBinding
 import org.iesch.a03_menu_principal.notifications.FCMTokenManager
-
+import org.iesch.a03_menu_principal.config.RemoteConfigManager
+import org.iesch.a03_menu_principal.databinding.ActivityLoginBinding
 
 enum class ProviderType {
     EMAILYCONTRASENA,
@@ -86,9 +87,9 @@ class LoginActivity : AppCompatActivity() {
         super.onResume()
     }
 
-
+    // ============================================
     // VALIDACIÓN
-
+    // ============================================
 
     private fun validarCampos(email: String, password: String): Boolean {
         return when {
@@ -112,9 +113,9 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-
+    // ============================================
     // SESIÓN ACTIVA
-
+    // ============================================
 
     private fun verificarSesionActiva() {
         lifecycleScope.launch {
@@ -127,9 +128,9 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-
+    // ============================================
     // LOGIN CON EMAIL Y PASSWORD
-
+    // ============================================
 
     private fun loginConEmailPassword(email: String, password: String) {
         binding.loginButton.isEnabled = false
@@ -140,13 +141,23 @@ class LoginActivity : AppCompatActivity() {
 
                 if (task.isSuccessful) {
                     Log.d("LoginActivity", "signInWithEmail:success")
+                    val userId = auth.currentUser?.uid
+
                     lifecycleScope.launch {
+                        // Guardar credenciales en DataStore
                         LoginDataStore.saveCredentials(
                             context = applicationContext,
                             email = email,
-                            password = "", // Por seguridad
-                            provider = ProviderType.EMAILYCONTRASENA.name
+                            password = "",
+                            provider = ProviderType.EMAILYCONTRASENA.name,
+                            userId = userId
                         )
+
+                        // Obtener y guardar el token FCM en Firestore
+                        if (userId != null) {
+                            FCMTokenManager.refreshAndSaveToken(userId)
+                        }
+
                         startMenuActivity()
                     }
                 } else {
@@ -161,9 +172,9 @@ class LoginActivity : AppCompatActivity() {
             }
     }
 
-
+    // ============================================
     // LOGIN CON GOOGLE
-
+    // ============================================
 
     private fun logueoConGoogle() {
         Log.d("LoginActivity", "Iniciando login con Google...")
@@ -251,8 +262,13 @@ class LoginActivity : AppCompatActivity() {
                                     context = applicationContext,
                                     email = email,
                                     password = "",
-                                    provider = ProviderType.GOOGLE.name
+                                    provider = ProviderType.GOOGLE.name,
+                                    userId = userId
                                 )
+
+                                // Obtener y guardar el token FCM en Firestore
+                                FCMTokenManager.refreshAndSaveToken(userId)
+
                                 Toast.makeText(
                                     this@LoginActivity,
                                     "¡Bienvenido, $email!",
@@ -269,7 +285,8 @@ class LoginActivity : AppCompatActivity() {
                                     context = applicationContext,
                                     email = email,
                                     password = "",
-                                    provider = ProviderType.GOOGLE.name
+                                    provider = ProviderType.GOOGLE.name,
+                                    userId = userId
                                 )
                                 startMenuActivity()
                             }
@@ -317,6 +334,7 @@ class LoginActivity : AppCompatActivity() {
         startActivity(intent)
         finish()
     }
+
 
     // DIÁLOGOS
 

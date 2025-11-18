@@ -6,25 +6,59 @@
 
     <style name="Theme._03_Menu_Principal" parent="Base.Theme._03_Menu_Principal" />
 
-    <!-- Tema para Login - SIEMPRE CLARO/BLANCO -->
-    <style name="Theme.Login" parent="Theme.Material3.Light.NoActionBar">
+    <!-- Tema 1: AZUL (Default) -->
+    <style name="Theme.Login.Blue" parent="Theme.Material3.Light.NoActionBar">
         <item name="colorPrimary">#2196F3</item>
         <item name="colorOnPrimary">#FFFFFF</item>
 
-        <item name="colorSecondary">#4CAF50</item>
+        <item name="colorSecondary">#1976D2</item>
         <item name="colorOnSecondary">#FFFFFF</item>
 
-        <item name="android:windowBackground">#FFFFFF</item>
-        <item name="android:statusBarColor">#FFFFFF</item>
-        <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
-        <item name="android:navigationBarColor">#FFFFFF</item>
+        <item name="android:windowBackground">#E3F2FD</item>
+        <item name="android:statusBarColor">#2196F3</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="m">false</item>
+        <item name="android:navigationBarColor">#2196F3</item>
 
         <item name="android:textColorPrimary">#000000</item>
         <item name="android:textColorSecondary">#757575</item>
-
-        <!-- Estilo de los TextInputLayout -->
-        <item name="textInputStyle">@style/Widget.Material3.TextInputLayout.OutlinedBox</item>
     </style>
+
+    <!-- Tema 2: VERDE -->
+    <style name="Theme.Login.Green" parent="Theme.Material3.Light.NoActionBar">
+        <item name="colorPrimary">#4CAF50</item>
+        <item name="colorOnPrimary">#FFFFFF</item>
+
+        <item name="colorSecondary">#388E3C</item>
+        <item name="colorOnSecondary">#FFFFFF</item>
+
+        <item name="android:windowBackground">#E8F5E9</item>
+        <item name="android:statusBarColor">#4CAF50</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="m">false</item>
+        <item name="android:navigationBarColor">#4CAF50</item>
+
+        <item name="android:textColorPrimary">#000000</item>
+        <item name="android:textColorSecondary">#757575</item>
+    </style>
+
+    <!-- Tema 3: MORADO -->
+    <style name="Theme.Login.Purple" parent="Theme.Material3.Light.NoActionBar">
+        <item name="colorPrimary">#9C27B0</item>
+        <item name="colorOnPrimary">#FFFFFF</item>
+
+        <item name="colorSecondary">#7B1FA2</item>
+        <item name="colorOnSecondary">#FFFFFF</item>
+
+        <item name="android:windowBackground">#F3E5F5</item>
+        <item name="android:statusBarColor">#9C27B0</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="m">false</item>
+        <item name="android:navigationBarColor">#9C27B0</item>
+
+        <item name="android:textColorPrimary">#000000</item>
+        <item name="android:textColorSecondary">#757575</item>
+    </style>
+
+    <!-- Alias para Theme.Login que apunta al tema por defecto -->
+    <style name="Theme.Login" parent="Theme.Login.Blue" />
 
     <!-- Tema para Edad Canina -->
     <style name="Edad_Canina" parent="Theme.Material3.DayNight">
