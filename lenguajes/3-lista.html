@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Tareas</title>
+</head>
+<body onload="obtenerTareas()">
+    <table>
+        <thead>
+            <tr>
+                <th>Tarea</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody id="tbody">
+           
+        </tbody>
+    </table>
+    
+
+    <button onclick="del()">Enter an ID</button>
+    
+    <script>
+    const tablebody = document.getElementById('tbody');
+
+   
+    function obtenerTareas(){
+        fetch("http://192.168.50.120:8069/listartareas")
+       
+        .then(res => {
+            if (!res.ok) {
+                throw new Error('Network response was not ok: ' + res.statusText);
+            }
+            return res.json();
+        })
+        
+        .then(data => {
+            
+            const tareas = data.results; 
+            if (Array.isArray(tareas)) {
+               
+                tareas.forEach(tarea => {
+                   
+                    const row = document.createElement('tr');
+                    
+                    
+                    const taskCell = document.createElement('td');
+                    
+                    taskCell.textContent = tarea[1] || 'Tarea sin nombre'; 
+
+                    const deleteCell = document.createElement('td');
+                    const deleteButton = document.createElement('button');
+                    deleteButton.textContent = 'Delete';
+                 
+                    deleteButton.onclick = () => del(tarea[0]); 
+
+                   
+                    deleteCell.appendChild(deleteButton);
+                    row.appendChild(taskCell);
+                    row.appendChild(deleteCell);
+                    
+                    tablebody.appendChild(row);
+                });
+            } else {
+               
+                console.error("Data received is not an array:", data);
+                
+            }
+        })
+        // Captura errores de fetch o procesamiento
+        .catch(err => console.error('Error fetching tasks:', err));           
+    }    
+
+ 
+    function del(){
+        const id = prompt("Please enter an ID:");
+        fetch('http://192.168.50.120:8069/gestion/lista_tareas.lista_tareas?data={"id":'+id+'}', {
+        method: 'DELETE',
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('La respuesta de la red no fue correcta: ' + response.statusText);
+            }
+            console.log('Recurso eliminado correctamente:', id);
+            
+        })
+        .catch(error => {
+            console.error('Hubo un problema con la solicitud DELETE:', error.message);
+        });
+    }
+
+    function promptForId() {
+        
+        if (id !== null && id !== "") {
+            console.log("You have entered an ID:", id);
+            
+        } else {
+            console.log("ID entry cancelled or empty.");
+        }
+    }
+    </script>
+</body>
+</html>
