@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ContextMenu?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.menubar.HelloController">
+   <children>
+      <MenuBar layoutY="2.0">
+        <menus>
+          <Menu mnemonicParsing="false" text="Archivos" />
+          <Menu mnemonicParsing="false" text="Edicion">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Colores" />
+              <MenuItem mnemonicParsing="false" text="Formato" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="insertar">
+            <items>
+              <MenuItem mnemonicParsing="false" text="About" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+      <Button layoutX="400.0" layoutY="115.0" mnemonicParsing="false" text="Button">
+         <contextMenu>
+            <ContextMenu>
+              <items>
+                  <MenuItem mnemonicParsing="false" text="Copiar" />
+                  <MenuItem mnemonicParsing="false" text="pergar" />
+                  <MenuItem mnemonicParsing="false" text="Cortar" />
+              </items>
+            </ContextMenu>
+         </contextMenu>
+      </Button>
+   </children>
+</AnchorPane>

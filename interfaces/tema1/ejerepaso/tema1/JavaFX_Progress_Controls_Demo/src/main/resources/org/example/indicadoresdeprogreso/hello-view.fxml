@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.ProgressIndicator?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.indicadoresdeprogreso.HelloController">
+   <children>
+      <VBox alignment="CENTER" layoutY="-1.0" prefHeight="400.0" prefWidth="592.0" spacing="10.0">
+         <children>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
+               <children>
+                  <ProgressBar fx:id="progressBar" prefWidth="200.0" progress="0.0" />
+                  <Button fx:id="progressBarDecrementButton" mnemonicParsing="false" onMouseClicked="#decrementProgressBar" text="&lt;&lt;" />
+                  <Button fx:id="progressBarIncrementButton" mnemonicParsing="false" onMouseClicked="#incrementProgressBar" text="&gt;&gt;" />
+                  <Label fx:id="progressBarLabel" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
+               <children>
+                  <ProgressIndicator fx:id="progressIndicator" progress="0.0" />
+                  <Button fx:id="indicatorDecrementButton" mnemonicParsing="false" onMouseClicked="#decrementProgressIndicator" text="&lt;&lt;" />
+                  <Button fx:id="indicatorIncrementButton" mnemonicParsing="false" onMouseClicked="#incrementProgressIndicator" text="&gt;&gt;" />
+                  <Label fx:id="indicatorLabel" />
+               </children>
+               <padding>
+                  <Insets left="180.0" />
+               </padding>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
+               <children>
+                  <Slider fx:id="progressSlider" />
+                  <Button fx:id="sliderDecrementButton" mnemonicParsing="false" onMouseClicked="#decrementSlider" text="&lt;&lt;" />
+                  <Button fx:id="sliderIncrementButton" mnemonicParsing="false" onMouseClicked="#incrementSlider" text="&gt;&gt;" />
+                  <Label fx:id="sliderLabel" />
+               </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <padding>
+                  <Insets left="55.0" />
+               </padding>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

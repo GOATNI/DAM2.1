@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.spinner.HelloController">
+   <children>
+      <VBox alignment="CENTER" layoutX="143.0" layoutY="86.0" prefHeight="200.0" prefWidth="386.0">
+         <children>
+            <Spinner fx:id="numberSpinner" />
+            <Label fx:id="spinnerValueLabel" />
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+
+<ImageView fx:id="ventana" fitHeight="174.0" fitWidth="234.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.projecto_varias_ventanas.Ventana2">
+   <image>
+      <Image url="@../../../img/DNI.jpg" />
+   </image>
+</ImageView>

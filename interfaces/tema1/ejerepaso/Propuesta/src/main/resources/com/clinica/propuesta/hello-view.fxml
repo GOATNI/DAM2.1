@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.clinica.propuesta.PresupuestoController"
+      spacing="15" style="-fx-background-color: #f9f9f9;">
+
+    <padding>
+        <Insets top="25" right="25" bottom="25" left="25"/>
+    </padding>
+
+    <!-- Título -->
+    <Label text="Generador de presupuestos para eventos"
+           style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #2c3e50;">
+        <padding>
+            <Insets bottom="10"/>
+        </padding>
+    </Label>
+
+    <!-- Formulario -->
+    <GridPane hgap="15" vgap="12">
+        <columnConstraints>
+            <ColumnConstraints minWidth="150" prefWidth="150"/>
+            <ColumnConstraints minWidth="250" prefWidth="350"/>
+        </columnConstraints>
+
+        <!-- Nombre -->
+        <Label text="• Nombre" GridPane.columnIndex="0" GridPane.rowIndex="0"
+               style="-fx-font-size: 13px; -fx-font-weight: bold;"/>
+        <TextField fx:id="nombreField" GridPane.columnIndex="1" GridPane.rowIndex="0"
+                   promptText="Ingrese el nombre"/>
+
+        <!-- Apellidos -->
+        <Label text="• Apellidos" GridPane.columnIndex="0" GridPane.rowIndex="1"
+               style="-fx-font-size: 13px; -fx-font-weight: bold;"/>
+        <TextField fx:id="apellidosField" GridPane.columnIndex="1" GridPane.rowIndex="1"
+                   promptText="Ingrese los apellidos"/>
+
+        <!-- Fecha del evento -->
+        <Label text="• Fecha del evento" GridPane.columnIndex="0" GridPane.rowIndex="2"
+               style="-fx-font-size: 13px; -fx-font-weight: bold;"/>
+        <DatePicker fx:id="fechaEventoPicker" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+
+        <!-- Duración -->
+        <Label text="• Duración (min 1h / max 4h)" GridPane.columnIndex="0" GridPane.rowIndex="3"
+               style="-fx-font-size: 13px; -fx-font-weight: bold;"/>
+        <HBox spacing="10" GridPane.columnIndex="1" GridPane.rowIndex="3" alignment="CENTER_LEFT">
+            <Spinner fx:id="duracionSpinner" prefWidth="80" editable="true"/>
+            <Label text="10 € / persona / hora" style="-fx-text-fill: #7f8c8d; -fx-font-style: italic;"/>
+        </HBox>
+
+        <!-- Número de invitados -->
+        <Label text="• Nº invitados" GridPane.columnIndex="0" GridPane.rowIndex="4"
+               style="-fx-font-size: 13px; -fx-font-weight: bold;"/>
+        <TextField fx:id="numInvitadosField" GridPane.columnIndex="1" GridPane.rowIndex="4"
+                   promptText="Cantidad de invitados"/>
+
+        <!-- Menú -->
+        <Label text="• Menú:" GridPane.columnIndex="0" GridPane.rowIndex="5"
+               style="-fx-font-size: 13px; -fx-font-weight: bold;"/>
+        <VBox spacing="8" GridPane.columnIndex="1" GridPane.rowIndex="5">
+            <RadioButton fx:id="picoteoRadio" text="○ Picoteo 10 € / persona"/>
+            <RadioButton fx:id="menu1Radio" text="○ Menú 1  15 € / persona"/>
+            <RadioButton fx:id="menu2Radio" text="○ Menú 2  20 € / persona"/>
+        </VBox>
+
+        <!-- Extras -->
+        <Label text="• Extras:" GridPane.columnIndex="0" GridPane.rowIndex="6"
+               style="-fx-font-size: 13px; -fx-font-weight: bold;"/>
+        <VBox spacing="8" GridPane.columnIndex="1" GridPane.rowIndex="6">
+            <CheckBox fx:id="discomovilCheck" text="○ Discomóvil: 200 €"/>
+            <CheckBox fx:id="animacionCheck" text="○ Animación infantil: 100 €"/>
+            <CheckBox fx:id="transporteCheck" text="○ Transporte: 5 € / persona"/>
+        </VBox>
+    </GridPane>
+
+    <!-- Separador -->
+    <Separator>
+        <VBox.margin>
+            <Insets top="10" bottom="10"/>
+        </VBox.margin>
+    </Separator>
+
+    <!-- Botones y resultado -->
+    <HBox spacing="15" alignment="CENTER_LEFT">
+        <Button fx:id="calcularButton" text="Calcular" onAction="#calcularPresupuesto"
+                style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 14px; -fx-padding: 8 20 8 20;"/>
+
+        <Label text="Precio Total:" style="-fx-font-size: 14px; -fx-font-weight: bold;">
+            <HBox.margin>
+                <Insets left="20"/>
+            </HBox.margin>
+        </Label>
+
+        <TextField fx:id="precioTotalField" prefWidth="150"
+                   style="-fx-background-color: #ecf0f1; -fx-border-color: #3498db; -fx-border-width: 2;"/>
+
+        <Button text="Limpiar" onAction="#limpiarFormulario"
+                style="-fx-background-color: #95a5a6; -fx-text-fill: white; -fx-font-weight: bold;">
+            <HBox.margin>
+                <Insets left="10"/>
+            </HBox.margin>
+        </Button>
+    </HBox>
+
+    <!-- Nota informativa -->
+    <Label text="Nota: El precio total se calculará automáticamente al presionar 'Calcular'"
+           style="-fx-font-size: 11px; -fx-text-fill: #7f8c8d; -fx-font-style: italic;">
+        <VBox.margin>
+            <Insets top="10"/>
+        </VBox.margin>
+    </Label>
+
+</VBox>
