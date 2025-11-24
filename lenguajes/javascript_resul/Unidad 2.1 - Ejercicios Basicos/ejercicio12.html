@@ -31,8 +31,8 @@
                 return;
             }
 
-            const dia = String(fecha.getDate()).padStart(2, '0');
-            const mes = String(fecha.getMonth() + 1).padStart(2, '0'); // getMonth() es 0-indexado
+            const dia = String(fecha.getDate());
+            const mes = String(fecha.getMonth() + 1); // getMonth() es 0-indexado
             const anio = fecha.getFullYear();
 
             resultadoDiv.innerHTML = `<p>Tu fecha de nacimiento es: <strong>${dia}-${mes}-${anio}</strong></p>`;

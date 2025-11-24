@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return { valido: false, mensaje: "Formato de DNI/NIE incorrecto (ej: 12345678A o X1234567B)." };
     }
 
-    // Function to update UI feedback
+    
     function updateUIFeedback(inputElement, errorElement, isValid, message) {
         errorElement.textContent = message;
         if (isValid) {

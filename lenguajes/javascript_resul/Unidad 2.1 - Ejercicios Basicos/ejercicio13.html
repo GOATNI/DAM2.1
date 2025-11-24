@@ -13,7 +13,7 @@
     <script>
         // 13. Crea un script que cuando le pases un objeto de tipo Date genere una cadena con el formato:
         //     Día de la semana, dd de mm de aaaa, es decir, jueves, 26 de noviembre de 2015.
-
+        
         function formatearFecha(fecha) {
             const diasSemana = ["domingo", "lunes", "martes", "miércoles", "jueves", "viernes", "sábado"];
             const meses = [
@@ -30,15 +30,27 @@
         }
 
         // Ejemplo de uso:
-        const fechaActual = new Date(); // Puedes cambiar esto por cualquier objeto Date
-        const fechaFormateada = formatearFecha(fechaActual);
+        function fechasa(){
+           
+            const datefechaActual = prompt("introduce me una fecha");
+             let resultadoDiv = document.getElementById("resultado");
+            
+            if(datefechaActual === null|| datefechaActual.trim === ""){
+                resultadoDiv.innerHTML = "<p>No se introdujo ninguna fecha.</p>";
+                return;
+            }
+                const fechaActual = new Date(datefechaActual); // Puedes cambiar esto por cualquier objeto Date
+                if(isNaN(fechaActual.getTime())){
+                     resultadoDiv.innerHTML = "<p>Fecha introducida no válida. Por favor, usa el formato aaaa-mm-dd.</p>";
+                    return;
+                }
 
-        document.getElementById("resultado").innerHTML = `<p>Fecha actual formateada: <strong>${fechaFormateada}</strong></p>`;
-
-        // Otro ejemplo con una fecha específica
-        const otraFecha = new Date(2015, 10, 26); // Noviembre es el mes 10 (0-indexado)
-        const otraFechaFormateada = formatearFecha(otraFecha);
-        document.write(`<p>Otra fecha formateada (26-11-2015): <strong>${otraFechaFormateada}</strong></p>`);
+                const fechaFormateada = formatearFecha(fechaActual);
+                resultadoDiv.innerHTML = `<p>Fecha actual formateada: <strong>${fechaFormateada}</strong></p>`;
+                
+            }
+            fechasa()
+            
     </script>
 </body>
 </html>
