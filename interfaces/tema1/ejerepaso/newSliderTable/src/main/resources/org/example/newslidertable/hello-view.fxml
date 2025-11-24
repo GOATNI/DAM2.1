@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox spacing="15" xmlns="http://javafx.com/javafx/17"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="org.example.newslidertable.HelloController">
+
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+
+    <Label text="Filtrar por población (mín / máx)" />
+
+    <Slider fx:id="sliderMin" showTickLabels="true" showTickMarks="true"/>
+    <Slider fx:id="sliderMax" showTickLabels="true" showTickMarks="true"/>
+
+    <TableView fx:id="tabla" VBox.vgrow="ALWAYS">
+        <columns>
+            <TableColumn fx:id="colProvincia" text="Provincia" />
+            <TableColumn fx:id="colAutonomia" text="Autonomía" />
+            <TableColumn fx:id="colPoblacion" text="Población" />
+        </columns>
+    </TableView>
+
+</VBox>
