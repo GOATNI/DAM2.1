@@ -19,7 +19,8 @@ public class NconsultasYmasApplication implements CommandLineRunner {
 	CriteriaDemoService criteriaDemoService;
 
     @Autowired
-    JdbcService jdbcTemplateServiceDemoService;
+
+	JdbcService jdbcTemplateServiceDemoService;
 
 	public static void main(String[] args) {
 		SpringApplication.run(NconsultasYmasApplication.class, args);

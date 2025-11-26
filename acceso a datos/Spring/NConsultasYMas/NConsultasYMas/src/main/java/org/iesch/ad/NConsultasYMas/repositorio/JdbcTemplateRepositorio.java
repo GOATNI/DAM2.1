@@ -46,6 +46,18 @@ public class JdbcTemplateRepositorio {
 
 
     }
+// buscar libros qye esten en eel rango de precio y del anio
+    public List<Libro> encontrarLibrosPorPreciosYanio(double precioInicial, double precioFinal, int anio) {
+        String sql = """
+                SELECT l.id, l.titulo, l.isbn, l.precio, l.anio_publicacion, a.id AS autor_id, a.nombre, a.apellido
+                FROM libros l
+                INNER JOIN autores a ON l.autor_id = a.id
+                WHERE l.precio BETWEEN ? AND ?
+                AND l.anio_publicacion >= ?
+                ORDER BY l.precio DESC, l.anio_publicacion DESC
+                """;
+        return jdbcTemplate.query(sql,new LibroConAutorRowMapper(),precioInicial,precioFinal,anio);
+    }
 
 
     private static class LibroConAutorRowMapper implements RowMapper<Libro> {

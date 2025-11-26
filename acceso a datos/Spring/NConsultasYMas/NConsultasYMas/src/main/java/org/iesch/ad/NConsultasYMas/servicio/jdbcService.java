@@ -44,6 +44,18 @@ private JdbcTemplateRepositorio jdbcTemplateRepositorio;
                     estadistica.get("ultimo_libro"));
         });
 
+        System.out.println("libro por rango de precio y año");
+        System.out.println("Libros entre 12 y 18 euros y publicados desde 1960");
+
+        List<Libro> librosCaros = jdbcTemplateRepositorio.encontrarLibrosPorPreciosYanio(12.0,18.0,1960);
+        librosCaros.forEach(libro -> System.out.printf(
+                libro.getTitulo(),
+                libro.getPrecio(),
+                libro.getAnioPublicacion(),
+                libro.getAutor().getNombre(),
+                libro.getAutor().getApellido()
+                ));
+        System.out.println("\n fin");
 
 
 
