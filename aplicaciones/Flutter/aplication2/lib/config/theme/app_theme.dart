@@ -26,7 +26,7 @@ class AppTheme {
       foregroundColor: Colors.red,
       centerTitle: true,
     ),
-
+      iconTheme: IconThemeData(color:listadeColores[colorseleccionado]),
   );
 
   
