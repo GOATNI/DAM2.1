@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Continents and Countries</title>
+</head>
+<body>
+    <h1>Continents and Countries</h1>
+    
+    <label for="continent">Continente:</label>
+    <select id="continent"></select>
+    
+    <label for="country">País:</label>
+    <select id="country"></select>
+    
+    <p>Has seleccionado: <span id="selected-country"></span></p>
+
+    <script>
+        const continentSelect = document.getElementById('continent');
+        const countrySelect = document.getElementById('country');
+        const selectedCountrySpan = document.getElementById('selected-country');
+        let countriesData = [];
+
+        fetch('https://raw.githubusercontent.com/mledoze/countries/master/countries.json')
+            .then(response => response.json())
+            .then(data => {
+                countriesData = data;
+                const continents = [...new Set(countriesData.map(country => country.region))].filter(Boolean).sort();
+                continents.forEach(continent => {
+                    const option = document.createElement('option');
+                    option.value = continent;
+                    option.textContent = continent;
+                    continentSelect.appendChild(option);
+                });
+                continentSelect.dispatchEvent(new Event('change'));
+            });
+
+        continentSelect.addEventListener('change', () => {
+            const selectedContinent = continentSelect.value;
+            countrySelect.innerHTML = '';
+            const countriesInContinent = countriesData.filter(country => country.region === selectedContinent);
+            countriesInContinent.forEach(country => {
+                const option = document.createElement('option');
+                option.value = country.name.common;
+                option.textContent = country.name.common;
+                countrySelect.appendChild(option);
+            });
+            countrySelect.dispatchEvent(new Event('change'));
+        });
+
+        countrySelect.addEventListener('change', () => {
+            selectedCountrySpan.textContent = countrySelect.value;
+        });
+    </script>
+</body>
+</html>

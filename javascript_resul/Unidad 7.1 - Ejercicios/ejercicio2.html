@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Rick and Morty Characters</title>
+    <style>
+        body { font-family: sans-serif; }
+        #characters { display: flex; flex-wrap: wrap; gap: 10px; }
+        .character { border: 1px solid #ccc; padding: 10px; cursor: pointer; text-align: center; }
+        #details { margin-top: 20px; border: 1px solid #ddd; padding: 10px; }
+        img { max-width: 100px; }
+    </style>
+</head>
+<body>
+    <h1>Rick and Morty Characters</h1>
+    <div id="characters"></div>
+    <div id="details"></div>
+
+    <script>
+        const charactersContainer = document.getElementById('characters');
+        const detailsContainer = document.getElementById('details');
+
+        fetch('https://rickandmortyapi.com/api/character')
+            .then(response => response.json())
+            .then(data => {
+                const characters = data.results;
+                characters.forEach(character => {
+                    const charDiv = document.createElement('div');
+                    charDiv.className = 'character';
+                    charDiv.innerHTML = `<img src="${character.image}" alt="${character.name}"><p>${character.name}</p>`;
+                    charDiv.addEventListener('click', () => showDetails(character));
+                    charactersContainer.appendChild(charDiv);
+                });
+            });
+
+        function showDetails(character) {
+            detailsContainer.innerHTML = `
+                <h2>${character.name}</h2>
+                <img src="${character.image}" alt="${character.name}">
+                <p><strong>Estado:</strong> ${character.status}</p>
+                <p><strong>Especie:</strong> ${character.species}</p>
+                <p><strong>Género:</strong> ${character.gender}</p>
+                <p><strong>Origen:</strong> ${character.origin.name}</p>
+            `;
+        }
+    </script>
+</body>
+</html>

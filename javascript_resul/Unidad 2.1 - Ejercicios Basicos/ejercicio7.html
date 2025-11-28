@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 7: Palíndromo</title>
+</head>
+<body>
+    <h1>Ejercicio 7: Comprobador de Palíndromos</h1>
+
+    <div id="resultado"></div>
+
+    <script>
+        // 7. Crear un script que solicite una cadena y diga si es palíndromo,
+        //    es decir, se escribe igual de derecha a izquierda y de izquierda a derecha.
+        //    Ejemplo de palíndromo: Allí ves Sevilla.
+
+        function esPalindromo() {
+            let cadena = prompt("Introduce una palabra o frase para comprobar si es un palíndromo:");
+            let resultadoDiv = document.getElementById("resultado");
+
+            if (cadena === null || cadena.trim() === "") {
+                resultadoDiv.innerHTML = "<p>No se introdujo ninguna cadena.</p>";
+                return;
+            }
+
+            // Limpiar la cadena: convertir a minúsculas y eliminar espacios y signos de puntuación
+            const cadenaLimpia = cadena.toLowerCase().replace(/[^a-z0-9]/g, '');
+
+            // Invertir la cadena limpia
+            const cadenaInvertida = cadenaLimpia.split('').reverse().join('');
+
+            if (cadenaLimpia === cadenaInvertida) {
+                resultadoDiv.innerHTML = `<p>La cadena "<strong>${cadena}</strong>" <strong>ES</strong> un palíndromo.</p>`;
+            } else {
+                resultadoDiv.innerHTML = `<p>La cadena "<strong>${cadena}</strong>" <strong>NO ES</strong> un palíndromo.</p>`;
+            }
+        }
+
+        esPalindromo();
+    </script>
+</body>
+</html>

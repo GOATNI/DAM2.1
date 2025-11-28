@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 6: Comprobador de Correo Electrónico</title>
+</head>
+<body>
+    <h1>Ejercicio 6: Comprobador de Correo Electrónico</h1>
+
+    <div id="resultado"></div>
+
+    <script>
+        // 6. Crear un script que compruebe si un correo electrónico es correcto:
+        //    Y caso de serlo muestre:
+        //    - el nombre de usuario
+        //    - el nombre de dominio
+
+        function comprobarEmail() {
+            let email = prompt("Introduce una dirección de correo electrónico:");
+            let resultadoDiv = document.getElementById("resultado");
+
+            if (email === null || email.trim() === "") {
+                resultadoDiv.innerHTML = "<p>No se introdujo ninguna dirección de correo.</p>";
+                return;
+            }
+
+            // Expresión regular para validar un correo electrónico
+            // Esta regex es una versión simplificada y común para la mayoría de los casos.
+            // Una regex completa para emails es muy compleja.
+            const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+            if (emailRegex.test(email)) {
+                // Si el email es correcto, extraer usuario y dominio
+                const partes = email.split('@');
+                const usuario = partes[0];
+                const dominio = partes[1];
+
+                resultadoDiv.innerHTML = `
+                    <p>El correo electrónico <strong>${email}</strong> es correcto.</p>
+                    <p>Nombre de usuario: <strong>${usuario}</strong></p>
+                    <p>Nombre de dominio: <strong>${dominio}</strong></p>
+                `;
+            } else {
+                resultadoDiv.innerHTML = `<p>El correo electrónico <strong>${email}</strong> no es válido.</p>`;
+            }
+        }
+
+        comprobarEmail();
+    </script>
+</body>
+</html>

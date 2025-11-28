@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 20: Juego de Adivinanza</title>
+</head>
+<body>
+    <h1>Ejercicio 20: Juego de Adivinanza de Números</h1>
+
+    <button onclick="jugar()">Empezar Juego</button>
+
+    <div id="resultado"></div>
+
+    <script>
+        // 20. Crea un script que pida dos números, y genere un aleatorio entre ambos números (incluidos).
+        // Hay que controlar que sean números entero, si no lo son, los ha de volver a pedir.
+        // Ojo que pueden darnos primero el número más alto o el más bajo, lo debemos controlar.
+
+        // Ayudate de la siguiente funcion:
+        // Math.floor(Math.random() * (MAX - MIN + 1)) + MIN;
+
+        // Ha de pedir también al usuario el nivel de dificultad. Fácil, normal o difícil.
+        // - Fácil significa que el usuario tiene N/2 intentos siendo N el rango del número aleatorio
+        // - Normal significa que el usuario tiene N/4 intentos siendo N el rango del número aleatorio
+        // - Difícil significa que el usuario tiene N/8 intentos siendo N el rango del número aleatorio
+
+        // Después se le dirá al usuario que acierte el número, haciendo que inserte un número.
+        // - Si acierta antes de que se le acaben los intentos. El juego terminará felicitando al usuario
+        //   y pidiéndole su nombre para colocar la puntuación (Número de intentos), la dificultad en la página.
+        //   Además, se le preguntará si quiere jugar de nuevo, volviendo a pedir todos los datos del juego.
+        // - Si falla se le pedirá otro número hasta que agote los intentos. Además, si el nivel de dificultad
+        //   es "fácil" o "normal", cada vez que falle le indicará si el número es mayor o menor al que ha puesto
+
+        // Pon el código en una función llamada jugar() y haz que se ejecute en atributo onclick del botón.
+
+        function generarNumeroAleatorio(min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+
+        function jugar() {
+            let num1, num2, min, max;
+            let inputValido = false;
+
+            // Pedir y validar los dos números
+            do {
+                num1 = parseInt(prompt("Introduce el primer número entero del rango:"));
+                num2 = parseInt(prompt("Introduce el segundo número entero del rango:"));
+
+                if (isNaN(num1) || !Number.isInteger(num1) || isNaN(num2) || !Number.isInteger(num2)) {
+                    alert("Por favor, introduce números enteros válidos.");
+                } else {
+                    inputValido = true;
+                    min = Math.min(num1, num2);
+                    max = Math.max(num1, num2);
+                }
+            } while (!inputValido);
+
+            let rango = max - min + 1;
+            let dificultad;
+            let intentosMaximos;
+
+            // Pedir y validar la dificultad
+            do {
+                dificultad = prompt("Elige la dificultad (facil, normal, dificil):").toLowerCase();
+                if (dificultad === "facil") {
+                    intentosMaximos = Math.ceil(rango / 2);
+                } else if (dificultad === "normal") {
+                    intentosMaximos = Math.ceil(rango / 4);
+                } else if (dificultad === "dificil") {
+                    intentosMaximos = Math.ceil(rango / 8);
+                } else {
+                    alert("Dificultad no válida. Por favor, elige entre 'facil', 'normal' o 'dificil'.");
+                }
+            } while (!intentosMaximos); // Loop hasta que intentosMaximos tenga un valor
+
+            let numeroSecreto = generarNumeroAleatorio(min, max);
+            let intentosRealizados = 0;
+            let adivinado = false;
+            let mensaje = "";
+
+            while (intentosRealizados < intentosMaximos && !adivinado) {
+                let intentoUsuario = parseInt(prompt(`Adivina el número entre ${min} y ${max}. Te quedan ${intentosMaximos - intentosRealizados} intentos.`));
+
+                if (isNaN(intentoUsuario) || !Number.isInteger(intentoUsuario)) {
+                    alert("Por favor, introduce un número entero.");
+                    continue; // No cuenta como intento si la entrada no es válida
+                }
+
+                intentosRealizados++;
+
+                if (intentoUsuario === numeroSecreto) {
+                    adivinado = true;
+                    let nombreJugador = prompt("¡Felicidades! Has adivinado el número. Introduce tu nombre:");
+                    mensaje = `
+                        <h2>¡Has ganado, ${nombreJugador}!</h2>
+                        <p>Adivinaste el número ${numeroSecreto} en ${intentosRealizados} intentos.</p>
+                        <p>Dificultad: ${dificultad}</p>
+                    `;
+                } else {
+                    if (dificultad === "facil" || dificultad === "normal") {
+                        if (intentoUsuario < numeroSecreto) {
+                            alert("El número secreto es MAYOR.");
+                        } else {
+                            alert("El número secreto es MENOR.");
+                        }
+                    }
+                }
+            }
+
+            if (!adivinado) {
+                mensaje = `
+                    <h2>¡Game Over!</h2>
+                    <p>Se te acabaron los intentos. El número secreto era ${numeroSecreto}.</p>
+                `;
+            }
+
+            document.getElementById("resultado").innerHTML = mensaje;
+
+            let jugarDeNuevo = confirm("¿Quieres jugar de nuevo?");
+            if (jugarDeNuevo) {
+                jugar(); // Reiniciar el juego
+            }
+        }
+    </script>
+</body>
+</html>

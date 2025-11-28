@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 3: Array sin Repetir y Ordenado</title>
+</head>
+<body>
+    <h1>Ejercicio 3: Array sin Repetir y Ordenado</h1>
+
+    <div id="resultado"></div>
+
+    <script>
+        // 3. Dado el siguiente array:
+        //    [4,0,3,4,7,3,5,8,1,8,8,0,2,3,1,2,5,7,3,2,5,1].
+        //    Genera un nuevo array con los elementos originales sin repetir y ordenado.
+
+        const originalArray = [4, 0, 3, 4, 7, 3, 5, 8, 1, 8, 8, 0, 2, 3, 1, 2, 5, 7, 3, 2, 5, 1];
+
+        // 1. Eliminar elementos repetidos
+        //    Usamos un Set para almacenar solo valores únicos
+        const uniqueArray = [...new Set(originalArray)];
+
+        // 2. Ordenar el nuevo array
+        uniqueArray.sort((a, b) => a - b); // Ordenar numéricamente de forma ascendente
+
+        document.getElementById("resultado").innerHTML = `
+            <p>Array original: [${originalArray.join(', ')}]</p>
+            <p>Array sin repetir y ordenado: [${uniqueArray.join(', ')}]</p>
+        `;
+    </script>
+</body>
+</html>

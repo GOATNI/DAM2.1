@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 15 - Calcular Edad</title>
+    <script>
+        function calcularEdad() {
+            let fechaNacimientoStr = prompt("Introduce tu fecha de nacimiento (ej. '1990-12-25', 'Dec 25 1990'):");
+
+            if (!fechaNacimientoStr) {
+                document.getElementById('resultado').innerHTML = "<p>No se introdujo ninguna fecha.</p>";
+                return;
+            }
+
+            const fechaNacimiento = new Date(fechaNacimientoStr);
+
+            if (isNaN(fechaNacimiento.getTime())) {
+                document.getElementById('resultado').innerHTML = `<p>La fecha introducida "${fechaNacimientoStr}" no es válida.</p>`;
+                return;
+            }
+
+            const hoy = new Date();
+            let edad = hoy.getFullYear() - fechaNacimiento.getFullYear();
+            const diferenciaMeses = hoy.getMonth() - fechaNacimiento.getMonth();
+
+            // Ajustar la edad si el cumpleaños de este año aún no ha pasado
+            if (diferenciaMeses < 0 || (diferenciaMeses === 0 && hoy.getDate() < fechaNacimiento.getDate())) {
+                edad--;
+            }
+
+            document.getElementById('resultado').innerHTML = 
+                `<p>Fecha de nacimiento: ${fechaNacimiento.toLocaleDateString()}</p>
+                 <p>Tu edad actual es: <strong>${edad} años</strong></p>`;
+        }
+    </script>
+</head>
+<body onload="calcularEdad()">
+    <h1>Calculadora de Edad</h1>
+    <div id="resultado"></div>
+</body>
+</html>

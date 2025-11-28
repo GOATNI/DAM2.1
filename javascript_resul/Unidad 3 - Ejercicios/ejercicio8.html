@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 8 - Formatear Nombre</title>
+    <script>
+        function formatearNombre() {
+            let nombreCompleto = prompt("Introduce tu nombre y apellidos:");
+
+            if (!nombreCompleto) {
+                document.getElementById('resultado').innerHTML = "<p>No se introdujo ningún nombre.</p>";
+                return;
+            }
+
+            // Dividir el nombre por los espacios
+            const partes = nombreCompleto.trim().split(/\s+/);
+            
+            if (partes.length < 2) {
+                 document.getElementById('resultado').innerHTML = "<p>Por favor, introduce al menos un nombre y un apellido.</p>";
+                 return;
+            }
+
+            const nombre = partes.shift(); // El primer elemento es el nombre
+            const apellidos = partes.join(' '); // El resto son los apellidos
+
+            document.getElementById('resultado').innerHTML = 
+                `<p>Formato original: ${nombreCompleto}</p>
+                 <p>Formato "Apellidos, Nombre": <strong>${apellidos}, ${nombre}</strong></p>`;
+        }
+    </script>
+</head>
+<body onload="formatearNombre()">
+    <h1>Formateador de Nombre</h1>
+    <div id="resultado"></div>
+</body>
+</html>

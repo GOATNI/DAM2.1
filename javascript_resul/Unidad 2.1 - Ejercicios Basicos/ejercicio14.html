@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 14: Año Bisiesto</title>
+</head>
+<body>
+    <h1>Ejercicio 14: Comprobar Año Bisiesto</h1>
+
+    <div id="resultado"></div>
+
+    <script>
+        // 14. Crea un script que diga si la fecha es de un año bisiesto.
+
+        function esBisiesto(year) {
+            // Un año es bisiesto si es divisible por 4,
+            // excepto si es divisible por 100 pero no por 400.
+            return (year % 4 === 0 && year % 100 !== 0) || (year % 400 === 0);
+        }
+
+        function comprobarAnioBisiesto() {
+            let anioStr = prompt("Introduce un año para comprobar si es bisiesto:");
+            let resultadoDiv = document.getElementById("resultado");
+
+            if (anioStr === null || anioStr.trim() === "") {
+                resultadoDiv.innerHTML = "<p>No se introdujo ningún año.</p>";
+                return;
+            }
+
+            const anio = parseInt(anioStr);
+
+            if (isNaN(anio) || !Number.isInteger(anio) || anio < 0) {
+                resultadoDiv.innerHTML = "<p>Por favor, introduce un año válido (número entero positivo).</p>";
+                return;
+            }
+
+            if (esBisiesto(anio)) {
+                resultadoDiv.innerHTML = `<p>El año <strong>${anio}</strong> <strong>ES</strong> un año bisiesto.</p>`;
+            } else {
+                resultadoDiv.innerHTML = `<p>El año <strong>${anio}</strong> <strong>NO ES</strong> un año bisiesto.</p>`;
+            }
+        }
+
+        comprobarAnioBisiesto();
+    </script>
+</body>
+</html>

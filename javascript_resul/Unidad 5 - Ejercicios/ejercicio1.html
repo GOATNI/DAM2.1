@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 1 - Validación de DNI</title>
+    <style>
+        .error {
+            color: red;
+            font-size: 0.8em;
+        }
+        
+        .valid {
+            border: 2px solid green;
+        }
+        
+        .invalid {
+            border: 2px solid red;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Validación de DNI en Formulario</h1>
+    <form id="dniForm">
+        <label for="dniInput">Introduce tu DNI:</label>
+        <input type="text" id="dniInput" name="dni" placeholder="Ej: 12345678A" required>
+        <span id="dniError" class="error"></span>
+        <br><br>
+        <button type="submit">Enviar</button>
+    </form>
+
+    <script src="ejercicio1.js"></script>
+</body>
+
+</html>

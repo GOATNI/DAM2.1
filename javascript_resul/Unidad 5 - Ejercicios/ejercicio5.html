@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 5 - Límite de caracteres en Textarea</title>
+    <style>
+        textarea {
+            width: 80%;
+            height: 150px;
+            padding: 10px;
+            font-size: 1em;
+        }
+        #contador {
+            font-size: 0.9em;
+            color: gray;
+        }
+        .limite-alcanzado {
+            color: red;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Límite de Caracteres en Textarea</h1>
+    <form>
+        <label for="miTextarea">Escribe tu mensaje (máx. 200 caracteres):</label>
+        <br>
+        <textarea id="miTextarea" maxlength="200"></textarea>
+        <p id="contador">0 / 200 caracteres</p>
+    </form>
+
+    <script src="ejercicio5.js"></script>
+</body>
+</html>

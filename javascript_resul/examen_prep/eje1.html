@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .error {
+            color: red;
+            font-size: 0.8em;
+            margin-top: 5px;
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <form id="registerform">
+        <h1>Formularios</h1>
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" name="nombre">
+        <br>
+        <span class="error" id="nombreError"></span>
+        <br>
+        <br>
+        <label for="email">Email:</label>
+        <input type="text" id="email" name="email">
+        <br>
+        <span class="error" id="emailError"></span>
+        <br>
+        <br>
+        <label for="numero">Numero:</label>
+        <input type="number" id="numero" name="numero">
+        <br>
+        <span class="error" id="numberError"></span>
+        <br>
+        <br>
+        <label for="bibliografia">Biobliografia:</label>
+        <textarea name="bibliografia" id="bibliografia"></textarea>
+        <br>
+        <span class="error" id="bibliografiaError"></span>
+        <br>
+        <br>
+        <button type="submit">send</button>
+        <button type="reset">Borrar</button>
+    </form>
+    <script>
+        const nombre = document.getElementById("nombre");
+        const email = document.getElementById("email");
+        const numero = document.getElementById("numero");
+        const bibliografia = document.getElementById("bibliografia");
+        const registerform = document.getElementById("registerform");
+
+        // Elementos de error
+        const nombreError = document.getElementById('nombreError');
+        const emailError = document.getElementById('emailError');
+        const numberError = document.getElementById("numberError");
+        const bibliografiaError = document.getElementById("bibliografiaError");
+
+        function validarEmail(email) {
+            const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return regex.test(email);
+        }
+
+        registerform.addEventListener('submit', (event) => {
+            event.preventDefault();
+            let valido = true;
+
+            // Limpiar errores
+            document.querySelectorAll('.error').forEach(span => span.textContent = '');
+
+            // Validar nombre
+            if (nombre.value.trim() === '') {
+                nombreError.textContent = 'El nombre es obligatorio.';
+                valido = false;
+            }
+
+            // Validar email
+            if (email.value.trim() === '') {
+                emailError.textContent = 'El correo electrónico es obligatorio.';
+                valido = false;
+            } else if (!validarEmail(email.value)) {
+                emailError.textContent = 'Formato de correo incorrecto.';
+                valido = false;
+            }
+
+            // Validar número
+            const numerovalidar = numero.value.trim();
+
+            if (numerovalidar === '') {
+                numberError.textContent = 'El número es obligatorio.';
+                valido = false;
+            } else if (numerovalidar.length !== 9) {
+                numberError.textContent = 'El número debe tener 9 dígitos.';
+                valido = false;
+            }
+
+            // Validar bibliografía
+            if (bibliografia.value.trim() === '') {
+                bibliografiaError.textContent = 'La bibliografía es obligatoria.';
+                valido = false;
+            }
+
+            // Resultado final
+            if (valido) {
+                alert('Formulario enviado con éxito!');
+                registerform.reset();
+            } else {
+                alert('Por favor, corrige los errores del formulario.');
+            }
+        });
+    </script>
+
+</body>
+
+</html>

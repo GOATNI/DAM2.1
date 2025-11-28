@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 12 - Formatear Fecha de Nacimiento</title>
+    <script>
+        function formatearFecha() {
+            let fechaNacimientoStr = prompt("Introduce tu fecha de nacimiento (ej. '1990-12-25', 'Dec 25 1990'):");
+
+            if (!fechaNacimientoStr) {
+                document.getElementById('resultado').innerHTML = "<p>No se introdujo ninguna fecha.</p>";
+                return;
+            }
+
+            const fechaNacimiento = new Date(fechaNacimientoStr);
+
+            if (isNaN(fechaNacimiento.getTime())) {
+                document.getElementById('resultado').innerHTML = `<p>La fecha introducida "${fechaNacimientoStr}" no es válida.</p>`;
+                return;
+            }
+
+            // padStart para asegurar dos dígitos con un 0 delante si es necesario
+            const dia = String(fechaNacimiento.getDate()).padStart(2, '0');
+            const mes = String(fechaNacimiento.getMonth() + 1).padStart(2, '0'); // Se suma 1 porque los meses van de 0 a 11
+            const anio = fechaNacimiento.getFullYear();
+
+            const fechaFormateada = `${dia}-${mes}-${anio}`;
+
+            document.getElementById('resultado').innerHTML = 
+                `<p>Fecha introducida: ${fechaNacimiento.toDateString()}</p>
+                 <p>Fecha formateada (dd-mm-aaaa): <strong>${fechaFormateada}</strong></p>`;
+        }
+    </script>
+</head>
+<body onload="formatearFecha()">
+    <h1>Formateador de Fecha de Nacimiento</h1>
+    <div id="resultado"></div>
+</body>
+</html>

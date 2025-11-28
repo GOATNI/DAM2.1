@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestor de Tareas APIREST (CRUD)</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding: 20px;
+            background-color: #f4f7f6;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        /* Estilos del Formulario */
+        
+        .form-container {
+            background: white;
+            padding: 20px;
+            margin: 0 auto 20px auto;
+            max-width: 900px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+        
+        .full-width {
+            grid-column: span 3;
+        }
+        
+        input,
+        select {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            width: 90%;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #555;
+            font-size: 0.9em;
+        }
+        
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+        
+        .btn-guardar {
+            background-color: #28a745;
+            color: white;
+            grid-column: span 3;
+            margin-top: 10px;
+        }
+        
+        .btn-guardar:hover {
+            background-color: #218838;
+        }
+        
+        .btn-limpiar {
+            background-color: #6c757d;
+            color: white;
+            grid-column: span 3;
+            margin-top: 5px;
+        }
+        /* Estilos de la Tabla */
+        
+        table {
+            width: 100%;
+            max-width: 1000px;
+            margin: 0 auto;
+            border-collapse: collapse;
+            background: white;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        
+        th,
+        td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        th {
+            background-color: #007bff;
+            color: white;
+        }
+        
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+        /* Botones de acción en la tabla */
+        
+        .btn-edit {
+            background-color: #ffc107;
+            color: #333;
+            padding: 5px 10px;
+            font-size: 0.8em;
+            margin-right: 5px;
+        }
+        
+        .btn-del {
+            background-color: #dc3545;
+            color: white;
+            padding: 5px 10px;
+            font-size: 0.8em;
+        }
+        
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Gestión de Tareas (API Odoo)</h1>
+
+    <div class="form-container">
+        <input type="hidden" id="inputIdOriginal">
+
+        <div>
+            <label>ID Tarea (Manual):</label>
+            <input type="text" id="inputId" placeholder="Ej: 10">
+        </div>
+        <div class="full-width">
+            <label>Descripción de la Tarea:</label>
+            <input type="text" id="inputTarea" placeholder="Ej: Comprar material oficina">
+        </div>
+        <div>
+            <label>Prioridad:</label>
+            <input type="number" id="inputPrioridad" placeholder="Ej: 10">
+        </div>
+        <div>
+            <label>Urgente:</label>
+            <select id="inputUrgente">
+                <option value="true">Sí</option>
+                <option value="false" selected>No</option>
+            </select>
+        </div>
+        <div>
+            <label>Realizada:</label>
+            <select id="inputRealizada">
+                <option value="true">Sí</option>
+                <option value="false" selected>No</option>
+            </select>
+        </div>
+        <div>
+            <label>Responsable:</label>
+            <input type="text" id="inputResponsable" placeholder="Nombre">
+        </div>
+
+        <button class="btn-guardar" onclick="guardarDatos()" id="btnAccion">CREAR TAREA (POST)</button>
+        <button class="btn-limpiar" onclick="limpiarFormulario()">Limpiar / Cancelar</button>
+    </div>
+
+    <div id="tabla-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Tarea</th>
+                    <th>Prioridad</th>
+                    <th>Urgente</th>
+                    <th>Estado</th>
+                    <th>Responsable</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody id="cuerpoTabla">
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        // CONFIGURACIÓN DE LA API
+        const IP = "192.168.50.120"; // CAMBIAR SI ES NECESARIO (ej: .1.120)
+        const PORT = "8069";
+        const URL_BASE = `http://${IP}:${PORT}`;
+
+        // 1. FUNCIÓN GET (Leer)
+        function cargarTareas() {
+            const tbody = document.getElementById('cuerpoTabla');
+            tbody.innerHTML = '<tr><td colspan="7" style="text-align:center">Cargando datos...</td></tr>';
+
+            fetch(`${URL_BASE}/listartareas`)
+                .then(res => res.json())
+                .then(datos => {
+                    tbody.innerHTML = ''; // Limpiar tabla
+
+                    // Se asume que 'datos' es un array de arrays:
+                    // [id, tarea, prioridad, urgente, realizada, responsable]
+                    datos.forEach(item => {
+                        let fila = `
+                            <tr>
+                                <td>${item[0]}</td>
+                                <td>${item[1]}</td>
+                                <td>${item[2]}</td>
+                                <td>${item[3]}</td>
+                                <td>${item[4]}</td>
+                                <td>${item[5]}</td>
+                                <td>
+                                    <button class="btn-edit" onclick="prepararEdicion('${item[0]}', '${item[1]}', '${item[2]}', '${item[3]}', '${item[4]}', '${item[5]}')">Editar</button>
+                                    <button class="btn-del" onclick="borrarTarea('${item[0]}')">Borrar</button>
+                                </td>
+                            </tr>
+                        `;
+                        tbody.innerHTML += fila;
+                    });
+                })
+                .catch(err => {
+                    console.error(err);
+                    tbody.innerHTML = '<tr><td colspan="7" style="color:red; text-align:center">Error de conexión con la API</td></tr>';
+                });
+        }
+
+        // 2. FUNCIÓN DELETE (Borrar)
+        function borrarTarea(id) {
+            if (!confirm(`¿Seguro que quieres borrar la tarea ID: ${id}?`)) return;
+
+            const dataStr = JSON.stringify({
+                "id": id
+            });
+
+            fetch(`${URL_BASE}/gestion/lista_tareas.lista_tareas?data=${dataStr}`, {
+                    method: 'DELETE'
+                })
+                .then(res => {
+                    if (res.ok) {
+                        cargarTareas(); // Recargar tabla
+                    } else {
+                        alert("Error al borrar");
+                    }
+                })
+                .catch(err => console.error("Error DELETE:", err));
+        }
+
+        // 3. FUNCIÓN PARA GESTIONAR POST (Crear) Y PUT (Actualizar)
+        function guardarDatos() {
+            // Recoger valores del formulario
+            const id = document.getElementById('inputId').value;
+            const tarea = document.getElementById('inputTarea').value;
+            const prioridad = document.getElementById('inputPrioridad').value;
+            const urgente = document.getElementById('inputUrgente').value;
+            const realizada = document.getElementById('inputRealizada').value;
+            const responsable = document.getElementById('inputResponsable').value;
+
+            // Comprobar si estamos EDITANDO o CREANDO
+            const idOriginal = document.getElementById('inputIdOriginal').value;
+            const esEdicion = idOriginal !== "";
+
+            // Crear objeto JSON
+            // NOTA: Ajusta las claves ('task', 'prioridad', etc.) a lo que espera tu API Odoo
+            const objetoDatos = {
+                "id": id,
+                "task": tarea,
+                "prioridad": prioridad,
+                "urgente": urgente,
+                "realizada": realizada,
+                "responsable": responsable
+            };
+
+            const dataStr = JSON.stringify(objetoDatos);
+
+            // Configurar método y URL
+            let method = esEdicion ? 'PUT' : 'POST';
+
+            console.log(`Enviando ${method}:`, dataStr);
+
+            fetch(`${URL_BASE}/gestion/lista_tareas.lista_tareas?data=${dataStr}`, {
+                    method: method
+                })
+                .then(res => res.json())
+                .then(data => {
+                    console.log("Respuesta servidor:", data);
+                    limpiarFormulario();
+                    cargarTareas(); // Recargar tabla
+                })
+                .catch(err => console.error(`Error ${method}:`, err));
+        }
+
+        // 4. FUNCIÓN AUXILIAR: Subir datos de la tabla al formulario (Para Editar)
+        function prepararEdicion(id, tarea, prioridad, urgente, realizada, responsable) {
+            document.getElementById('inputIdOriginal').value = id; // Marcamos que estamos editando este ID original
+
+            document.getElementById('inputId').value = id;
+            document.getElementById('inputTarea').value = tarea;
+            document.getElementById('inputPrioridad').value = prioridad;
+            document.getElementById('inputUrgente').value = urgente; // Puede requerir convertir string a boolean dependiendo de cómo venga
+            document.getElementById('inputRealizada').value = realizada;
+            document.getElementById('inputResponsable').value = responsable;
+
+            // Cambiar aspecto del botón
+            const btn = document.getElementById('btnAccion');
+            btn.innerText = "GUARDAR CAMBIOS (PUT)";
+            btn.style.backgroundColor = "#ffc107"; // Amarillo
+            btn.style.color = "black";
+
+            // Scroll hacia arriba
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        function limpiarFormulario() {
+            document.getElementById('inputIdOriginal').value = ""; // Reseteamos modo edición
+
+            document.getElementById('inputId').value = "";
+            document.getElementById('inputTarea').value = "";
+            document.getElementById('inputPrioridad').value = "";
+            document.getElementById('inputResponsable').value = "";
+
+            // Resetear botón a modo CREAR
+            const btn = document.getElementById('btnAccion');
+            btn.innerText = "CREAR TAREA (POST)";
+            btn.style.backgroundColor = "#28a745"; // Verde
+            btn.style.color = "white";
+        }
+
+        // Cargar al inicio
+        cargarTareas();
+    </script>
+</body>
+
+</html>

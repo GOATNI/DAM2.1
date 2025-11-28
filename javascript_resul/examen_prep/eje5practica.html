@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio: Reserva de Cine</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            text-align: center;
+            background-color: #f4f4f4;
+        }
+        
+        h2 {
+            color: #333;
+        }
+        
+        .pantalla {
+            background: #333;
+            color: white;
+            margin: 0 auto 30px auto;
+            width: 300px;
+            padding: 10px;
+            border-radius: 0 0 50px 50px;
+            box-shadow: 0 10px 10px -5px rgba(0, 0, 0, 0.5);
+        }
+        
+        table {
+            margin: 0 auto;
+            border-spacing: 10px;
+        }
+        
+        td {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 12px;
+            cursor: pointer;
+            transition: transform 0.2s;
+            color: white;
+        }
+        
+        td:hover {
+            transform: scale(1.1);
+        }
+        
+        .libre {
+            background-color: #4CAF50;
+            box-shadow: 0 4px #2E7D32;
+        }
+        
+        .ocupado {
+            background-color: #F44336;
+            box-shadow: 0 4px #C62828;
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+        
+        .seleccionado {
+            background-color: #2196F3;
+            box-shadow: 0 4px #1565C0;
+        }
+        
+        #resumen {
+            margin-top: 20px;
+            font-size: 1.2em;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2>Selección de Asientos</h2>
+    <div class="pantalla">PANTALLA</div>
+
+    <div id="sala-container"></div>
+    <div id="resumen">Selecciona tus asientos</div>
+
+    <script>
+        // 0 = Libre, 1 = Ocupado (ya vendido), 2 = Tu selección
+        let sala = [
+            [0, 0, 0, 1, 1, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 1, 1],
+            [1, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 1, 1, 1, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0]
+        ];
+
+        function pintarSala() {
+            let html = '<table>';
+            let seleccionados = 0;
+            let precioEntrada = 9.50;
+
+            for (let i = 0; i < sala.length; i++) {
+                html += '<tr>';
+                for (let j = 0; j < sala[i].length; j++) {
+                    let clase = '';
+                    let contenido = '';
+
+                    if (sala[i][j] === 0) {
+                        clase = 'libre';
+                        contenido = 'L';
+                    } else if (sala[i][j] === 1) {
+                        clase = 'ocupado';
+                        contenido = 'X';
+                    } else if (sala[i][j] === 2) {
+                        clase = 'seleccionado';
+                        contenido = 'Yo';
+                        seleccionados++;
+                    }
+
+                    // Solo añadimos onclick si no está ocupado por otro (estado 1)
+                    let accion = sala[i][j] !== 1 ? `onclick="toggleAsiento(${i}, ${j})"` : '';
+
+                    html += `<td class="${clase}" ${accion}>${contenido}</td>`;
+                }
+                html += '</tr>';
+            }
+            html += '</table>';
+
+            document.getElementById('sala-container').innerHTML = html;
+
+            // Actualizar resumen
+            let total = (seleccionados * precioEntrada).toFixed(2);
+            document.getElementById('resumen').innerHTML =
+                `Has seleccionado <b>${seleccionados}</b> entradas.<br>Total a pagar: <b>${total}€</b>`;
+        }
+
+        function toggleAsiento(fila, col) {
+            // Si está libre (0) pasa a seleccionado (2)
+            if (sala[fila][col] === 0) {
+                sala[fila][col] = 2;
+            }
+            // Si está seleccionado (2) pasa a libre (0)
+            else if (sala[fila][col] === 2) {
+                sala[fila][col] = 0;
+            }
+            pintarSala();
+        }
+
+        pintarSala();
+    </script>
+</body>
+
+</html>

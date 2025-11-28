@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 1: Media Aritmética de un Vector</title>
+</head>
+<body>
+    <h1>Ejercicio 1: Media Aritmética de un Vector</h1>
+
+    <div id="resultado"></div>
+
+    <script>
+        // 1. Crea un script en el que se pida al usuario un vector de números enteros
+        //    e indique en pantalla la media aritmética de todos sus elementos.
+        //    Para parar la introducción de número, teclea un 0.
+        //    Comprueba que todos los valores son números, antes de hacer la operación.
+
+        function calcularMedia() {
+            let numeros = [];
+            let input;
+            let suma = 0;
+            let contador = 0;
+
+            alert("Introduce números enteros. Teclea 0 para finalizar.");
+
+            do {
+                input = prompt(`Introduce un número entero (0 para finalizar). Llevas ${contador} números.`);
+                let numero = parseInt(input);
+
+                if (input === null) { // Si el usuario cancela el prompt
+                    alert("Operación cancelada.");
+                    numeros = []; // Limpiar para evitar cálculos parciales
+                    break;
+                }
+
+                if (input.trim() === "0") {
+                    if (contador === 0) {
+                        alert("No se introdujeron números para calcular la media.");
+                    }
+                    break; // Salir del bucle si se introduce 0
+                }
+
+                if (isNaN(numero) || !Number.isInteger(numero)) {
+                    alert("Entrada no válida. Por favor, introduce un número entero.");
+                } else {
+                    numeros.push(numero);
+                    suma += numero;
+                    contador++;
+                }
+            } while (true); // Bucle infinito hasta que se rompa con '0' o 'cancelar'
+
+            let resultadoDiv = document.getElementById("resultado");
+            if (contador > 0) {
+                let media = suma / contador;
+                resultadoDiv.innerHTML = `
+                    <p>Números introducidos: [${numeros.join(', ')}]</p>
+                    <p>Suma total: ${suma}</p>
+                    <p>Cantidad de números: ${contador}</p>
+                    <p><strong>La media aritmética es: ${media.toFixed(2)}</strong></p>
+                `;
+            } else {
+                resultadoDiv.innerHTML = "<p>No se introdujeron números válidos para calcular la media.</p>";
+            }
+        }
+
+        calcularMedia();
+    </script>
+</body>
+</html>

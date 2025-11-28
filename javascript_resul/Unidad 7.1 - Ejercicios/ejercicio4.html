@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Task List API REST</title>
+</head>
+
+<body>
+    <h1>Task List API REST</h1>
+    <button id="show-tasks">Mostrar Datos</button>
+    <table id="tasks-table" style="display:none;">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Tarea</th>
+                <th>Prioridad</th>
+                <th>Urgente</th>
+                <th>Realizada</th>
+                <th>Responsable</th>
+                <th>Acción</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+
+    <script>
+        const showTasksButton = document.getElementById('show-tasks');
+        const tasksTable = document.getElementById('tasks-table');
+        const tasksTbody = tasksTable.querySelector('tbody');
+
+        let tasks = [{
+            id: 1,
+            tarea: "Hacer la compra",
+            prioridad: 10,
+            urgente: false,
+            realizada: false,
+            responsable: "Juan"
+        }, {
+            id: 2,
+            tarea: "Enviar Correo",
+            prioridad: 20,
+            urgente: true,
+            realizada: false,
+            responsable: "Maria"
+        }, {
+            id: 3,
+            tarea: "Llamar al cliente",
+            prioridad: 5,
+            urgente: true,
+            realizada: true,
+            responsable: "Pedro"
+        }];
+
+        function renderTasks() {
+            tasksTbody.innerHTML = '';
+            tasks.forEach(task => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${task.id}</td>
+                    <td>${task.tarea}</td>
+                    <td>${task.prioridad}</td>
+                    <td>${task.urgente}</td>
+                    <td>${task.realizada}</td>
+                    <td>${task.responsable}</td>
+                    <td><button class="delete" data-id="${task.id}">DELETE</button></td>
+                `;
+                tasksTbody.appendChild(row);
+            });
+        }
+
+        showTasksButton.addEventListener('click', () => {
+            tasksTable.style.display = 'table';
+            renderTasks();
+        });
+
+        tasksTbody.addEventListener('click', (event) => {
+            if (event.target.classList.contains('delete')) {
+                const idToDelete = parseInt(event.target.getAttribute('data-id'));
+                const idFromPrompt = prompt('Introduce el id de la tarea que deseas borrar');
+                if (idFromPrompt && parseInt(idFromPrompt) === idToDelete) {
+                    tasks = tasks.filter(task => task.id !== idToDelete);
+                    renderTasks();
+                } else if (idFromPrompt) {
+                    alert('El ID introducido no es correcto.');
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
