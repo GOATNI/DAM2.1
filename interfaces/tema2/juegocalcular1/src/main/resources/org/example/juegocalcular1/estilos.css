@@ -1,0 +1,58 @@
+.button {
+
+    -fx-padding: 10 20 10 20;
+    -fx-border-radius: 20;
+    -fx-background-radius: 20;
+
+    -fx-background-color: #94c0f4;
+    -fx-text-fill: #FFFFFF;
+
+
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-font-family: "Segoe UI";
+
+
+    -fx-border-width: 0;
+
+
+
+}
+
+
+.button:hover {
+    -fx-background-color: #0056b3;
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+}
+
+
+
+.buttons1 {
+
+    -fx-padding: 12 30 12 30;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+
+
+    -fx-text-fill: #FFFFFF;
+    -fx-border-color: #b9edc2;
+    -fx-border-width: 2;
+
+
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-font-family: "Segoe UI";
+
+
+    -fx-cursor: hand;
+}
+
+
+.buttons1:hover {
+    -fx-background-color: #218838;
+    -fx-border-color: #0c5323;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 8, 0, 0, 2);
+}
+
+
