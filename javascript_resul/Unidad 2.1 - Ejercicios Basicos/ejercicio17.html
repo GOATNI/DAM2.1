@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 17</title>
+</head>
+<body>
+    <h1>Ejercicio 17: Analizador de Caracteres</h1>
+
+    <script>
+        // 17. Crea un script que, dado un carácter, nos diga si es un número,
+        //     si es vocal, si es consonante, si está en mayúsculas o si es
+        //     otro distinto a los anteriores. Utiliza Switch case
+
+        let caracter = prompt("Introduce un carácter:");
+
+        if (caracter === null || caracter.length !== 1) {
+            document.write("<p>Por favor, introduce un único carácter válido.</p>");
+        } else {
+            let tipo = "Otro";
+
+            // Convertir a mayúsculas para simplificar la comparación de vocales/consonantes
+            let charUpper = caracter.toUpperCase();
+
+            // Comprobar si es un número
+            if (!isNaN(parseInt(caracter)) && isFinite(caracter)) {
+                tipo = "Número";
+            } else if (charUpper >= 'A' && charUpper <= 'Z') { // Es una letra
+                switch (charUpper) {
+                    case 'A':
+                    case 'E':
+                    case 'I':
+                    case 'O':
+                    case 'U':
+                        tipo = "Vocal";
+                        break;
+                    default:
+                        tipo = "Consonante";
+                        break;
+                }
+                // Comprobar si está en mayúsculas (solo si es una letra)
+                if (caracter === charUpper) {
+                    tipo += " (Mayúscula)";
+                } else {
+                    tipo += " (Minúscula)";
+                }
+            }
+
+            document.write("<p>El carácter '" + caracter + "' es: " + tipo + "</p>");
+        }
+    </script>
+</body>
+</html>

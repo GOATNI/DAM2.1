@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 14 - Año Bisiesto</title>
+    <script>
+        function esBisiesto() {
+            let anioInput = prompt("Introduce un año para comprobar si es bisiesto:");
+            let anio = parseInt(anioInput);
+
+            if (isNaN(anio) || anio <= 0) {
+                document.getElementById('resultado').innerHTML = "<p>Por favor, introduce un año válido.</p>";
+                return;
+            }
+
+            // La condición para que un año sea bisiesto:
+            // Es divisible por 4, pero no por 100, a menos que también sea divisible por 400.
+            const esBisiesto = (anio % 4 === 0 && anio % 100 !== 0) || (anio % 400 === 0);
+
+            if (esBisiesto) {
+                document.getElementById('resultado').innerHTML = `<p>El año <strong>${anio}</strong> sí es un año bisiesto.</p>`;
+            } else {
+                document.getElementById('resultado').innerHTML = `<p>El año <strong>${anio}</strong> no es un año bisiesto.</p>`;
+            }
+        }
+    </script>
+</head>
+<body onload="esBisiesto()">
+    <h1>Comprobador de Años Bisiestos</h1>
+    <div id="resultado"></div>
+</body>
+</html>

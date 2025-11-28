@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 6 - Validar Email</title>
+    <script>
+        function validarEmail() {
+            let email = prompt("Introduce tu dirección de correo electrónico:");
+
+            if (!email) {
+                document.getElementById('resultado').innerHTML = "<p>No se introdujo ningún email.</p>";
+                return;
+            }
+
+            // Expresión regular simple para validar email
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+            if (emailRegex.test(email)) {
+                const partes = email.split('@');
+                const usuario = partes[0];
+                const dominio = partes[1];
+                document.getElementById('resultado').innerHTML = 
+                    `<p>El email "${email}" es válido.</p>
+                     <p><b>Nombre de usuario:</b> ${usuario}</p>
+                     <p><b>Dominio:</b> ${dominio}</p>`;
+            } else {
+                document.getElementById('resultado').innerHTML = `<p>El email "${email}" no es válido.</p>`;
+            }
+        }
+    </script>
+</head>
+<body onload="validarEmail()">
+    <h1>Validación de Correo Electrónico</h1>
+    <div id="resultado"></div>
+</body>
+</html>

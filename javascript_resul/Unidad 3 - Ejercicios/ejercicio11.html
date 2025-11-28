@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 11 - Cronómetro</title>
+    <script>
+        let tiempoInicio;
+
+        function empezar() {
+            tiempoInicio = new Date();
+            document.getElementById('resultado').innerHTML = "Contando...";
+            document.getElementById('btnEmpezar').disabled = true;
+            document.getElementById('btnFinalizar').disabled = false;
+        }
+
+        function finalizar() {
+            if (!tiempoInicio) {
+                document.getElementById('resultado').innerHTML = "Pulsa 'Empezar a contar' primero.";
+                return;
+            }
+            const tiempoFin = new Date();
+            const tiempoTranscurrido = (tiempoFin - tiempoInicio) / 1000; // en segundos
+
+            document.getElementById('resultado').innerHTML = `Tiempo transcurrido: <strong>${tiempoTranscurrido.toFixed(3)} segundos</strong>.`;
+            document.getElementById('btnEmpezar').disabled = false;
+            document.getElementById('btnFinalizar').disabled = true;
+            tiempoInicio = null; // Resetear para la próxima vez
+        }
+    </script>
+</head>
+<body>
+    <h1>Cronómetro</h1>
+    <p>Mide el tiempo entre la pulsación de dos botones.</p>
+    <button id="btnEmpezar" onclick="empezar()">Empezar a contar</button>
+    <button id="btnFinalizar" onclick="finalizar()" disabled>Finalizar</button>
+    <div id="resultado" style="margin-top: 20px; font-size: 1.2em;"></div>
+</body>
+</html>

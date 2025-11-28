@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 5 - Calendario</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: center;
+            padding: 8px;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .festivo {
+            background-color: #ffcccc;
+            color: red;
+            font-weight: bold;
+        }
+        .hoy {
+            background-color: #ccffcc;
+        }
+    </style>
+    <script>
+        function generarCalendario() {
+            const festivos2025 = [[1,6],[],[],[17,18,23],[1],[],[],[15],[],[12],[1],[6,8,25]];
+            const nombresMeses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+            
+            let mesInput = prompt("Introduce el número del mes (1-12) para generar el calendario de 2025:");
+            let mes = parseInt(mesInput) - 1; // Convertir a índice 0-11
+
+            if (isNaN(mes) || mes < 0 || mes > 11) {
+                document.getElementById('calendario').innerHTML = "<p>Mes no válido. Por favor, introduce un número del 1 al 12.</p>";
+                return;
+            }
+
+            const diasEnMes = new Date(2025, mes + 1, 0).getDate();
+            const primerDia = new Date(2025, mes, 1).getDay(); // 0=Domingo, 1=Lunes...
+            const diaSemana = primerDia === 0 ? 6 : primerDia - 1; // Ajustar para que Lunes sea 0
+
+            const festivosDelMes = festivos2025[mes];
+
+            let html = `<h2>${nombresMeses[mes]} 2025</h2>`;
+            html += '<table>';
+            html += '<tr><th>L</th><th>M</th><th>X</th><th>J</th><th>V</th><th>S</th><th>D</th></tr>';
+            html += '<tr>';
+
+            // Espacios en blanco al principio del mes
+            for (let i = 0; i < diaSemana; i++) {
+                html += '<td></td>';
+            }
+
+            for (let dia = 1; dia <= diasEnMes; dia++) {
+                let diaActual = new Date(2025, mes, dia).getDay();
+                if (diaActual === 0) diaActual = 7; // Domingo
+                
+                let clase = '';
+                if (festivosDelMes.includes(dia)) {
+                    clase = 'festivo';
+                }
+
+                html += `<td class="${clase}">${dia}</td>`;
+
+                if ((dia + diaSemana) % 7 === 0) {
+                    html += '</tr><tr>';
+                }
+            }
+
+            html += '</tr>';
+            html += '</table>';
+
+            document.getElementById('calendario').innerHTML = html;
+        }
+    </script>
+</head>
+<body onload="generarCalendario()">
+    <h1>Calendario Mensual 2025</h1>
+    <div id="calendario"></div>
+</body>
+</html>

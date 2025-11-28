@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 11: Calculadora de Tiempo Transcurrido</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 50px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 1.2em;
+            margin: 10px;
+            cursor: pointer;
+        }
+        #resultado {
+            margin-top: 20px;
+            font-size: 1.1em;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Ejercicio 11: Tiempo Transcurrido</h1>
+
+    <button id="startButton">Empezar a contar</button>
+    <button id="stopButton" disabled>Finalizar</button>
+
+    <div id="resultado"></div>
+
+    <script>
+        // 11. Calcula el tiempo transcurrido entre la pulsación de dos botones
+        //     rotulados "Empezar a contar", "Finalizar".
+
+        let startTime;
+        const startButton = document.getElementById('startButton');
+        const stopButton = document.getElementById('stopButton');
+        const resultadoDiv = document.getElementById('resultado');
+
+        startButton.addEventListener('click', function() {
+            startTime = new Date();
+            resultadoDiv.innerHTML = "<p>Contando...</p>";
+            startButton.disabled = true;
+            stopButton.disabled = false;
+        });
+
+        stopButton.addEventListener('click', function() {
+            if (startTime) {
+                const endTime = new Date();
+                const elapsedTimeMs = endTime.getTime() - startTime.getTime(); // Tiempo en milisegundos
+
+                // Convertir a segundos, minutos, etc.
+                const segundos = Math.floor(elapsedTimeMs / 1000);
+                const minutos = Math.floor(segundos / 60);
+                const horas = Math.floor(minutos / 60);
+
+                const segundosRestantes = segundos % 60;
+                const minutosRestantes = minutos % 60;
+
+                resultadoDiv.innerHTML = `
+                    <p>Tiempo transcurrido:</p>
+                    <p><strong>${horas} horas, ${minutosRestantes} minutos, ${segundosRestantes} segundos</strong></p>
+                    <p>(${elapsedTimeMs} milisegundos)</p>
+                `;
+                startButton.disabled = false;
+                stopButton.disabled = true;
+                startTime = null; // Resetear para una nueva cuenta
+            } else {
+                resultadoDiv.innerHTML = "<p>Pulsa 'Empezar a contar' primero.</p>";
+            }
+        });
+    </script>
+</body>
+</html>

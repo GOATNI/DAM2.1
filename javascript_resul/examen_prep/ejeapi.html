@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Usuarios API Pública</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f2f5;
+            padding: 20px;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        
+        #grid-usuarios {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            border-left: 5px solid #007bff;
+            transition: margin-top 0.3s;
+        }
+        
+        .card:hover {
+            margin-top: -5px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .card h3 {
+            margin-top: 0;
+            color: #007bff;
+        }
+        
+        .card p {
+            margin: 5px 0;
+            color: #555;
+            font-size: 0.9em;
+        }
+        
+        .card .email {
+            color: #888;
+            font-style: italic;
+        }
+        
+        .error {
+            color: red;
+            text-align: center;
+            font-weight: bold;
+        }
+        
+        button {
+            display: block;
+            margin: 0 auto 20px auto;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Directorio de Usuarios (JSONPlaceholder)</h1>
+    <button onclick="cargarUsuarios()">Cargar Usuarios desde API</button>
+    <div id="grid-usuarios"></div>
+
+    <script>
+        // URL de una API pública gratuita para pruebas
+        const API_URL = 'https://jsonplaceholder.typicode.com/users';
+
+        // Usamos async/await para un código más limpio que el .then()
+        async function cargarUsuarios() {
+            const contenedor = document.getElementById("grid-usuarios");
+            contenedor.innerHTML = '<p style="text-align:center; width:100%">Cargando...</p>';
+
+            try {
+                // 1. Petición
+                const respuesta = await fetch(API_URL);
+
+                // 2. Verificar estado HTTP
+                if (!respuesta.ok) throw new Error("Error en la red: " + respuesta.status);
+
+                // 3. Convertir a JSON
+                const usuarios = await respuesta.json();
+
+                // 4. Renderizar
+                let html = '';
+                usuarios.forEach(usuario => {
+                    html += `
+                        <div class="card">
+                            <h3>${usuario.name}</h3>
+                            <p><strong>Alias:</strong> ${usuario.username}</p>
+                            <p class="email">📧 ${usuario.email}</p>
+                            <p>🏠 ${usuario.address.street}, ${usuario.address.city}</p>
+                            <p>🏢 ${usuario.company.name}</p>
+                            <p>📞 ${usuario.phone}</p>
+                        </div>
+                    `;
+                });
+                contenedor.innerHTML = html;
+
+            } catch (error) {
+                console.error("Hubo un problema:", error);
+                contenedor.innerHTML = `<p class="error">Error cargando datos: ${error.message}</p>`;
+            }
+        }
+    </script>
+</body>
+
+</html>

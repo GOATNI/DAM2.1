@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 7 - Palíndromo</title>
+    <script>
+        function esPalindromo() {
+            let cadena = prompt("Introduce una cadena de texto para comprobar si es un palíndromo:");
+
+            if (!cadena) {
+                document.getElementById('resultado').innerHTML = "<p>No se introdujo ninguna cadena.</p>";
+                return;
+            }
+
+            // Limpiar la cadena: quitar espacios, puntuación y convertir a minúsculas
+            const cadenaLimpia = cadena.toLowerCase().replace(/[\s.,;:]/g, '');
+            
+            // Invertir la cadena
+            const cadenaInvertida = cadenaLimpia.split('').reverse().join('');
+
+            if (cadenaLimpia === cadenaInvertida) {
+                document.getElementById('resultado').innerHTML = `<p>"${cadena}" <strong>es</strong> un palíndromo.</p>`;
+            } else {
+                document.getElementById('resultado').innerHTML = `<p>"${cadena}" <strong>no</strong> es un palíndromo.</p>`;
+            }
+        }
+    </script>
+</head>
+<body onload="esPalindromo()">
+    <h1>Comprobador de Palíndromos</h1>
+    <div id="resultado"></div>
+</body>
+</html>

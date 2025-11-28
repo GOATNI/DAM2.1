@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 12: Formatear Fecha de Nacimiento</title>
+</head>
+<body>
+    <h1>Ejercicio 12: Formatear Fecha de Nacimiento</h1>
+
+    <div id="resultado"></div>
+
+    <script>
+        // 12. Crea un script en el que se pida la fecha de nacimiento y devuelva
+        //     la fecha en formato: dd-mm-aaaa, es decir, 26-11-2015.
+
+        function formatearFechaNacimiento() {
+            let fechaNacimientoStr = prompt("Introduce tu fecha de nacimiento (aaaa-mm-dd, ej: 1990-01-15):");
+            let resultadoDiv = document.getElementById("resultado");
+
+            if (fechaNacimientoStr === null || fechaNacimientoStr.trim() === "") {
+                resultadoDiv.innerHTML = "<p>No se introdujo ninguna fecha.</p>";
+                return;
+            }
+
+            const fecha = new Date(fechaNacimientoStr);
+
+            // Comprobar si la fecha es válida (ej: si el usuario introduce "abc")
+            if (isNaN(fecha.getTime())) {
+                resultadoDiv.innerHTML = "<p>Fecha introducida no válida. Por favor, usa el formato aaaa-mm-dd.</p>";
+                return;
+            }
+
+            const dia = String(fecha.getDate()).padStart(2, '0');
+            const mes = String(fecha.getMonth() + 1).padStart(2, '0'); // getMonth() es 0-indexado
+            const anio = fecha.getFullYear();
+
+            resultadoDiv.innerHTML = `<p>Tu fecha de nacimiento es: <strong>${dia}-${mes}-${anio}</strong></p>`;
+        }
+
+        formatearFechaNacimiento();
+    </script>
+</body>
+</html>

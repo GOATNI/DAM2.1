@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // NO MODIFICAR ESTA PARTE DEL CÓDIGO
+        // Simula dos respuestas de API que podríamos recibir
+        const respuestaApi1 = '{"status": 200, "data": {"id": 1, "nombre": "Rick Sanchez", "dimension": "C-137"}}';
+        const respuestaApi2 = '{"status": 200, "data": {"info": {"episodios": 51, "temporadas": 5}, "primera_aparicion": "Pilot"}}';
+
+        // FIN DE LA PARTE NO MODIFICABLE
+
+        function procesarDatosPersonaje() {
+            let datosFinales = {};
+            let errorGeneral = false;
+
+            try {
+                const datos1 = JSON.parse(respuestaApi1);
+                if (datos1.status === 200) {
+                    datosFinales.id = datos1.data.id;
+                    datosFinales.nombre = datos1.data.nombre;
+                    datosFinales.dimension = datos1.data.dimension;
+
+                    try {
+                        const datos2 = JSON.parse(respuestaApi2);
+                        if (datos2.status === 200) {
+                            datosFinales.episodios = datos2.data.info.episodios;
+                            datosFinales.primera_aparicion = datos2.data.primera_aparicion;
+                        } else {
+                            console.log("Error en la segunda API");
+                            errorGeneral = true;
+                        }
+                    } catch (e) {
+                        console.log("Fallo al parsear la segunda respuesta");
+                        errorGeneral = true;
+                    }
+
+                } else {
+                    console.log("Error en la primera API");
+                    errorGeneral = true;
+                }
+            } catch (e) {
+                console.log("Fallo al parsear la primera respuesta");
+                errorGeneral = true;
+            }
+
+            if (!errorGeneral) {
+                console.log("Datos del personaje procesados:", datosFinales);
+                return datosFinales;
+            } else {
+                console.log("No se pudieron procesar los datos.");
+                return null;
+            }
+        }
+
+        procesarDatosPersonaje();
+    </script>
+</body>
+
+</html>

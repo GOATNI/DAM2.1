@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 16 - Horario</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 10px;
+            text-align: center;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .hora {
+            background-color: #e0e0e0;
+            font-weight: bold;
+        }
+        .recreo {
+            background-color: #d4edda;
+            font-style: italic;
+        }
+    </style>
+    <script>
+        function generarHorario() {
+            const horario = [
+                ["IPPE", "PROY", "IPPE", "AD", "SGE"],
+                ["DI", "SGE", "AD", "AD", "SGE"],
+                ["DI", "SGE", "AD", "AD", "SASP"],
+                ["RECREO","RECREO","RECREO","RECREO","RECREO"],
+                ["DWC", "PMDM", "PMDM", "PROY", "DI"],
+                ["DWC", "PMDM", "PMDM", "PSP", "DI"],
+                ["DWC", "PMDM", "PMDM", "PSP", "DI"]
+            ];
+
+            const diasSemana = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes"];
+            
+            // Calcular las horas
+            const horas = [];
+            let horaInicio = new Date();
+            horaInicio.setHours(8, 0, 0); // Empezamos a las 8:00
+
+            for (let i = 0; i < horario.length; i++) {
+                let horaFin = new Date(horaInicio.getTime() + 55 * 60000); // 55 minutos por clase
+                if (i === 3) { // RECREO
+                    horaFin = new Date(horaInicio.getTime() + 30 * 60000); // 30 minutos de recreo
+                }
+                
+                horas.push(
+                    `${horaInicio.toTimeString().substring(0,5)} - ${horaFin.toTimeString().substring(0,5)}`
+                );
+                horaInicio = horaFin;
+            }
+
+            // Mostrar fecha actual
+            const hoy = new Date();
+            const opcionesFecha = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            document.getElementById('fecha').innerText = `Horario para la semana del: ${hoy.toLocaleDateString('es-ES', opcionesFecha)}`;
+
+            // Generar tabla
+            let tablaHTML = '<table><thead><tr><th>Hora</th>';
+            diasSemana.forEach(dia => tablaHTML += `<th>${dia}</th>`);
+            tablaHTML += '</tr></thead><tbody>';
+
+            for (let i = 0; i < horario.length; i++) {
+                tablaHTML += '<tr>';
+                tablaHTML += `<td class="hora">${horas[i]}</td>`;
+                for (let j = 0; j < horario[i].length; j++) {
+                    let clase = horario[i][j];
+                    let claseCSS = clase === 'RECREO' ? 'recreo' : '';
+                    tablaHTML += `<td class="${claseCSS}">${clase}</td>`;
+                }
+                tablaHTML += '</tr>';
+            }
+
+            tablaHTML += '</tbody></table>';
+            document.getElementById('horario-container').innerHTML = tablaHTML;
+        }
+    </script>
+</head>
+<body onload="generarHorario()">
+    <h1>Horario de Clases</h1>
+    <div id="fecha" style="font-size: 1.2em; margin-bottom: 10px;"></div>
+    <div id="horario-container"></div>
+</body>
+</html>

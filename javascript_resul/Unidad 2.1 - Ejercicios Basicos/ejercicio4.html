@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 4: Ordenar Nombres</title>
+</head>
+<body>
+    <h1>Ejercicio 4: Ordenar Nombres</h1>
+
+    <div id="resultado"></div>
+
+    <script>
+        // 4. Genera un array con los siguientes nombres: Julián, Rodrigo, Mateo, Valdomero.
+        //    Haz una ordenación de los mismos en orden normal e inverso.
+
+        const nombres = ["Julián", "Rodrigo", "Mateo", "Valdomero"];
+
+        // Ordenación normal (alfabética ascendente)
+        const nombresNormal = [...nombres].sort(); // Crear una copia para no modificar el original
+
+        // Ordenación inversa (alfabética descendente)
+        const nombresInverso = [...nombres].sort().reverse(); // Crear una copia y luego invertir
+
+        document.getElementById("resultado").innerHTML = `
+            <p>Array original de nombres: [${nombres.join(', ')}]</p>
+            <p>Nombres ordenados alfabéticamente (normal): [${nombresNormal.join(', ')}]</p>
+            <p>Nombres ordenados alfabéticamente (inverso): [${nombresInverso.join(', ')}]</p>
+        `;
+    </script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 13: Formatear Objeto Date</title>
+</head>
+<body>
+    <h1>Ejercicio 13: Formatear Objeto Date</h1>
+
+    <div id="resultado"></div>
+
+    <script>
+        // 13. Crea un script que cuando le pases un objeto de tipo Date genere una cadena con el formato:
+        //     Día de la semana, dd de mm de aaaa, es decir, jueves, 26 de noviembre de 2015.
+
+        function formatearFecha(fecha) {
+            const diasSemana = ["domingo", "lunes", "martes", "miércoles", "jueves", "viernes", "sábado"];
+            const meses = [
+                "enero", "febrero", "marzo", "abril", "mayo", "junio",
+                "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"
+            ];
+
+            const diaSemana = diasSemana[fecha.getDay()];
+            const dia = fecha.getDate();
+            const mes = meses[fecha.getMonth()];
+            const anio = fecha.getFullYear();
+
+            return `${diaSemana}, ${dia} de ${mes} de ${anio}`;
+        }
+
+        // Ejemplo de uso:
+        const fechaActual = new Date(); // Puedes cambiar esto por cualquier objeto Date
+        const fechaFormateada = formatearFecha(fechaActual);
+
+        document.getElementById("resultado").innerHTML = `<p>Fecha actual formateada: <strong>${fechaFormateada}</strong></p>`;
+
+        // Otro ejemplo con una fecha específica
+        const otraFecha = new Date(2015, 10, 26); // Noviembre es el mes 10 (0-indexado)
+        const otraFechaFormateada = formatearFecha(otraFecha);
+        document.write(`<p>Otra fecha formateada (26-11-2015): <strong>${otraFechaFormateada}</strong></p>`);
+    </script>
+</body>
+</html>

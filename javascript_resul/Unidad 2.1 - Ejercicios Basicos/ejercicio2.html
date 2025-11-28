@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 2: Validación de DNI</title>
+</head>
+<body>
+    <h1>Ejercicio 2: Validación de DNI</h1>
+
+    <div id="resultado"></div>
+
+    <script>
+        // 2. El cálculo de la letra del Documento Nacional de Identidad (DNI) es un proceso matemático sencillo
+        //    que se basa en obtener el resto de la división entera del número de DNI y el número 23.
+        //    Si el resto es 0 será la letra 'T', si es 1 la letra 'R', etc. Se adjunta el array con las letras
+        //    correspondientes a los restos.
+        //    var letras = ['T', 'R', 'W', 'A', 'G', 'M', 'Y', 'F', 'P', 'D', 'X', 'B', 'N', 'J', 'Z', 'S', 'Q', 'V', 'H', 'L', 'C', 'K', 'E', 'T'];
+        //    Pídele un DNI al usuario e indícale si el DNI introducido es válido o no.
+
+        const letrasDNI = ['T', 'R', 'W', 'A', 'G', 'M', 'Y', 'F', 'P', 'D', 'X', 'B', 'N', 'J', 'Z', 'S', 'Q', 'V', 'H', 'L', 'C', 'K', 'E', 'T'];
+
+        function validarDNI() {
+            let dniCompleto = prompt("Introduce tu DNI (8 números y 1 letra, ej: 12345678A):");
+            let resultadoDiv = document.getElementById("resultado");
+
+            if (dniCompleto === null || dniCompleto.length !== 9) {
+                resultadoDiv.innerHTML = "<p>Formato de DNI incorrecto. Debe tener 8 números y 1 letra.</p>";
+                return;
+            }
+
+            let numeroDNI = parseInt(dniCompleto.substring(0, 8));
+            let letraDNI = dniCompleto.substring(8, 9).toUpperCase();
+
+            if (isNaN(numeroDNI) || !Number.isInteger(numeroDNI)) {
+                resultadoDiv.innerHTML = "<p>El número del DNI no es válido.</p>";
+                return;
+            }
+
+            let indiceLetra = numeroDNI % 23;
+            let letraCalculada = letrasDNI[indiceLetra];
+
+            if (letraDNI === letraCalculada) {
+                resultadoDiv.innerHTML = `<p>El DNI ${dniCompleto} es <strong>VÁLIDO</strong>.</p>`;
+            } else {
+                resultadoDiv.innerHTML = `<p>El DNI ${dniCompleto} es <strong>INVÁLIDO</strong>. La letra correcta para el número ${numeroDNI} es ${letraCalculada}.</p>`;
+            }
+        }
+
+        validarDNI();
+    </script>
+</body>
+</html>

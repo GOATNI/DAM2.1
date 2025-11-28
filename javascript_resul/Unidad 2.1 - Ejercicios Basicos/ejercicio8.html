@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 8: Formatear Nombre</title>
+</head>
+<body>
+    <h1>Ejercicio 8: Formatear Nombre y Apellidos</h1>
+
+    <div id="resultado"></div>
+
+    <script>
+        // 8. Crear un script que solicite el nombre y apellidos de una persona (en una sola vez)
+        //    y luego los muestre como "apellidos, nombre".
+
+        function formatearNombre() {
+            let nombreCompleto = prompt("Introduce tu nombre y apellidos (ej: Juan Pérez García):");
+            let resultadoDiv = document.getElementById("resultado");
+
+            if (nombreCompleto === null || nombreCompleto.trim() === "") {
+                resultadoDiv.innerHTML = "<p>No se introdujo ningún nombre.</p>";
+                return;
+            }
+
+            // Dividir la cadena en palabras
+            const partesNombre = nombreCompleto.trim().split(/\s+/);
+
+            if (partesNombre.length < 2) {
+                resultadoDiv.innerHTML = "<p>Por favor, introduce al menos un nombre y un apellido.</p>";
+                return;
+            }
+
+            // Asumimos que el primer elemento es el nombre y el resto son apellidos
+            const nombre = partesNombre[0];
+            const apellidos = partesNombre.slice(1).join(' ');
+
+            resultadoDiv.innerHTML = `<p>Formato "apellidos, nombre": <strong>${apellidos}, ${nombre}</strong></p>`;
+        }
+
+        formatearNombre();
+    </script>
+</body>
+</html>

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 5: Calendario con Festivos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+        }
+        table {
+            border-collapse: collapse;
+            width: 80%;
+            max-width: 600px;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: center;
+            height: 60px;
+            vertical-align: top;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .day-header {
+            background-color: #e0e0e0;
+            font-weight: bold;
+        }
+        .holiday {
+            color: red;
+            font-weight: bold;
+        }
+        .empty-day {
+            background-color: #f9f9f9;
+        }
+        .month-year {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Ejercicio 5: Calendario con Festivos</h1>
+
+    <div id="calendar-container"></div>
+
+    <script>
+        // 5. Crea un calendario del mes que le pidas al usuario.
+        // Marca en color rojo los días festivos. Guarda los festivos en un array doble indexado por el número del mes (0 a 11), así:
+        // Array de festivos de 2025:
+        var festivos2025 = [
+            [1, 6],      // Enero (mes 0)
+            [],          // Febrero (mes 1)
+            [],          // Marzo (mes 2)
+            [17, 18, 23], // Abril (mes 3)
+            [1],         // Mayo (mes 4)
+            [],          // Junio (mes 5)
+            [],          // Julio (mes 6)
+            [15],        // Agosto (mes 7)
+            [],          // Septiembre (mes 8)
+            [12],        // Octubre (mes 9)
+            [1],         // Noviembre (mes 10)
+            [6, 8, 25]   // Diciembre (mes 11)
+        ];
+
+        function generarCalendario() {
+            let mesInput = prompt("Introduce el número del mes (1-12) para generar el calendario de 2025:");
+            let mes = parseInt(mesInput);
+
+            if (isNaN(mes) || mes < 1 || mes > 12) {
+                alert("Por favor, introduce un número de mes válido (1-12).");
+                return;
+            }
+
+            const year = 2025;
+            const monthIndex = mes - 1; // Meses en Date son 0-indexados
+
+            const nombreMeses = [
+                "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
+                "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
+            ];
+            const nombreDiasSemana = ["Dom", "Lun", "Mar", "Mié", "Jue", "Vie", "Sáb"];
+
+            let primerDiaMes = new Date(year, monthIndex, 1);
+            let ultimoDiaMes = new Date(year, monthIndex + 1, 0); // Día 0 del siguiente mes es el último día del mes actual
+            let numDiasMes = ultimoDiaMes.getDate();
+            let primerDiaSemana = primerDiaMes.getDay(); // 0 para Domingo, 1 para Lunes, etc.
+
+            let calendarioHTML = `<div class="month-year">${nombreMeses[monthIndex]} ${year}</div>`;
+            calendarioHTML += "<table>";
+            calendarioHTML += "<thead><tr>";
+            for (let i = 0; i < nombreDiasSemana.length; i++) {
+                calendarioHTML += `<th class="day-header">${nombreDiasSemana[i]}</th>`;
+            }
+            calendarioHTML += "</tr></thead><tbody><tr>";
+
+            // Rellenar días vacíos al principio del mes
+            for (let i = 0; i < primerDiaSemana; i++) {
+                calendarioHTML += "<td class='empty-day'></td>";
+            }
+
+            let diaActual = 1;
+            for (let i = primerDiaSemana; i < 7; i++) {
+                let esFestivo = festivos2025[monthIndex] && festivos2025[monthIndex].includes(diaActual);
+                calendarioHTML += `<td class="${esFestivo ? 'holiday' : ''}">${diaActual}</td>`;
+                diaActual++;
+            }
+            calendarioHTML += "</tr>";
+
+            // Rellenar el resto del mes
+            while (diaActual <= numDiasMes) {
+                calendarioHTML += "<tr>";
+                for (let i = 0; i < 7 && diaActual <= numDiasMes; i++) {
+                    let esFestivo = festivos2025[monthIndex] && festivos2025[monthIndex].includes(diaActual);
+                    calendarioHTML += `<td class="${esFestivo ? 'holiday' : ''}">${diaActual}</td>`;
+                    diaActual++;
+                }
+                calendarioHTML += "</tr>";
+            }
+
+            calendarioHTML += "</tbody></table>";
+            document.getElementById("calendar-container").innerHTML = calendarioHTML;
+        }
+
+        generarCalendario(); // Llamar a la función al cargar la página
+    </script>
+</body>
+</html>
