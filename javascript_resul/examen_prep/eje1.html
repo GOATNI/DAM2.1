@@ -83,6 +83,7 @@
             } else if (!validarEmail(email.value)) {
                 emailError.textContent = 'Formato de correo incorrecto.';
                 valido = false;
+                email.value = ''
             }
 
             // Validar número

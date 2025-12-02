@@ -88,6 +88,8 @@
                     <th>Realizada</th>
                     <th>Responsable</th>
                     <th>Acción</th>
+
+
                 </tr>
             </thead>
             <tbody id="cuerpoTabla">
@@ -144,6 +146,7 @@
 
             // Pedir el nuevo valor usando prompt
             const nuevaPrioridad = prompt(`Introduce la nueva prioridad (número) para la tarea ID ${id}: "${nombreTarea}"`);
+
 
             // Si el usuario cancela o no introduce valor, terminamos
             if (nuevaPrioridad === null || nuevaPrioridad.trim() === "") {
