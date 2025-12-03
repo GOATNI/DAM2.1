@@ -119,7 +119,7 @@ public class HelloController {
     }
     @FXML
     void enableAllButtons() {
-        btn1. setDisable(false);
+        btn1.setDisable(false);
         btn2.setDisable(false);
         btn5.setDisable(false);
         btn7.setDisable(false);
@@ -127,11 +127,12 @@ public class HelloController {
         btn15.setDisable(false);
         btn20.setDisable(false);
         btn25.setDisable(false);
-        btn50. setDisable(false);
+        btn50.setDisable(false);
         btn60.setDisable(false);
         btn75.setDisable(false);
         btn100.setDisable(false);
     }
+
     @FXML
     void newGame() {
         // Resetear valores
@@ -148,10 +149,9 @@ public class HelloController {
 
     private void subirnumero(int i) {
         minumero += i;
-        minumerotf.setText(minumero. toString());
-
+        minumerotf.setText(minumero.toString());
         // Verifica si has adivinado el número
-        if (minumero. equals(numero)) {
+        if (minumero.equals(numero)) {
             // Mostrar alerta de victoria
             javafx.scene.control. Alert alert = new javafx.scene.control.Alert(javafx. scene.control.Alert.AlertType.INFORMATION);
             alert. setTitle("¡Has Ganado!");

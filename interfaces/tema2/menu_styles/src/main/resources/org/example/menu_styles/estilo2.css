@@ -1,0 +1,33 @@
+.menu-bar {
+    -fx-background-color: #4CAF50;
+}
+
+.menu-bar .menu:hover,
+.menu-bar .menu:showing {
+    -fx-background-color: #388E3C;
+}
+
+.menu-item {
+    -fx-background-color: #4CAF50;
+    -fx-text-fill: white;
+}
+
+.menu-item:hover {
+    -fx-background-color: #81C784;
+}
+
+.context-menu {
+    -fx-background-color: #4CAF50;
+}
+.button{
+    -fx-background-color:#ae46e8;
+    -fx-font-size:20;
+    -fx-border-radius:3;
+    -fx-border-color:black;
+}
+.label{
+    -fx-background-color:#dfdf3b;
+    -fx-font-size:20;
+    -fx-border-radius:3;
+    -fx-border-color:#51e661;
+}

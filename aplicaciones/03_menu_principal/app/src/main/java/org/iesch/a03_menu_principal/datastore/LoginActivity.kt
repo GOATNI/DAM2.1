@@ -34,6 +34,7 @@ import org.iesch.a03_menu_principal.notifications.FCMTokenManager
 import org.iesch.a03_menu_principal.config.RemoteConfigManager
 import org.iesch.a03_menu_principal.databinding.ActivityLoginBinding
 
+
 enum class ProviderType {
     EMAILYCONTRASENA,
     GOOGLE
