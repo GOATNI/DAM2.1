@@ -11,10 +11,10 @@ class Practica8Screen extends StatelessWidget {
         slivers: [
           // 1. El Widget Estrella: SliverAppBar
           SliverAppBar(
-            backgroundColor: Colors.indigo,
-            expandedHeight: 200.0, // Altura cuando está expandido
-            floating: false, // ¿Aparece apenas haces scroll hacia arriba?
-            pinned: true, // ¿Se queda pegado arriba al bajar del todo?
+            backgroundColor: const Color.fromARGB(255, 215, 221, 255),
+            expandedHeight: 200.0, 
+            floating: false, 
+            pinned: true,
             flexibleSpace: FlexibleSpaceBar(
               title: const Text('Práctica 8: Slivers'),
               centerTitle: true,
@@ -38,7 +38,7 @@ class Practica8Screen extends StatelessWidget {
                   ),
                 );
               },
-              childCount: 20, // Número de elementos
+              childCount: 20, 
             ),
           ),
         ],
