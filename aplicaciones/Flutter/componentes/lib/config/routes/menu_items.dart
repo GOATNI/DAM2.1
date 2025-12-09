@@ -52,4 +52,16 @@ final menuItems = <MenuItem>[
     link: '/sliders', 
     icono: Icons.check_box,
   ),
+  MenuItem(
+    titulo: 'Animaciones', 
+    subtitulo: 'Un simple ejemplo de Animaciones', 
+    link: '/animaciones', 
+    icono: Icons.animation,
+  ),
+  MenuItem(
+    titulo: 'progres indicator y snack bar', 
+    subtitulo: 'Un simple ejemplo de indicator y snack bar', 
+    link: '/snackbar', 
+    icono: Icons.refresh,
+  ),
 ];

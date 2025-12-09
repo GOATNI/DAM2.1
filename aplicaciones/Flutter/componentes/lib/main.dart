@@ -20,7 +20,9 @@ class MyApp extends StatelessWidget {
         '/listas' : (context)=> ListasScreen(),
         '/tarjetas' : (context)=> TarjetasScreen(),
         '/alertas'  : (context)=> AlertasScreen(),
-        '/sliders'  : (context)=> SlidersScreen()
+        '/sliders'  : (context)=> SlidersScreen(),
+        '/animaciones' : (context) => AnimacionesScreen(),
+        '/snackbar' : (context) => ProgresIndicatorScreen(),
       },
     );
   }
