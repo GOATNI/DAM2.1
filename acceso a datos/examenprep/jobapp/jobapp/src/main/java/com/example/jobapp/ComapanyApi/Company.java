@@ -2,6 +2,7 @@ package com.example.jobapp.ComapanyApi;
 
 
 import com.example.jobapp.Jobapi.Job;
+import com.example.jobapp.ReviewsApi.Reviws;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
@@ -24,4 +25,8 @@ public class Company {
     @JsonIgnore
     @OneToMany(mappedBy = "company")
     private List<Job> jobs;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "company")
+    private List<Reviws> reviews;
 }
