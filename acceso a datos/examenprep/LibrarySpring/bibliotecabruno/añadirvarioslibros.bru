@@ -1,0 +1,53 @@
+meta {
+  name: añadirvarioslibros
+  type: http
+  seq: 4
+}
+
+post {
+  url: http://127.0.0.1:8080/Libros/añadirvarios
+  body: json
+  auth: inherit
+}
+
+body:json {
+  [
+    {
+      "Titulo": "Cien años de soledad",
+      "Categoria": "Novela",
+      "FechaPublicacion": "1967-05-30",
+      "ISBN": "978-3-16-148410-0"
+    },
+    {
+      "Titulo": "1984",
+      "Categoria": "Distopía",
+      "FechaPublicacion": "1949-06-08",
+      "ISBN": "978-0-452-28423-4"
+    },
+    {
+      "Titulo": "Orgullo y prejuicio",
+      "Categoria": "Romance",
+      "FechaPublicacion": "1813-01-28",
+      "ISBN": "978-0-486-28473-6"
+    },
+    {
+      "Titulo": "El Principito",
+      "Categoria": "Fábula",
+      "FechaPublicacion": "1943-04-06",
+      "ISBN": "978-3-596-22950-3"
+    },
+    {
+      "Titulo": "Don Quijote de la Mancha",
+      "Categoria": "Clásico",
+      "FechaPublicacion": "1605-01-16",
+      "ISBN": "978-84-204-1214-6"
+    },
+    {
+      "Titulo": "Matar a un ruiseñor",
+      "Categoria": "Drama legal",
+      "FechaPublicacion": "1960-07-11",
+      "ISBN": "978-0-06-112008-4"
+    }
+  ]
+  
+}

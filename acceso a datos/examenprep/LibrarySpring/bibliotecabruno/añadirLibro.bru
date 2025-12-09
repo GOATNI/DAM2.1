@@ -1,0 +1,23 @@
+meta {
+  name: añadirLibro
+  type: http
+  seq: 1
+}
+
+post {
+  url: http://127.0.0.1:8080/Libros
+  body: json
+  auth: inherit
+}
+
+body:json {
+  
+    { 
+      "id":1,
+      "Titulo": "Cien años de soledad",
+      "Categoria": "Novela",
+      "FechaPublicacion": "1967-05-30",
+      "ISBN": "978-3-16-148410-0"
+    }
+  
+}

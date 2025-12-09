@@ -1,5 +1,6 @@
 package com.example.jobapp.Jobapi;
 
+import com.example.jobapp.excepciones.JobNoEncontrado;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,9 +19,9 @@ public class JobController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Job> getJobById(@PathVariable Long id) {
+    public ResponseEntity<? extends Object> getJobById(@PathVariable Long id) {
         Job job = jobService.getJobById(id);
-        return job != null ? ResponseEntity.ok(job) : ResponseEntity.notFound().build();
+        return job != null ? ResponseEntity.ok(job) : ResponseEntity.ok(new JobNoEncontrado(" " +id.toString()));
     }
 
     @PostMapping
