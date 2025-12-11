@@ -1,0 +1,33 @@
+meta {
+  name: getbycourseidandage
+  type: http
+  seq: 6
+}
+
+get {
+  url: http://127.0.0.1:8080/student/course/1/age/22
+  body: json
+  auth: inherit
+}
+
+body:json {
+  [
+    {
+      "name": "Computer Science",
+      "category": "Technology"
+    },
+    {
+      "name": "Business Management",
+      "category": "Administration"
+    },
+    {
+      "name": "Graphic Design",
+      "category": "Arts"
+    }
+  ]
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

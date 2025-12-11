@@ -1,0 +1,33 @@
+meta {
+  name: getcoursename
+  type: http
+  seq: 8
+}
+
+get {
+  url: http://127.0.0.1:8080/student/search/name/fernand/minAge/20/maxAge/25/Coursename/Graphic Design
+  body: json
+  auth: inherit
+}
+
+body:json {
+  [
+    {
+      "name": "Computer Science",
+      "category": "Technology"
+    },
+    {
+      "name": "Business Management",
+      "category": "Administration"
+    },
+    {
+      "name": "Graphic Design",
+      "category": "Arts"
+    }
+  ]
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

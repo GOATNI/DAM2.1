@@ -1,0 +1,58 @@
+meta {
+  name: addStudents
+  type: http
+  seq: 3
+}
+
+post {
+  url: http://127.0.0.1:8080/student/addmany
+  body: json
+  auth: inherit
+}
+
+body:json {
+  [
+    {
+      "name": "Alice Martins",
+      "email": "alice.martins@example.com",
+      "age": 22,
+      "course": { "id": 1 }
+    },
+    {
+      "name": "Bruno Carvalho",
+      "email": "bruno.carvalho@example.com",
+      "age": 25,
+      "course": { "id": 1 }
+    },
+    {
+      "name": "Clara Silva",
+      "email": "clara.silva@example.com",
+      "age": 19,
+      "course": { "id": 2 }
+    },
+    {
+      "name": "Diego Santos",
+      "email": "diego.santos@example.com",
+      "age": 30,
+      "course": { "id": 2 }
+    },
+    {
+      "name": "Fernanda Rocha",
+      "email": "fernanda.rocha@example.com",
+      "age": 24,
+      "course": { "id": 3 }
+    },
+    {
+      "name": "Fernanda Recardo",
+      "email": "fernanda.recardo@example.com",
+      "age": 25,
+      "course": { "id": 2 }
+    }
+  ]
+  
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

@@ -1,0 +1,33 @@
+meta {
+  name: addcourses
+  type: http
+  seq: 1
+}
+
+post {
+  url: http://127.0.0.1:8080/course/addmany
+  body: json
+  auth: inherit
+}
+
+body:json {
+  [
+    {
+      "name": "Computer Science",
+      "category": "Technology"
+    },
+    {
+      "name": "Business Management",
+      "category": "Administration"
+    },
+    {
+      "name": "Graphic Design",
+      "category": "Arts"
+    }
+  ]
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}
