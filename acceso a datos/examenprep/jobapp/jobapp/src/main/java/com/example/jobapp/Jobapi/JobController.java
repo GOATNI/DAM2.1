@@ -19,9 +19,9 @@ public class JobController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<? extends Object> getJobById(@PathVariable Long id) {
+    public Object getJobById(@PathVariable Long id) {
         Job job = jobService.getJobById(id);
-        return job != null ? ResponseEntity.ok(job) : ResponseEntity.ok(new JobNoEncontrado(" " +id.toString()));
+        return job != null ? ResponseEntity.ok(job) : new JobNoEncontrado(" " +id.toString());
     }
 
     @PostMapping
