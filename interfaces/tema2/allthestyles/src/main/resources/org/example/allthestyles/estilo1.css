@@ -1,0 +1,133 @@
+.root {
+    -fx-background-color: #f5f5f5;
+}
+
+.button {
+    -fx-border-color: red;
+    -fx-border-radius: 6px;
+    -fx-background-radius: 6px;
+    -fx-background-color: #f5f5f5;
+    -fx-text-fill: #202020;
+    -fx-padding: 8px 15px;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+}
+
+.button:hover {
+    -fx-background-color: #ffe5e5;
+}
+
+.button:pressed {
+    -fx-background-color: #ffb3b3;
+}
+
+.table-view {
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 15px;
+    -fx-border-color: #dddddd;
+    -fx-border-radius: 15px;
+    -fx-padding: 5px;
+}
+
+.table-view:focused {
+    -fx-border-color: #89b4ff;
+}
+
+.table-view .column-header {
+    -fx-background-color: #efefef;
+    -fx-font-weight: bold;
+}
+
+.table-view .table-row-cell:selected {
+    -fx-background-color: #d0e4ff;
+}
+
+.label {
+    -fx-text-fill: blue;
+    -fx-font-size: 14px;
+}
+
+.radio-button {
+    -fx-text-fill: gray;
+    -fx-font-size: 14px;
+}
+
+.radio-button:selected {
+    -fx-text-fill: black;
+}
+
+.check-box {
+    -fx-border-color: cyan;
+    -fx-text-fill: #303030;
+    -fx-padding: 5px;
+}
+
+.check-box:selected {
+    -fx-mark-color: #ff4040;
+    -fx-font-weight: bold;
+}
+
+.choice-box {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #cccccc;
+    -fx-border-radius: 4px;
+}
+
+.combo-box {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #cccccc;
+}
+
+.date-picker {
+    -fx-background-color: #ffffff;
+}
+
+.text-field {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #cccccc;
+    -fx-border-radius: 4px;
+    -fx-padding: 5px;
+}
+
+.text-field:focused {
+    -fx-border-color: #89b4ff;
+}
+
+.progress-bar {
+    -fx-background-color: #e0e0e0;
+}
+
+.progress-bar .bar {
+    -fx-background-color: #4caf50;
+}
+
+.slider .thumb {
+    -fx-background-color: #2196f3;
+}
+
+.slider .track {
+    -fx-background-color: #cccccc;
+}
+
+.spinner {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #cccccc;
+}
+
+.menu-bar {
+    -fx-background-color: #f0f0f0;
+}
+
+.menu-item {
+    -fx-background-color: #ffffff;
+}
+
+.menu-item:hover {
+    -fx-background-color: #e3f2fd;
+}
+
+.split-menu-button {
+    -fx-background-color: #f5f5f5;
+    -fx-border-color: #cccccc;
+}
