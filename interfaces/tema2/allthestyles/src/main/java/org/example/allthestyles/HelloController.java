@@ -4,8 +4,16 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+
+import java.awt.*;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 
 public class HelloController {
     // Declarar todos los elementos del FXML
@@ -45,6 +53,7 @@ public class HelloController {
 
     @FXML
     private ProgressBar progressBar;
+
 
     // Variable para contar clicks
     private int clickCount = 0;
@@ -148,5 +157,9 @@ public class HelloController {
         String css = getClass().getResource("estilo3.css").toExternalForm();
         rootPane.getStylesheets().add(css);
         welcomeText.setText("Estilo: Tema Océano 🌊");
+    }
+    @FXML
+    private void ayudar() throws URISyntaxException, IOException {
+        Desktop.getDesktop().browse(new URI("ayuda.chm"));
     }
 }
