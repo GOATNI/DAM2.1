@@ -37,16 +37,16 @@ from javafx_exam.employee e
 join company c 
 on e.company_id = c.company_id;
 
-select  * from javafx_exam.company]]></console>
+select  * from javafx_exam.company
+
+SELECT e.full_name, e.email, e.phone, e.date_of_birth FROM employee e]]></console>
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseEditorStateManager">
     <last-used-providers />
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
-    <open-files>
-      <object connection-id="2420a168-644b-4dc5-b56f-3a47e02364e6" object-ref="consoles/Connection" />
-    </open-files>
+    <open-files />
   </component>
   <component name="DBNavigator.Project.DatabasePrerequisiteManager">
     <prerequisites />

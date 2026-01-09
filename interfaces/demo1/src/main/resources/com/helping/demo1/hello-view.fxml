@@ -14,7 +14,6 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="661.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.helping.demo1.HelloController">
    <children>
       <MenuBar>
@@ -33,7 +32,7 @@
                   <MenuItem mnemonicParsing="false" onAction="#add" text="add" />
             </items>
           </Menu>
-          <Menu mnemonicParsing="false" text="Help">
+          <Menu mnemonicParsing="false" onAction="#listados" text="Help">
             <items>
               <MenuItem mnemonicParsing="false" text="table" />
             </items>

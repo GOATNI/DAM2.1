@@ -6,7 +6,7 @@ public class empleado {
     int idempleado;
     String nombreEntero;
     String gmail;
-    int phone;
+    String phone;
     Date dateofbirth;
     String gender;
     boolean knows_java;
@@ -18,7 +18,7 @@ public class empleado {
     public empleado() {
     }
 
-    public empleado(int idempleado, String nombreEntero, String gmail, int phone, Date dateofbirth, String gender, boolean knows_java, boolean knows_python, boolean knows_sql, boolean is_full_time, String company_name) {
+    public empleado(int idempleado, String nombreEntero, String gmail, String phone, Date dateofbirth, String gender, boolean knows_java, boolean knows_python, boolean knows_sql, boolean is_full_time, String company_name) {
         this.idempleado = idempleado;
         this.nombreEntero = nombreEntero;
         this.gmail = gmail;
@@ -48,11 +48,11 @@ public class empleado {
         this.nombreEntero = nombreEntero;
     }
 
-    public int getPhone() {
+    public String getPhone() {
         return phone;
     }
 
-    public void setPhone(int phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 
@@ -118,6 +118,13 @@ public class empleado {
 
     public void setCompany_name(String company_name) {
         this.company_name = company_name;
+    }
+
+    public empleado(String nombreEntero, String gmail, String phone, Date dateofbirth) {
+        this.nombreEntero = nombreEntero;
+        this.gmail = gmail;
+        this.phone = phone;
+        this.dateofbirth = dateofbirth;
     }
 
     @Override
