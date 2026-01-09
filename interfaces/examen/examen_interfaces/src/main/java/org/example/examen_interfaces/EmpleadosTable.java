@@ -51,15 +51,6 @@ public class EmpleadosTable {
         try {
             ResultSet rs = stat.executeQuery(sql);
 
-            while (rs.next()){
-                Empleado piezas1 = new Empleado(
-
-                        rs.getString("Nombre"),
-                        rs.getInt("Deparatamento"),
-                        rs.getDouble("Salario")
-                );
-                piezas.add(piezas1);
-            }
 
 
             TNombre.setCellValueFactory(new PropertyValueFactory<>("Nombre"));

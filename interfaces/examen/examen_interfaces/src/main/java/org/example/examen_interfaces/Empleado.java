@@ -8,10 +8,10 @@ public class Empleado {
     protected String Nombre;
     protected Date fecha;
     protected int Sexo;
-    protected int departamento;
+    protected String departamento;
     protected double Salario;
 
-    public Empleado(int id, String nombre, Date fecha, int sexo, int departamento, double salario) {
+    public Empleado(int id, String nombre, Date fecha, int sexo, String departamento, double salario) {
         this.id = id;
         Nombre = nombre;
         this.fecha = fecha;
@@ -20,7 +20,7 @@ public class Empleado {
         Salario = salario;
     }
 
-    public Empleado(String nombre, int departamento, double salario) {
+    public Empleado(String nombre, String departamento, double salario) {
         Nombre = nombre;
         this.departamento = departamento;
         Salario = salario;
@@ -58,11 +58,11 @@ public class Empleado {
         Sexo = sexo;
     }
 
-    public int getDepartamento() {
+    public String getDepartamento() {
         return departamento;
     }
 
-    public void setDepartamento(int departamento) {
+    public void setDepartamento(String departamento) {
         this.departamento = departamento;
     }
 

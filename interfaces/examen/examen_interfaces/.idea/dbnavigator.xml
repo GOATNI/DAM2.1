@@ -11,16 +11,13 @@
   </component>
   <component name="DBNavigator.Project.DatabaseAssistantManager">
     <assistants>
-      <assistant-state connection-id="05ebffc2-7054-4632-969a-3c3fdb9f2058" assistant-type="SELECT_AI" default-profile-name="" selected-chat-id="" availability="UNAVAILABLE" acknowledgement="NONE" selected="true">
-        <tools />
+      <assistant-state connection-id="05ebffc2-7054-4632-969a-3c3fdb9f2058" default-profile-name="" selected-conversation-id="" assistant-type="SELECT_AI" availability="UNAVAILABLE" acknowledgement="NONE">
+        <conversations />
       </assistant-state>
-      <assistant-state connection-id="30957c88-e480-4f21-b210-dfa065d1ac97" assistant-type="SELECT_AI" default-profile-name="" selected-chat-id="" availability="UNAVAILABLE" acknowledgement="NONE" selected="true">
-        <tools />
+      <assistant-state connection-id="30957c88-e480-4f21-b210-dfa065d1ac97" default-profile-name="" selected-conversation-id="" assistant-type="SELECT_AI" availability="UNAVAILABLE" acknowledgement="NONE">
+        <conversations />
       </assistant-state>
     </assistants>
-    <selection-state>
-      <model-selection />
-    </selection-state>
   </component>
   <component name="DBNavigator.Project.DatabaseBrowserManager">
     <autoscroll-to-editor value="false" />
@@ -30,10 +27,11 @@
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
     <connection id="30957c88-e480-4f21-b210-dfa065d1ac97">
-      <console name="Connection" type="STANDARD" schema="mysql" session="Main"><![CDATA[SELECT e.*, c.company_name
-FROM javafx_exam.employee e
-JOIN javafx_exam.company c
-ON e.company_id = c.company_id;]]></console>
+      <console name="Connection" type="STANDARD" schema="mysql" session="Main"><![CDATA[select e.*,d.Departamento as nombre_dep from empresa.empleados e
+join empresa.departamentos d 
+on e.`Departamento` = d.`Id`;
+
+select Departamento from empresa.departamentos;]]></console>
     </connection>
     <connection id="05ebffc2-7054-4632-969a-3c3fdb9f2058">
       <console name="Connection 1" type="STANDARD" schema="mysql" session="Main" />
@@ -84,7 +82,7 @@ ON e.company_id = c.company_id;]]></console>
           <description value="" />
           <database-type value="MYSQL" />
           <config-type value="BASIC" />
-          <database-version value="8.4" />
+          <database-version value="9.3" />
           <driver-source value="BUNDLED" />
           <driver-library value="" />
           <driver value="" />
@@ -102,12 +100,6 @@ ON e.company_id = c.company_id;]]></console>
           <token-type value="" />
           <token-config-file value="" />
           <token-profile value="" />
-          <adb-compartment-ocid value="" />
-          <adb-database-ocid value="" />
-          <azure-token-database-id-uri value="" />
-          <azure-token-tenant-id value="" />
-          <azure-token-client-id value="" />
-          <azure-token-client-certificate-file value="" />
           <session-user value="root@localhost" />
         </database>
         <properties>
@@ -145,20 +137,11 @@ ON e.company_id = c.company_id;]]></console>
         </details>
         <debugger>
           <compile-dependencies value="true" />
+          <tcp-driver-tunneling value="false" />
           <tcp-host-address value="" />
           <tcp-port-from value="4000" />
           <tcp-port-to value="4999" />
-          <jdwp-tunnel-type value="NONE" />
           <debugger-type value="ASK" />
-          <reverse-ssh-tunnel>
-            <host value="" />
-            <port value="22" />
-            <bind-host value="127.0.0.1" />
-            <bind-port value="0" />
-            <auth-type value="PASSWORD" />
-            <user value="" />
-            <key-file value="" />
-          </reverse-ssh-tunnel>
         </debugger>
         <object-filters hide-empty-schemas="false" hide-pseudo-columns="false" hide-audit-columns="false">
           <object-filters />
@@ -195,7 +178,6 @@ ON e.company_id = c.company_id;]]></console>
             <object-type name="DBLINK" enabled="true" />
             <object-type name="CREDENTIAL" enabled="true" />
             <object-type name="AI_PROFILE" enabled="true" />
-            <object-type name="AI_MODEL" enabled="true" />
           </object-type-filter>
         </object-filters>
       </connection>
@@ -223,12 +205,6 @@ ON e.company_id = c.company_id;]]></console>
           <token-type value="" />
           <token-config-file value="" />
           <token-profile value="" />
-          <adb-compartment-ocid value="" />
-          <adb-database-ocid value="" />
-          <azure-token-database-id-uri value="" />
-          <azure-token-tenant-id value="" />
-          <azure-token-client-id value="" />
-          <azure-token-client-certificate-file value="" />
           <session-user value="root@localhost" />
         </database>
         <properties>
@@ -266,20 +242,11 @@ ON e.company_id = c.company_id;]]></console>
         </details>
         <debugger>
           <compile-dependencies value="true" />
+          <tcp-driver-tunneling value="false" />
           <tcp-host-address value="" />
           <tcp-port-from value="4000" />
           <tcp-port-to value="4999" />
-          <jdwp-tunnel-type value="NONE" />
           <debugger-type value="ASK" />
-          <reverse-ssh-tunnel>
-            <host value="" />
-            <port value="22" />
-            <bind-host value="127.0.0.1" />
-            <bind-port value="0" />
-            <auth-type value="PASSWORD" />
-            <user value="" />
-            <key-file value="" />
-          </reverse-ssh-tunnel>
         </debugger>
         <object-filters hide-empty-schemas="false" hide-pseudo-columns="false" hide-audit-columns="false">
           <object-filters />
@@ -316,7 +283,6 @@ ON e.company_id = c.company_id;]]></console>
             <object-type name="DBLINK" enabled="true" />
             <object-type name="CREDENTIAL" enabled="true" />
             <object-type name="AI_PROFILE" enabled="true" />
-            <object-type name="AI_MODEL" enabled="true" />
           </object-type-filter>
         </object-filters>
       </connection>
@@ -363,7 +329,6 @@ ON e.company_id = c.company_id;]]></console>
           <object-type name="DBLINK" enabled="true" />
           <object-type name="CREDENTIAL" enabled="true" />
           <object-type name="AI_PROFILE" enabled="true" />
-          <object-type name="AI_MODEL" enabled="true" />
         </object-type-filter>
       </filters>
       <sorting>
@@ -464,9 +429,11 @@ ON e.company_id = c.company_id;]]></console>
           <content-type name="DTD" enabled="true" />
           <content-type name="HTML" enabled="true" />
           <content-type name="XHTML" enabled="true" />
+          <content-type name="CSS" enabled="true" />
           <content-type name="Java" enabled="true" />
           <content-type name="SQL" enabled="true" />
           <content-type name="PL/SQL" enabled="true" />
+          <content-type name="JavaScript" enabled="true" />
           <content-type name="JSON" enabled="true" />
           <content-type name="JSON5" enabled="true" />
           <content-type name="Groovy" enabled="true" />
@@ -671,11 +638,6 @@ ON e.company_id = c.company_id;]]></console>
         <debug-execution-timeout value="600" />
         <parameter-history-size value="10" />
       </method-execution>
-      <method-execution>
-        <execution-timeout value="30" />
-        <debug-execution-timeout value="600" />
-        <parameter-history-size value="10" />
-      </method-execution>
     </execution-engine-settings>
     <operation-settings>
       <transactions>
@@ -726,9 +688,6 @@ ON e.company_id = c.company_id;]]></console>
       <credential-settings>
         <credentials />
       </credential-settings>
-      <profile-settings>
-        <profiles />
-      </profile-settings>
     </assistant-settings>
     <general-settings>
       <regional-settings>

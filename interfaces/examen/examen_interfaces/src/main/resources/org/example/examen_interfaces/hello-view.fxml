@@ -21,21 +21,21 @@
               <menus>
                 <Menu fx:id="menuGestión" mnemonicParsing="false" text="Gestion">
                   <items>
-                    <MenuItem fx:id="NuevoEmpleado" mnemonicParsing="false" onAction="#clearFields" text="NuevoEmpleado" />
-                        <MenuItem fx:id="GuardarEmpleado" mnemonicParsing="false" onAction="#saveEmployee" text="GuardarEmpleado" />
+                    <MenuItem fx:id="NuevoEmpleado" mnemonicParsing="false" onAction="#newempleado" text="NuevoEmpleado" />
+                        <MenuItem fx:id="GuardarEmpleado" mnemonicParsing="false" onAction="#addempleado" text="GuardarEmpleado" />
                   </items>
                 </Menu>
                 <Menu fx:id="Departamentomenu" mnemonicParsing="false" text="Desplazamiento">
                   <items>
-                    <MenuItem fx:id="PrimerRegistro" mnemonicParsing="false" onAction="#onFirstButtonClick" text="PrimerRegistro" />
-                        <MenuItem fx:id="RegistroAnterior" mnemonicParsing="false" onAction="#onPreviousButtonClick" text="RegistroAnterior" />
-                        <MenuItem fx:id="RegistroSiguiente" mnemonicParsing="false" onAction="#onNextButtonClick" text="RegistroSuigente" />
-                        <MenuItem fx:id="UltimoRegistro" mnemonicParsing="false" onAction="#onLastButtonClick" text="UltimoRegistro" />
+                    <MenuItem fx:id="PrimerRegistro" mnemonicParsing="false" onAction="#first" text="PrimerRegistro" />
+                        <MenuItem fx:id="RegistroAnterior" mnemonicParsing="false" onAction="#previous" text="RegistroAnterior" />
+                        <MenuItem fx:id="RegistroSiguiente" mnemonicParsing="false" onAction="#next" text="RegistroSuigente" />
+                        <MenuItem fx:id="UltimoRegistro" mnemonicParsing="false" onAction="#last" text="UltimoRegistro" />
                   </items>
                 </Menu>
                 <Menu fx:id="Listadosmenu" mnemonicParsing="false" text="Listado">
                   <items>
-                    <MenuItem fx:id="EmpladosTable" mnemonicParsing="false" onAction="#listados" text="Empleados" />
+                    <MenuItem fx:id="EmpladosTable" mnemonicParsing="false" text="Empleados" />
                   </items>
                 </Menu>
               </menus>

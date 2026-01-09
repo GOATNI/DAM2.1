@@ -14,33 +14,50 @@ import java.io.IOException;
 import java.sql.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.Properties;
+
+import static org.example.examen_interfaces.EmpleadosTable.stat;
 
 
 public class HelloController {
     private static final String url = "jdbc:mysql://localhost:3306/empresa";
     private static final String user = "root";
     private static final String clave = "1234";
+    private static Connection con;
+    private static ResultSet rs;
 
-    private ObservableList<Empleado> empleadosList = FXCollections.observableArrayList();
-    private ObservableList<Departamento> departamentoObservableList = FXCollections.observableArrayList();
+    static {
+        try {
+            con = DriverManager.getConnection(url, user, clave);
+            Statement stat = con.createStatement(
+                    ResultSet.TYPE_SCROLL_INSENSITIVE,
+                    ResultSet.CONCUR_READ_ONLY
+            );
+            rs = stat.executeQuery(
+                    "select e.*,d.Departamento as nombre_dep from empresa.empleados e\n" +
+                            "join empresa.departamentos d \n" +
+                            "on e.`Departamento` = d.`Id`;"
+            );
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
 
     @FXML
-    private DatePicker fechanacimientodp;
+    DatePicker fechanacimientodp;
     @FXML
-    private RadioButton Femeninocb;
+    RadioButton Femeninocb;
     @FXML
-    private RadioButton Masculinocb;
+     RadioButton Masculinocb;
     @FXML
     private TextField idtf;
     @FXML
-    private TextField nombretf;
+     TextField nombretf;
     @FXML
-    private ComboBox Departamentocb;
+     ComboBox Departamentocb;
     @FXML
-    private TextField Salariotf;
+     TextField Salariotf;
     @FXML
     private Menu menuGestión;
     @FXML
@@ -73,195 +90,240 @@ public class HelloController {
             stage.show();
 
     }
+    private ObservableList<String> companies = FXCollections.observableArrayList();
+
     @FXML
-    void initialize() {
-        loadEmpleadosFromDatabase();
-        Empleado empleado = empleadosList.get(0);
-        idtf.setText(String.valueOf(empleado.id));
-        nombretf.setText(String.valueOf(empleado.Nombre));
-        Salariotf.setText(String.valueOf(empleado.Salario));
+    public void initialize() throws SQLException {
 
-    }
+        try (Statement tempStat = con.createStatement();
+             ResultSet rsCompanies = tempStat.executeQuery("select Departamento from empresa.departamentos;")) {
 
-    private Object getdepartamento(Empleado empleado) {
-        int iddepart= empleado.departamento;
-        String deprtementindex ;
-        for (Departamento i : departamentoObservableList){
-            if (i.id == iddepart){
-                return i.departamento;
-
+            while (rsCompanies.next()) {
+                companies.add(rsCompanies.getString("Departamento").trim());
             }
-        }
-        return null;
-    }
-
-
-    private Connection getConnection() throws SQLException {
-        return DriverManager.getConnection(url, user, clave);
-    }
-
-    private void loadDepartamentos(){
-        departamentoObservableList.clear();
-        String sql = "Select * FROM departamentos";
-        try (Connection con = getConnection();
-             Statement stat = con.createStatement();
-             ResultSet rs = stat.executeQuery(sql)) {
-
-            while (rs.next()) {
-                departamentoObservableList.add(new Departamento(
-                        rs.getInt("Id"),
-                        rs.getString("Departamento")
-                ));
-            }
-
-        } catch (SQLException e) {
-            showAlert("Error de Base de Datos", "No se pudieron cargar los datos de la base de datos.");
-            e.printStackTrace();
+            Departamentocb.setItems(companies);
         }
 
-    }
 
-    private void loadEmpleadosFromDatabase() {
-        empleadosList.clear();
-        String sql = "SELECT * FROM empleados";
-        try (Connection con = getConnection();
-             Statement stat = con.createStatement();
-             ResultSet rs = stat.executeQuery(sql)) {
-
-            while (rs.next()) {
-                empleadosList.add(new Empleado(
-                        rs.getInt("Id"),
-                        rs.getString("Nombre"),
-                        rs.getDate("FechaNac"),
-                        rs.getInt("Sexo"),
-                        rs.getInt("Departamento"),
-                        rs.getDouble("Salario")
-                ));
-            }
-
-        } catch (SQLException e) {
-            showAlert("Error de Base de Datos", "No se pudieron cargar los datos de la base de datos.");
-            e.printStackTrace();
+        if (rs.next()) {
+            loadPersonFromResultSet();
         }
     }
 
-    private void showAlert(String errorDeBaseDeDatos, String s) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle(errorDeBaseDeDatos);
-        alert.setHeaderText(null);
-        alert.setContentText(s);
-        alert.showAndWait();
-    }
-    private void displayEmpleado(Empleado empleado) {
-        if (empleado != null) {
-            idtf.setText(String.valueOf(empleado.id));
-            nombretf.setText(String.valueOf(empleado.Nombre));
-            Salariotf.setText(String.valueOf(empleado.Salario));
-        } else {
-
+    public void next() throws SQLException {
+        if (rs.next()) {
+            loadPersonFromResultSet();
         }
     }
-    private void showEmpleado(int index) {
-        if (!empleadosList.isEmpty() && index >= 0 && index < empleadosList.size()) {
-            currentIndex = index;
-            displayEmpleado(empleadosList.get(currentIndex));
+
+    public void previous() throws SQLException {
+        if (rs.previous()) {
+            loadPersonFromResultSet();
         }
-        updateNavigationButtons();
-    }
-    private int currentIndex = -1;
-
-    @FXML
-    private void onFirstButtonClick() {
-        showEmpleado(0);
     }
 
-    @FXML
-    private void onPreviousButtonClick() {
-        if (currentIndex > 0) {
-            showEmpleado(currentIndex - 1);
+    public void first() throws SQLException {
+        if (rs.first()) {
+            loadPersonFromResultSet();
+        }
+    }
+
+    public void last() throws SQLException {
+        if (rs.last()) {
+            loadPersonFromResultSet();
+        }
+    }
+    private void loadPersonFromResultSet() throws SQLException {
+
+        idtf.setText(String.valueOf(rs.getInt("Id")));
+        nombretf.setText(rs.getString("Nombre"));
+
+        Date dob = rs.getDate("FechaNac");
+        if (dob != null) {
+            fechanacimientodp.setValue(dob.toLocalDate());
+        }
+
+        // Gender
+        Integer gender = rs.getInt("Sexo");
+        if (gender == 1) {
+            Femeninocb.setSelected(true);
+        } else if (gender == 0) {
+            Masculinocb.setSelected(true);
+        }
+
+       Salariotf.setText(String.valueOf(rs.getDouble("Salario")));
+
+        // Company preselection
+        String personCompany = rs.getString("nombre_dep").trim();
+        if (companies.contains(personCompany)) {
+            Departamentocb.getSelectionModel().select(personCompany);
         }
     }
 
     @FXML
-    private void onNextButtonClick() {
-        if (currentIndex < empleadosList.size() - 1) {
-            showEmpleado(currentIndex + 1);
-        }
-    }
+    public void newempleado(){
 
-    @FXML
-    private void onLastButtonClick() {
-        showEmpleado(empleadosList.size() - 1);
-    }
-
-    private void updateNavigationButtons() {
-        PrimerRegistro.setDisable(currentIndex <= 0);
-        RegistroAnterior.setDisable(currentIndex <= 0);
-        RegistroSiguiente.setDisable(currentIndex >= empleadosList.size() - 1);
-        UltimoRegistro.setDisable(currentIndex >= empleadosList.size() - 1);
-    }
-    @FXML
-    private void clearFields() {
-        nombretf.clear();
         idtf.clear();
+        idtf.setDisable(true);
+        nombretf.clear();
+        fechanacimientodp.setValue(null);
+        Femeninocb.setSelected(false);
+        Masculinocb.setSelected(false);
         Salariotf.clear();
-        fechanacimientodp.setValue(LocalDate.now());
-        Femeninocb.equals(false);
-        Femeninocb.equals(false);
-        ObservableList<String> nombredepartamentos = FXCollections.observableArrayList();
-        for (Departamento i: departamentoObservableList){
-            nombredepartamentos.add(i.departamento);
-        }
-        Departamentocb.getItems().clear();
-
+        Departamentocb.setValue(null);
     }
+
     @FXML
-    void saveEmployee() {
+    public  void addempleado(){
+
+        int dep = Departamentocb.getSelectionModel().getSelectedIndex()+1;
         String nombre = nombretf.getText();
-        String id = idtf.getText();
-        String salarioStr = Salariotf.getText();
-        int Sexo = 0;
+        LocalDate date = fechanacimientodp.getValue();
+        int sex = 0;
         if (Femeninocb.isSelected()){
-             Sexo = 1;
-        } else if (Masculinocb.isSelected()) {
-             Sexo = 0;
+            sex = 1;
+        }else if (Masculinocb.isSelected()){
+            sex = 0;
         }
 
-        ObservableList<String> nombredepartamentos = FXCollections.observableArrayList();
-        for (Departamento i: departamentoObservableList){
-            nombredepartamentos.add(i.departamento);
-        }
-        String item  = String.valueOf(Departamentocb.getItems().add(nombredepartamentos));
 
-        if (nombre.isEmpty() || id.isEmpty() || salarioStr.isEmpty() || !Femeninocb.isSelected()||!Masculinocb.isSelected()) {
-            showAlert("Error de Datos", "Todos los campos deben estar llenos para guardar un empleado.");
-            return;
+        String salarioTexto = Salariotf.getText();
+        System.out.println(salarioTexto);
+
+        if (salarioTexto == null || salarioTexto.trim().isEmpty()) {
+            // Muestra una alerta al usuario o asigna un valor por defecto
+            System.out.println("Error: El campo de salario está vacío");
+            return; // Detiene la ejecución para que no intente el parseDouble
         }
 
-        double salario;
+        double salario = 0.0;
         try {
-            salario = Double.parseDouble(salarioStr);
+             salario = Double.parseDouble(salarioTexto.trim());
+            // ... resto de tu lógica para guardar en la DB
         } catch (NumberFormatException e) {
-            showAlert("Error de Formato", "El salario debe ser un número válido.");
+            System.out.println("Error: El formato del número es incorrecto");
+        }
+
+        String sqlInsert = "INSERT INTO empresa.empleados (Nombre, FechaNac, Sexo, Departamento, Salario) " +
+                "VALUES (?, ?, ?, ?, ?)";
+
+        try (PreparedStatement pstmt = con.prepareStatement(sqlInsert)) {
+            pstmt.setString(1,nombre );
+            pstmt.setDate(2,Date.valueOf(date));
+            pstmt.setInt(3, sex);
+            pstmt.setInt(4, dep);
+            pstmt.setDouble(5,salario);
+
+            int affectedRows = pstmt.executeUpdate();
+
+            if (affectedRows > 0) {
+                System.out.println("SUCCESS: Employee added to database!");
+                loadPersonFromResultSet();
+            }
+            refreshResultSet();
+        } catch (SQLException e) {
+            System.err.println("SQL Error Code: " + e.getErrorCode());
+            e.printStackTrace(); // This will tell you if the ENUM or FOREIGN KEY failed
+        }
+    }
+    private void refreshResultSet() throws SQLException {
+        // Re-execute the main query
+        rs = stat.executeQuery(
+                "select e.*,d.Departamento as nombre_dep from empresa.empleados e join empresa.departamentos d on e.`Departamento` = d.`Id`;"
+        );
+
+        rs.last();
+        loadPersonFromResultSet();
+    }
+
+    @FXML
+    public void updateempleado() {
+        // 1. Obtener el ID del empleado (es imprescindible para el WHERE)
+        String idTexto = idtf.getText();
+        if (idTexto == null || idTexto.isEmpty()) {
+            System.out.println("Error: No hay un ID seleccionado para actualizar");
+            return;
+        }
+        int id = Integer.parseInt(idTexto);
+
+        // 2. Obtener los nuevos valores de los campos
+        String nombre = nombretf.getText();
+        LocalDate date = fechanacimientodp.getValue();
+        int dep = Departamentocb.getSelectionModel().getSelectedIndex() + 1;
+        int sex = Femeninocb.isSelected() ? 1 : 0;
+
+        double salario = 0.0;
+        try {
+            salario = Double.parseDouble(Salariotf.getText().trim());
+        } catch (NumberFormatException e) {
+            System.out.println("Error: Salario no válido");
             return;
         }
 
-        String sql = "INSERT INTO empleados (Id, Nombre, FechaNac, Sexo,Departamento,Salario) VALUES (?, ?, ?, ?, ?, ?)";
-        try (Connection con = getConnection();
-             PreparedStatement ps = con.prepareStatement(sql)) {
-            ps.setInt(1, Integer.parseInt(id));
-            ps.setString(2, nombre);
-            ps.setString(3, LocalDateTime.now().toString());
-            ps.setInt(4, Sexo);
-            ps.setInt(5,Integer.parseInt(item));
-            ps.setDouble(6,salario);
-            ps.executeUpdate();
-            loadEmpleadosFromDatabase(); // Recarga la tabla para mostrar el nuevo registro
-            showAlert("Éxito", "Empleado guardado correctamente.");
+        // 3. Sentencia SQL UPDATE
+        String sqlUpdate = "UPDATE empresa.empleados SET Nombre = ?, FechaNac = ?, Sexo = ?, Departamento = ?, Salario = ? WHERE Id = ?";
+
+        try (PreparedStatement pstmt = con.prepareStatement(sqlUpdate)) {
+            pstmt.setString(1, nombre);
+            pstmt.setDate(2, Date.valueOf(date));
+            pstmt.setInt(3, sex);
+            pstmt.setInt(4, dep);
+            pstmt.setDouble(5, salario);
+            pstmt.setInt(6, id); // El ID va en el último '?' para el WHERE
+
+            int affectedRows = pstmt.executeUpdate();
+
+            if (affectedRows > 0) {
+                System.out.println("SUCCESS: Empleado actualizado correctamente.");
+            }
         } catch (SQLException e) {
-            showAlert("Error de Base de Datos", "No se pudo insertar el nuevo registro.");
+            System.err.println("Error al actualizar: " + e.getMessage());
             e.printStackTrace();
         }
     }
+
+    @FXML
+    public void deleteempleado() {
+        // 1. Obtener el ID del campo de texto
+        String idTexto = idtf.getText();
+
+        if (idTexto == null || idTexto.isEmpty()) {
+            System.out.println("Error: No hay ID para eliminar.");
+            return;
+        }
+
+        // 2. Sentencia SQL DELETE
+        String sqlDelete = "DELETE FROM empresa.empleados WHERE Id = ?";
+
+        try (PreparedStatement pstmt = con.prepareStatement(sqlDelete)) {
+            pstmt.setInt(1, Integer.parseInt(idTexto));
+
+            int affectedRows = pstmt.executeUpdate();
+
+            if (affectedRows > 0) {
+                System.out.println("SUCCESS: Registro con ID " + idTexto + " eliminado.");
+
+                // 3. Limpiar los campos de la interfaz
+                newempleado();
+
+                refreshResultSet();
+            }
+        } catch (SQLException e) {
+            System.err.println("Error al eliminar: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    private void mostrarAlerta(String titulo, String encabezado, String mensaje, Alert.AlertType tipo) {
+        Alert alerta = new Alert(tipo);
+        alerta.setTitle(titulo);
+        alerta.setHeaderText(encabezado);
+        alerta.setContentText(mensaje);
+        alerta.showAndWait();
+    }
+
+
+
+
 
 }
