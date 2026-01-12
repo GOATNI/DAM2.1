@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.examneinterfaces2.Table">
+   <children>
+      <TableView fx:id="productoTableView" prefHeight="400.0" prefWidth="600.0">
+        <columns>
+          <TableColumn fx:id="nombretc" prefWidth="152.0" text="Nombre" />
+          <TableColumn fx:id="preciotc" prefWidth="75.0" text="Precio_iva" />
+            <TableColumn fx:id="categoriatc" prefWidth="105.0" text="Categoria" />
+            <TableColumn fx:id="marcatc" prefWidth="110.0" text="Marca" />
+            <TableColumn fx:id="Estadotc" prefWidth="157.0" text="Estado" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>

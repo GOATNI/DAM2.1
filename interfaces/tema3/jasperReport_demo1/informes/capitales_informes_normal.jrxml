@@ -1,0 +1,57 @@
+<!-- Created with Jaspersoft Studio version 7.0.3.final using JasperReports Library version 7.0.3-41034ca841d452f3305ba55b9042260aaa1ab5dd  -->
+<jasperReport name="capitales_informes_normal" language="java" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="7cef5baf-96c6-4622-876d-267dcd1127b1">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="capitales"/>
+	<query language="SQL"><![CDATA[select * from capitales.capitales]]></query>
+	<field name="Provincia" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="Provincia"/>
+		<property name="com.jaspersoft.studio.field.label" value="Provincia"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="capitales"/>
+	</field>
+	<field name="Autonomía" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="Autonomía"/>
+		<property name="com.jaspersoft.studio.field.label" value="Autonomía"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="capitales"/>
+	</field>
+	<field name="Población" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="Población"/>
+		<property name="com.jaspersoft.studio.field.label" value="Población"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="capitales"/>
+	</field>
+	<background splitType="Stretch"/>
+	<title height="79" splitType="Stretch"/>
+	<pageHeader height="35" splitType="Stretch"/>
+	<columnHeader height="44" splitType="Stretch">
+		<element kind="staticText" uuid="0632a373-6eda-40aa-9cf8-2c171cf7e5bf" x="40" y="0" width="100" height="30">
+			<text><![CDATA[Provincia]]></text>
+			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="334b787a-3770-478c-81a7-f8a8326771d2"/>
+		</element>
+		<element kind="staticText" uuid="39e0a2d7-ef9e-4137-8150-0d8a4ed29bb0" x="240" y="0" width="100" height="30">
+			<text><![CDATA[Autonomía]]></text>
+			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="91179ac0-11d7-46f6-b488-ab82e6be520c"/>
+		</element>
+		<element kind="staticText" uuid="b43097de-a01a-4b4f-8060-f3b8474f1a60" x="430" y="0" width="100" height="30">
+			<text><![CDATA[Población]]></text>
+			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="0be84619-397e-4078-b1c6-12998eb39328"/>
+		</element>
+	</columnHeader>
+	<detail>
+		<band height="40" splitType="Stretch">
+			<element kind="textField" uuid="0f12ef4b-002f-4747-8475-9fa82134002a" x="40" y="0" width="100" height="30">
+				<expression><![CDATA[$F{Provincia}]]></expression>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="334b787a-3770-478c-81a7-f8a8326771d2"/>
+			</element>
+			<element kind="textField" uuid="d4baeecd-da61-4fdb-b3fb-2f7abb76e0a1" x="230" y="0" width="100" height="30">
+				<expression><![CDATA[$F{Autonomía}]]></expression>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="91179ac0-11d7-46f6-b488-ab82e6be520c"/>
+			</element>
+			<element kind="textField" uuid="855f6d78-2310-4fcd-8695-1881a03da764" x="430" y="0" width="100" height="30">
+				<expression><![CDATA[$F{Población}]]></expression>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="0be84619-397e-4078-b1c6-12998eb39328"/>
+			</element>
+		</band>
+	</detail>
+	<columnFooter height="45" splitType="Stretch"/>
+	<pageFooter height="54" splitType="Stretch"/>
+	<summary height="42" splitType="Stretch"/>
+</jasperReport>

@@ -1,0 +1,94 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+<!--
+    <record model="ir.ui.view" id="school.list">
+      <field name="name">school list</field>
+      <field name="model">school.school</field>
+      <field name="arch" type="xml">
+        <list>
+          <field name="name"/>
+          <field name="value"/>
+          <field name="value2"/>
+        </list>
+      </field>
+    </record>
+-->
+
+    <!-- actions opening views on models -->
+
+    <record model="ir.actions.act_window" id="school.action_window_alumno">
+      <field name="name">Estudiantes</field>
+      <field name="res_model">school.student</field>
+      <field name="view_mode">list,form,kanban</field>
+    </record>
+    
+
+    <record model="ir.actions.act_window" id="school.action_window_asignatura">
+      <field name="name">school subject</field>
+      <field name="res_model">school.subject</field>
+      <field name="view_mode">list,form</field>
+    </record>
+
+    <record model="ir.actions.act_window" id="school.action_window_profesor">
+      <field name="name">Teachers</field>
+      <field name="res_model">school.teacher</field>
+      <field name="view_mode">list,form</field>
+    </record>
+
+    <record model="ir.actions.act_window" id="school.action_window_curso">
+      <field name="name">courses</field>
+      <field name="res_model">school.course</field>
+      <field name="view_mode">list,form,calendar</field>
+    </record>
+    <record model="ir.actions.act_window" id="school.action_window_nota">
+      <field name="name">Notas</field>
+      <field name="res_model">school.note</field>
+      <field name="view_mode">list,form,graph</field>
+    </record>
+
+
+    <!-- server action to the one above -->
+<!--
+    <record model="ir.actions.server" id="school.action_server">
+      <field name="name">school server</field>
+      <field name="model_id" ref="model_school_school"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "list,form",
+          "res_model": model._name,
+        }
+      </field>
+    </record>
+-->
+
+    <!-- Top menu item -->
+
+    <menuitem name="Escuela" id="school.menu_root"/>
+
+    <!-- menu categories -->
+
+    <menuitem name="Alumnos" id="school.menu_alumno" parent="school.menu_root"/>
+    <menuitem name="Administracion" id="school.menu_administracion" parent="school.menu_root"/>
+
+    <!-- actions -->
+
+    <menuitem name="Listado de alumnos" id="school.menu_alumno_list" parent="school.menu_alumno"
+              action="school.action_window_alumno"/>
+
+    <menuitem name="Listado de asignaturas" id="school.menu_asignatura_list" parent="school.menu_administracion"
+              action="school.action_window_asignatura"/>
+
+    <menuitem name="Listado de profesores" id="school.menu_teacher_list" parent="school.menu_administracion"
+              action="school.action_window_profesor"/>
+              
+    <menuitem name="Listado de cursos" id="school.menu_course_list" parent="school.menu_administracion"
+              action="school.action_window_curso"/>
+    <menuitem name="Listado de notas" id="school.menu_notas_list" parent="school.menu_administracion"
+              action="school.action_window_nota"/>
+
+
+  </data>
+</odoo>
