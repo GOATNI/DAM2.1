@@ -1,0 +1,84 @@
+<odoo>
+    <data>
+<!--Vista de lista-->
+        <record model="ir.ui.view" id="hospital.doctor_list">
+        <field name="name">hospital doctor list</field>
+        <field name="model">hospital.doctor</field>
+        <field name="arch" type="xml">
+            <list>
+            <field name="name"/>
+            <field name="surname"/>
+            <field name="phone"/>
+            <field name="specialty"/>
+            <field name="registration_number"/>
+            <field name="admision_ids"/>
+
+            </list>
+        </field>
+        </record>
+
+
+        <!--Vista de formulario-->
+        <record model="ir.ui.view" id="hospital.doctor_form">
+        <field name="name">hospital doctor form</field>
+        <field name="model">hospital.doctor</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name="name"/>
+                    <field name="surname"/>
+                    <field name="phone"/>
+                    <field name="specialty"/>
+                    <field name="registration_number"/>
+                    <field name="admision_ids"/>
+                    <field name="image" widget="image"/>
+                </group>
+            </form>
+        </field>
+        </record>
+
+
+        <record model="ir.ui.view" id="hospital.doctor_kanban">
+    <field name="name">hospital doctor kanban</field>
+    <field name="model">hospital.doctor</field>
+    <field name="arch" type="xml">
+        <kanban>
+            <!-- ¡CAMBIO AQUÍ! Añadimos 'image' a la lista de campos. -->
+            <field name="name"/>
+            <field name="id"/>
+            <field name="surname"/>
+            <field name="phone"/>
+            <field name="specialty"/>
+            <field name="registration_number"/>
+            <field name="image"/> <!-- Campo añadido para que Odoo lo cargue -->
+            
+            <template>
+                <t t-name="kanban-box">
+                    <div class="oe_kanban_global_click">
+                        <a type="edit">
+                            <img class="o_image_64_contain"
+                                t-att-alt="record.name.value"
+                                t-att-src="kanban_image('hospital.doctor', 'image', record.id.raw_value)" />
+                        </a>
+                        <div class="oe_product_desc">
+                            <h4>
+                                <field name="name" /> <br/>
+                                <field name="surname" /><br/>
+                            </h4>
+                            <field name="phone" />
+                            <br/>
+                            <field name="specialty"/>
+                            <br/>
+                            <field name="registration_number"/>
+                            <br/>
+                        </div>
+                    </div>
+                </t>
+            </template>
+        </kanban>
+    </field>
+</record>
+
+
+    </data>
+</odoo>
