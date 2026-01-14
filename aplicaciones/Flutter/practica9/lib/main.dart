@@ -12,11 +12,12 @@ void main() {
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-
   @override
   Widget build(BuildContext context) {
+    
     // 1. Inyección del Provider en el Widget Tree
     return ChangeNotifierProvider(
+      
       create: (context) => ScoreProvider(), // Crea una instancia de tu estado
       child: MaterialApp(
         title: 'Basketball Score',
@@ -34,7 +35,8 @@ class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State<HomeScreen> createState() => _HomeScreenState()
+  ;
 }
 
 class _HomeScreenState extends State<HomeScreen> {
@@ -54,7 +56,9 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+  debugShowCheckedModeBanner: false;
     return Scaffold(
+     
       appBar: AppBar(
         title: const Text('Basketball Score',
             style: TextStyle(color: Colors.white)),
