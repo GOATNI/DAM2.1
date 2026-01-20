@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:menu_dash/screens/apijson_screen.dart';
+import 'package:menu_dash/screens/baloncesto_screen_1.dart';
 import 'package:menu_dash/screens/menu_screen.dart';
+import 'package:menu_dash/screens/perrosapi_scree.dart';
 
 void main() => runApp(const MyApp());
 
@@ -14,6 +16,8 @@ class MyApp extends StatelessWidget {
       routes: {
         '/': (context) => MenuScreen(),
         'api1': (context) => ApiJsonPlaceUsersScreen(),
+        'baloncesto': (context) => BaloncestoScreen1(),
+        'practica10' : (context) => PerrosRazaView(),
       },
     );
   }
