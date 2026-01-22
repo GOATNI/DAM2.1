@@ -5,22 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9ffe8fbd-9d33-40bb-808e-07ba8f4a7946" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../../aplicaciones/Flutter/aplication2/lib/presentacionesScreen/screen/botones_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../../aplicaciones/Flutter/aplication2/lib/presentacionesScreen/screen/botones_screen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../aplicaciones/Flutter/aplication2/lib/presentacionesScreen/wigets/TarjetaPersonalisada1.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../../aplicaciones/Flutter/aplication2/lib/presentacionesScreen/wigets/TarjetaPersonalisada1.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../aplicaciones/Flutter/componentes/lib/presentation/screens/animaciones_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../../aplicaciones/Flutter/componentes/lib/presentation/screens/animaciones_screen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../aplicaciones/Flutter/componentes/lib/presentation/screens/botones_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../../aplicaciones/Flutter/componentes/lib/presentation/screens/botones_screen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../aplicaciones/Flutter/componentes/lib/presentation/screens/progres_indicator_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../../aplicaciones/Flutter/componentes/lib/presentation/screens/progres_indicator_screen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../aplicaciones/Flutter/componentes/lib/presentation/screens/sliders_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../../aplicaciones/Flutter/componentes/lib/presentation/screens/sliders_screen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../aplicaciones/Flutter/componentes/lib/presentation/widgets/tarjeta_personalizada_1.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../../aplicaciones/Flutter/componentes/lib/presentation/widgets/tarjeta_personalizada_1.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../aplicaciones/Flutter/contador/lib/screens/counter_functions_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../../aplicaciones/Flutter/contador/lib/screens/counter_functions_screen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../aplicaciones/Flutter/gestor_de_estados/lib/screens/home_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../../aplicaciones/Flutter/gestor_de_estados/lib/screens/home_screen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../aplicaciones/Flutter/menu_dash/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../../aplicaciones/Flutter/menu_dash/lib/main.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../aplicaciones/Flutter/menu_dash/lib/screens/apijson_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../../aplicaciones/Flutter/menu_dash/lib/screens/apijson_screen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../aplicaciones/Flutter/menu_dash/lib/services/jsonplaceholder_services.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../../aplicaciones/Flutter/menu_dash/lib/services/jsonplaceholder_services.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../aplicaciones/Flutter/menudash2/lib/screens/apijson_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../../aplicaciones/Flutter/menudash2/lib/screens/apijson_screen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../aplicaciones/Flutter/menudash2/lib/screens/menu_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../../aplicaciones/Flutter/menudash2/lib/screens/menu_screen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../aplicaciones/Flutter/menudash2/menudash/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../../aplicaciones/Flutter/menudash2/menudash/lib/main.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../aplicaciones/Flutter/superhero_app/lib/screens/superhero_search_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../../aplicaciones/Flutter/superhero_app/lib/screens/superhero_search_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,24 +15,24 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 8
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 8
+}</component>
   <component name="ProjectId" id="38J8GyOGGVdkvngl61Zyk0UIwn3" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
     <option name="sortKey" value="BY_TIME_DESCENDING" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Maven. [org.apache.maven.plugins:maven-archetype-plugin:RELEASE:generate].executor": "Run",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "main"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Maven. [org.apache.maven.plugins:maven-archetype-plugin:RELEASE:generate].executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;
   }
-}]]></component>
+}</component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="9ffe8fbd-9d33-40bb-808e-07ba8f4a7946" name="Changes" comment="" />
