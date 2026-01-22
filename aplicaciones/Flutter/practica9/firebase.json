@@ -1,0 +1,22 @@
+{
+    "flutter": {
+        "platforms": {
+            "android": {
+                "default": {
+                    "projectId": "practica9-new-firebase",
+                    "appId": "1:52918376135:android:4dabf074aa1d783ca650e2",
+                    "fileOutput": "android/app/google-services.json"
+                }
+            },
+            "dart": {
+                "lib/firebase_options.dart": {
+                    "projectId": "practica9-new-firebase",
+                    "configurations": {
+                        "android": "1:52918376135:android:4dabf074aa1d783ca650e2",
+                        "ios": "1:52918376135:ios:8ff8e47d2d4c0a4ca650e2"
+                    }
+                }
+            }
+        }
+    }
+}
