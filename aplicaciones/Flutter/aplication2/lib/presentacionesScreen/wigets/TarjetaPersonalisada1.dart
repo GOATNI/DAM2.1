@@ -25,8 +25,8 @@ class TarjetaPersonalisada1 extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.end,
               spacing: 20,
               children: [
-                TextButton(onPressed: () { }, child: Text('Cancelar'),style: TextButton.styleFrom(backgroundColor: colors.error),),
-                TextButton(onPressed: () { }, child: Text('OK'),style: TextButton.styleFrom(backgroundColor: Colors.green),),
+                TextButton(onPressed: () { },style: TextButton.styleFrom(backgroundColor: colors.error), child: Text('Cancelar'),),
+                TextButton(onPressed: () { },style: TextButton.styleFrom(backgroundColor: Colors.green), child: Text('OK'),),
             
               ],
             ),

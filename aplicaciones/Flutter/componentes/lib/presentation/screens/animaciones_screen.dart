@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 
 class AnimacionesScreen extends StatefulWidget {
    
-  const AnimacionesScreen({Key? key}) : super(key: key);
+  const AnimacionesScreen({super.key});
 
   @override
   State<AnimacionesScreen> createState() => _AnimacionesScreenState();

@@ -17,7 +17,8 @@ class _ApiJsonPlaceUsersScreenState extends State<ApiJsonPlaceUsersScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    _futureUsers = JsonPlaceHolderAPIService.fetchUsersWithHttp();
+    //_futureUsers = JsonPlaceHolderAPIService.fetchUsersWithHttp();
+    _futureUsers = JsonPlaceHolderAPIService.fetchUsersWithDio();
   }
 
   @override

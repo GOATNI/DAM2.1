@@ -5,19 +5,19 @@ import 'package:menu_dash/widgets/option_menu_item.dart';
 
 class MenuScreen extends StatelessWidget {
    
-  const MenuScreen({Key? key}) : super(key: key);
+  const MenuScreen({super.key});
   
   @override
   Widget build(BuildContext context) {
 
-    final List<OptionMenuItem> _listaOpcionesMenu = MenuItems().listaOpcionesMenu;
+    final List<OptionMenuItem> listaOpcionesMenu = MenuItems().listaOpcionesMenu;
 
     return Scaffold(
       //appBar: AppBar(title: Text('Menu'),), 
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: GridView.builder(
-          itemCount: _listaOpcionesMenu.length,
+          itemCount: listaOpcionesMenu.length,
           // Griddelegate sirve para personalizar el comportamiento del Grid
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
@@ -26,8 +26,8 @@ class MenuScreen extends StatelessWidget {
             ), 
           itemBuilder: ( context, index ){
 
-            final OptionMenuItem _opcion = _listaOpcionesMenu[index];
-            return MenuItem(opcion: _opcion);
+            final OptionMenuItem opcion = listaOpcionesMenu[index];
+            return MenuItem(opcion: opcion);
           }
           ),
       )

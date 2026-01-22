@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class ApiJsonPlaceUsersScreen extends StatelessWidget {
    
-  const ApiJsonPlaceUsersScreen({Key? key}) : super(key: key);
+  const ApiJsonPlaceUsersScreen({super.key});
   
   @override
   Widget build(BuildContext context) {

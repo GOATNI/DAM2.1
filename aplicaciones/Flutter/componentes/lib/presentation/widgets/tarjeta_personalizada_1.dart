@@ -20,7 +20,7 @@ class TarjetaPersonalizada1 extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                TextButton(onPressed: (){}, child: Text('Cancelar'), style: TextButton.styleFrom(foregroundColor: colors.error),),
+                TextButton(onPressed: (){}, style: TextButton.styleFrom(foregroundColor: colors.error), child: Text('Cancelar'),),
                 TextButton(onPressed: (){}, child: Text('Ok')),
               ],
             ),

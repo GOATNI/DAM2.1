@@ -5,7 +5,7 @@ import 'package:gestor_de_estados/pages/page3.dart';
 
 class HomeScreen extends StatefulWidget {
    
-  const HomeScreen({Key? key}) : super(key: key);
+  const HomeScreen({super.key});
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -13,7 +13,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
 
-  List<Widget> _paginas = [ Pagina1(), Pagina2(), Pagina3()];
+  final List<Widget> _paginas = [ Pagina1(), Pagina2(), Pagina3()];
   int _currentIndex = 0;
   @override
   Widget build(BuildContext context) {
