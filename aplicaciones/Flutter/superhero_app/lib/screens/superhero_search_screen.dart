@@ -67,7 +67,7 @@ class _SuperheroSearchScreenState extends State<SuperheroSearchScreen> {
                           children: [
                             ListTile(
                               title: Text(listaSuperHeroes![index].name),
-                              subtitle: Text(listaSuperHeroes![index].id),
+                              subtitle: Text(listaSuperHeroes[index].id),
                               trailing: Icon(Icons.arrow_forward_ios),
                               onTap: () {
                                 

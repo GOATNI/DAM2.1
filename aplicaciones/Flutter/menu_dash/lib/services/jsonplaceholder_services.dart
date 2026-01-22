@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:dio/dio.dart';
 import 'package:http/http.dart' as http;
 
 class JsonPlaceHolderAPIService {
@@ -19,4 +20,17 @@ class JsonPlaceHolderAPIService {
     }
   }
 
-}
+  // Metodo para obtener la listas de usuarios usando DIO
+  static Future<List<dynamic>> fetchUsersWithDio() async {
+    
+    
+    final response = await dio.get(
+      'https://jsonplaceholder.typicode.com/users'
+    );
+    if (response.statusCode == 200 ){
+      return response.data;
+    } else {
+      throw Exception("Error  al cargar usuarios con Dio");
+    }
+  }
+  }

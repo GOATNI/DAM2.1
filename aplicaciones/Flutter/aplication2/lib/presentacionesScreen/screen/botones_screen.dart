@@ -24,7 +24,7 @@ class _BotonesScreenView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return Container(
+    return SizedBox(
       width: double.infinity,
       child: Padding(
         padding: EdgeInsetsGeometry.symmetric(horizontal: 5,vertical: 10),

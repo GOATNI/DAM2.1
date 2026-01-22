@@ -62,7 +62,7 @@ class _SlidersScreenState extends State<SlidersScreen> {
             value: _checkValue,  
             onChanged: ( value ){
               setState(() {
-                _checkValue = value!;
+                _checkValue = value;
               });
             }),
           Expanded(

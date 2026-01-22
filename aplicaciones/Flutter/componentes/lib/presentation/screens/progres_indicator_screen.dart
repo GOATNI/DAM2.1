@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class ProgresIndicatorScreen extends StatelessWidget {
    
-  const ProgresIndicatorScreen({Key? key}) : super(key: key);
+  const ProgresIndicatorScreen({super.key});
   
   @override
   Widget build(BuildContext context) {
@@ -41,9 +41,7 @@ class ProgresIndicatorScreen extends StatelessWidget {
 }
 
 class _LinearProgresControlado extends StatelessWidget {
-  const _LinearProgresControlado({
-    super.key,
-  });
+  const _LinearProgresControlado();
 
   @override
   Widget build(BuildContext context) {
@@ -56,9 +54,7 @@ class _LinearProgresControlado extends StatelessWidget {
 }
 
 class _CircularControlado extends StatelessWidget {
-  const _CircularControlado({
-    super.key,
-  });
+  const _CircularControlado();
 
   @override
   Widget build(BuildContext context) {
