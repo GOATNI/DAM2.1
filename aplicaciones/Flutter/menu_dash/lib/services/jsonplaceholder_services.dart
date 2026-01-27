@@ -4,7 +4,10 @@ import 'package:http/http.dart' as http;
 
 class JsonPlaceHolderAPIService {
 
-  // Método para obtener lalista de usuarios mediante http
+  // Crear una instancia de Dio
+  static final Dio dio = Dio();
+
+  // Método para obtener la lista de usuarios mediante http
   static Future<List<dynamic>> fetchUsersWithHttp() async {
 
     final response = await http.get(
@@ -16,21 +19,21 @@ class JsonPlaceHolderAPIService {
       return json.decode( response.body );
     } else {
       // Si la respuesta no es correcta lanzamos un error
-      throw Exception("Error al cargar las lista de usuarios");
+      throw Exception("Error al cargar la lista de usuarios");
     }
   }
 
-  // Metodo para obtener la listas de usuarios usando DIO
+  // Metodo para obtener la lista de usuarios usando DIO
   static Future<List<dynamic>> fetchUsersWithDio() async {
-    
     
     final response = await dio.get(
       'https://jsonplaceholder.typicode.com/users'
     );
+    
     if (response.statusCode == 200 ){
       return response.data;
     } else {
-      throw Exception("Error  al cargar usuarios con Dio");
+      throw Exception("Error al cargar usuarios con Dio");
     }
   }
-  }
+}
