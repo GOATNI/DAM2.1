@@ -1,3 +1,5 @@
+import 'package:firebase_app/screens/HomeScreen.dart';
+import 'package:firebase_app/services/auth_service.dart';
 import 'package:flutter/material.dart';
 
 class RegisterScreen extends StatefulWidget {
@@ -13,11 +15,59 @@ class _RegisterScreenState extends State<RegisterScreen> {
   String pass = "";
   String nombre = "";
 
-  TextEditingController _emailController = TextEditingController();
-  TextEditingController _passController = TextEditingController();
-  TextEditingController _nombreController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passController = TextEditingController();
+  final TextEditingController _nombreController = TextEditingController();
 
   final _formkey = GlobalKey<FormState>();
+  final _authService = authService();
+  bool _isloading = false;
+
+   @override
+  void dispose() {
+    _emailController.dispose();
+    _passController.dispose();
+    _nombreController.dispose();
+    super.dispose();
+  }
+
+  
+  Future<void> _Registring() async{
+    if (!_formkey.currentState!.validate()){
+      return null;
+      };
+    setState() => _isloading = true;
+
+    try {
+      _authService.registerEmailyContrasena(email: _emailController.text, password: _passController.text,nombre: _nombreController.text);
+      //Mostrar un mensaje de exito
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: 
+          Text("usuario creado correctamente",
+          ),
+          backgroundColor: Colors.green,
+          )
+          );
+      }
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: 
+          Text(e.toString(),
+          ),
+          backgroundColor: Colors.red,
+          )
+          );
+      } 
+    }
+
+    if(!mounted) return;
+    Navigator.pop(context);
+  
+
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -105,7 +155,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     SizedBox(height: 30,),
                     GestureDetector(
                       onTap: () {
-                        
+                        _Registring();
                       },
                       child: Container(
                         width: MediaQuery.of(context).size.width,

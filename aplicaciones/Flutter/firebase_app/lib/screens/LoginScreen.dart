@@ -1,3 +1,4 @@
+import 'package:firebase_app/services/auth_service.dart';
 import 'package:flutter/material.dart';
 
 class Loginscreen extends StatefulWidget {
@@ -12,10 +13,47 @@ class _LoginscreenState extends State<Loginscreen> {
   String email = "";
   String pass = "";
 
-  TextEditingController _emailController = TextEditingController();
-  TextEditingController _passController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passController = TextEditingController();
+
 
   final _formkey = GlobalKey<FormState>();
+  final _authService = authService();
+  bool _isloading = false;
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passController.dispose();
+    super.dispose();
+  }
+
+  Future<void> _signing() async{
+    if (!_formkey.currentState!.validate()){
+      return null;
+      };
+    setState() => _isloading = true;
+
+    try {
+      _authService.iniciarsession(email: _emailController.text, password: _passController.text);
+      // no nesesitamos navegar el streambuilder lo hace automatica mente 
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: 
+          Text(e.toString(),
+          ),
+          backgroundColor: Colors.red,
+          )
+          );
+      } 
+    }
+    finally{
+      if (mounted) {
+        setState() => _isloading = true;
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -54,6 +92,14 @@ class _LoginscreenState extends State<Loginscreen> {
                             fontSize: 18,
                           )
                         ),
+                        validator: (value) {
+                          if(value == null || value.isEmpty){
+                            return "porfavor engresa un correo";
+                          }
+                          if(!value.contains('@')){
+                            return "porfavor engresa un correo";
+                          }
+                        },
                       ),
                     ),
                     SizedBox(height: 30,),
@@ -77,12 +123,19 @@ class _LoginscreenState extends State<Loginscreen> {
                             fontSize: 18,
                           )
                         ),
+                        validator: (value) {
+                          if(value == null || value.isEmpty){
+                            return "porfavor engresa una contraseña";
+                          }
+                        },
                       ),
                     ),
                     SizedBox(height: 30,),
                     GestureDetector(
                       onTap: () {
-                        
+                       if(_isloading == false){
+                        _signing();
+                       } 
                       },
                       child: Container(
                         width: MediaQuery.of(context).size.width,

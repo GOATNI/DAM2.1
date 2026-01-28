@@ -1,3 +1,7 @@
+import 'package:firebase_app/screens/HomeScreen.dart';
+import 'package:firebase_app/screens/LoginScreen.dart';
+import 'package:firebase_app/services/auth_service.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class Seleccionarscreen extends StatelessWidget {
@@ -5,6 +9,37 @@ class Seleccionarscreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    final _authService = authService();
+
+
+
+    return StreamBuilder<User?>
+    //escucha los cambios de estados
+    (stream:_authService.authStateChanges, builder: (context, snapshot) {
+      //mientras se esta verificando estado 
+      if (snapshot.connectionState == ConnectionState.waiting) {
+
+          return Scaffold(
+            body: Center(
+              child: CircularProgressIndicator.adaptive(),
+            ),
+          );
+      }
+      if(snapshot.hasError){
+          return Scaffold(
+            body: Center(
+              child: Text("ha occurido un error"),
+            ),
+          );
+        }
+        // si se ha lougeado
+      if(snapshot.hasData){
+          return Homescreen();
+      }
+      //si no hay usuario lougeado
+      return Loginscreen();
+      
+    },
+    );
   }
 }
