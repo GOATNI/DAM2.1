@@ -8,156 +8,186 @@ class Loginscreen extends StatefulWidget {
 }
 
 class _LoginscreenState extends State<Loginscreen> {
-  String email = '';
-  String passwd = '';
-  
+
+  String email = "";
+  String pass = "";
+
   TextEditingController _emailController = TextEditingController();
-   TextEditingController _passwdController = TextEditingController();
-   final _formkey = GlobalKey<FormState>();
+  TextEditingController _passController = TextEditingController();
+
+  final _formkey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
-   return Scaffold(
-    backgroundColor: Colors.white,
-    body: SingleChildScrollView(
-      child: Column(
-        children: [
-          SizedBox(
-            width: MediaQuery.of(context).size.width,
-            child:  Image.asset(
-              '/assets/car.PNG',fit: BoxFit.cover
-              ,
-              ),
-          ),
-          SizedBox(height: 30,),
-          Padding(
-      
-            padding: const EdgeInsets.all(20.0),
-            child: Form(
-              key: _formkey,
-              child: Column(
-                children: [
-                  Container(
-                    padding: EdgeInsets.symmetric(vertical: 2.0,horizontal: 30.0),
-                    decoration: BoxDecoration(
-                      color: Colors.grey[200],
-                      borderRadius: BorderRadius.circular(30.0)
-                    ),
-                    child: TextFormField(
-                      controller:_emailController,
-                      decoration: InputDecoration(
-                        border: InputBorder.none,
-                        hintText: 'Email',
-                        hintStyle: TextStyle(
-                          color: Colors.lightGreenAccent,
-                          fontSize: 18,
-                        )
+    return Scaffold(
+      backgroundColor: Colors.white,
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            SizedBox(
+              width: MediaQuery.of(context).size.width,
+              child: Image.asset("assets/car.PNG", fit: BoxFit.cover,),
+            ),
+            SizedBox(height: 30,),
+            Padding(
+              padding: EdgeInsets.only(left: 20, right: 20),
+              child: Form(
+                key: _formkey,
+                child: Column(
+                  children: [
+                    Container(
+                      padding: EdgeInsets.symmetric(
+                        vertical: 2.0,
+                        horizontal: 30.0,
                       ),
-                    ),
-                  ),
-                  SizedBox(height: 30.0,),
-                  Container(
-                    padding: EdgeInsets.symmetric(vertical: 2.0,horizontal: 30.0),
-                    decoration: BoxDecoration(
-                      color: Colors.grey[200],
-                      borderRadius: BorderRadius.circular(30.0)
-                    ),
-                    child: TextFormField(
-                      obscureText: true,
-                      controller:_passwdController,
-                      decoration: InputDecoration(
-                      
-                        border: InputBorder.none,
-                        hintText: 'Password',
-                        hintStyle: TextStyle(
-                          color: Colors.lightGreenAccent,
-                          fontSize: 18,
-                        )
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: 30.0,),
-                  GestureDetector(
-                    child: Container(
-                      width:MediaQuery.of(context).size.width,
-                      padding: EdgeInsets.symmetric(vertical: 13.0,horizontal: 30.0),
                       decoration: BoxDecoration(
-                        color: Colors.blue
+                        color: Color(0xFFEDf0f8),
+                        borderRadius: BorderRadius.circular(30)
                       ),
-                      child: Center(
-                        child: Text(
-                          'Iniciar Secion'
-                          ,style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 22.0,
-                            fontWeight: .w500,
-                          ),),
+                      child: TextFormField(
+                        controller: _emailController,
+                        decoration: InputDecoration(
+                          border: InputBorder.none,
+                          hintText: "Email",
+                          hintStyle: TextStyle(
+                            color: Color(0xFFB2B7BF),
+                            fontSize: 18,
+                          )
+                        ),
                       ),
                     ),
-                    onTap: () {
-                      
-                    },
-                  ),
-                  SizedBox(height: 20,),
-                  GestureDetector(
-                    child: Text('Contraseña olvidada'),
-                    onTap: () {
-                      
-                    },
-                    ),
-                  SizedBox(height: 40,),
-                  GestureDetector(
-                    child: Text('o lougeate con'),
-                    onTap: () {
-                      
-                    },
-                    ),
-                  SizedBox(height: 30,),
-      
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      GestureDetector(
-                        child: Image.asset('assets/google.png',
-                        width: 45,
-                        height: 45,
-                        fit: BoxFit.cover,),
-                        onTap: () {
-                          
-                        },
+                    SizedBox(height: 30,),
+                    Container(
+                      padding: EdgeInsets.symmetric(
+                        vertical: 2.0,
+                        horizontal: 30.0,
                       ),
-                      SizedBox(width: 30,),
-                      GestureDetector(
-                        child: Image.asset('assets/apple1.png',
-                        width: 50,
-                        height: 50,
-                        fit: BoxFit.cover,),
-                        onTap: () {
-                          
-                        },
+                      decoration: BoxDecoration(
+                        color: Color(0xFFEDf0f8),
+                        borderRadius: BorderRadius.circular(30)
                       ),
-                      SizedBox(width: 30,)
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text("Aún no tienes cuenta"),
-                      SizedBox(width: 5,),
-                      GestureDetector(child: Text("Registrar Usuario"),
+                      child: TextFormField(
+                        obscureText: true,
+                        controller: _passController,
+                        decoration: InputDecoration(
+                          border: InputBorder.none,
+                          hintText: "Password",
+                          hintStyle: TextStyle(
+                            color: Color(0xFFB2B7BF),
+                            fontSize: 18,
+                          )
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: 30,),
+                    GestureDetector(
                       onTap: () {
                         
                       },
-                      )
-                    ],
-                  )
-                ],
+                      child: Container(
+                        width: MediaQuery.of(context).size.width,
+                        padding: EdgeInsets.symmetric(
+                          vertical: 13,
+                          horizontal: 30
+                        ),
+                        decoration: BoxDecoration(
+                          color: Color(0xFF273671),
+                          borderRadius: BorderRadius.circular(30)
+                        ),
+                        child: Center(
+                          child: Text(
+                            "Login con Firebase",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 20,
+                              fontWeight: .w500
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: 20,),
+                    GestureDetector(
+                      onTap: () {
+                        
+                      },
+                      child: Text('¿Contraseña olvidada?',
+                      style: TextStyle(
+                        color: Color(0xFF8c8e98),
+                        fontSize: 18,
+                        fontWeight: .w500, 
+                      ),),
+                    ),
+                    SizedBox(height: 40,),
+                    Text('O Logueate con:',
+                      style: TextStyle(
+                        color: Color(0xFF273671),
+                        fontSize: 20,
+                        fontWeight: .w500, 
+                      ),
+                    ),
+                    SizedBox(height: 30,),
+                    Row(
+                      mainAxisAlignment: .center,
+                      children: [
+                        GestureDetector(
+                          onTap: () {
+                            
+                          },
+                          child: Image.asset(
+                            'assets/google.png',
+                            height: 45,
+                            width: 45,
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                        SizedBox(width: 30,),
+                        GestureDetector(
+                          child: Image.asset(
+                            'assets/apple1.png',
+                            height: 50,
+                            width: 50,
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 30,),
+                    Row(
+                      mainAxisAlignment: .center,
+                      children: [
+                        Text('¿Aún no tienes cuenta?',
+                            style: TextStyle(
+                              color: Color(0xFF8c8e98),
+                              fontSize: 16,
+                              fontWeight: .w500, 
+                            ),
+                        ),
+                        SizedBox(width: 5,),
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.pushNamed(
+                              context, 
+                              '/register'
+                            );
+                          },
+                          child: Text('Registrar Usuario',
+                              style: TextStyle(
+                                color: Color(0xFF273671),
+                                fontSize: 18,
+                                fontWeight: .w500, 
+                              ),
+                          ),
+                        ),
+                      ],
+                    )
+                  ],
+                ),
               ),
-            ),
-          )
-        ],
+            )
+          ],
+        ),
       ),
-    ),
-   );
+    );
   }
 }
-

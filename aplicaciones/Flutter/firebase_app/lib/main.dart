@@ -8,37 +8,34 @@ import 'package:flutter/material.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:provider/provider.dart';
 import 'firebase_options.dart';
+void main() async { 
 
-void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+    WidgetsFlutterBinding.ensureInitialized();
+    await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+    );
 
-  //FirebaseCrashlytics.instance.crash();
-  //FirebaseAnalytics analytics = FirebaseAnalytics.instance;
+    //FirebaseCrashlytics.instance.crash();
+    //FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
 
-  //await analytics.logEvent(name: "prueba_dam2",parameters: {'timestamp':DateTime.now().toIso8601String()});
-  runApp(const MyApp());
-}
+    //FirebaseAnalytics analytics = FirebaseAnalytics.instance;
+
+    runApp(const MyApp()); 
+  }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({super.key});
 
   @override
-  Widget build(BuildContext context) => MultiProvider(
-     
-      providers: [],
-      child: MaterialApp(
-        initialRoute: '/',
-        routes: {
-          '/': (context) => Seleccionarscreen(),
-          '/login': (context) => Loginscreen(),
-          '/Register': (context) => Registerscreen(),
-          '/Home': (context) => Homescreen(),
-        },
-      ),
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      initialRoute: '/',
+      routes: {
+        '/' : (context) => Loginscreen(),
+        '/login' : (context) => Loginscreen(),
+        '/register' : (context) => RegisterScreen(),
+        '/home' : (context) => Homescreen(),
+      },
     );
+  }
 }
-
-class AuthProvider {
-}
-
