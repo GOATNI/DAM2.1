@@ -27,12 +27,12 @@ import java.util.Scanner;
 public class FTPClientApp {
 
     // CONFIGURACIÓN HARDCODEADA (modifica aquí)
-    private static final String HOST = "test.rebex.net";
+    private static final String HOST = "eu-central-1.sftpcloud.io";
     private static final int PORT = 21;
-    private static final String USER = "demo";
-    private static final String PASS = "password";
+    private static final String USER = "cd3f49c523bd46759d7dc6566662ddc1";
+    private static final String PASS = "V6XgE2eq8FghE5Og1IpJjUO1prMFiNTU";
     // Ruta local que se usará siempre al subir (hardcodeada)
-    private static final String UPLOAD_PATH = "./archivo_a_subir.txt";
+    private static final String UPLOAD_PATH = "./all";
 
     private FTPClient ftpClient = new FTPClient();
     private final Scanner scanner = new Scanner(System.in);
