@@ -1,0 +1,11 @@
+meta {
+  name: DeleteOne
+  type: http
+  seq: 6
+}
+
+delete {
+  url: http://localhost:8080/api/books/id
+  body: json
+  auth: inherit
+}

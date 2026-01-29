@@ -1,0 +1,16 @@
+meta {
+  name: Buscar libros entre precio
+  type: http
+  seq: 4
+}
+
+get {
+  url: http://127.0.0.1:8080/api/books/template/search/precio?min=35&max=85
+  body: none
+  auth: inherit
+}
+
+params:query {
+  min: 35
+  max: 85
+}

@@ -1,0 +1,9 @@
+{
+  "version": "1",
+  "name": "mongoEnbebidos",
+  "type": "collection",
+  "ignore": [
+    "node_modules",
+    ".git"
+  ]
+}

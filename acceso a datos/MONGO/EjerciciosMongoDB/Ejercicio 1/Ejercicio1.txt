@@ -1,0 +1,157 @@
+Ejercicio: Plataforma de cursos online con
+documentos anidados.
+La estructura del ejercicio incluye múltiples niveles de anidación:
+ Cursos con módulos
+ Módulos con lecciones
+ Estudiantes inscritos con progreso
+ Valoraciones y reseñas
+
+__________________________
+
+Conceptos clave:
+1. Notación punto: Acceder a campos anidados (ej: &quot;modulos.lecciones.tipo&quot;)
+2. Operador $unwind: Desenrolla arrays para procesarlos
+3. Operador $size: Cuenta elementos en un array
+4. Operador $filter: Filtra elementos dentro de un array
+5. Pipeline de agregación: Secuencia de operaciones de transformación
+6. Operadores de comparación: $gt, $lt, $gte, $lte, $eq, $ne
+7. Operadores lógicos: $and, $or, $not
+8. Proyecciones: Seleccionar qué campos mostrar (1) u ocultar (0)
+9. Operador $expr: Permite usar expresiones de agregación en find()
+10. Operadores de agregación: $sum, $avg, $count, $push, $first, $max, $min
+Tareas previas a realizar:
+1. Crea la base de datos: “academia_online”
+2. Crea la colección: “cursos”
+3. Importa los datos: “datos.json”
+Consultas a realizar:
+Nivel básico:
+1. Mostrar todos los cursos
+db.cursos.find()
+1:Mostrar solo titulo y categoria de todos los cursos.
+db.cursos.find(
+  {},
+  { _id: 0, titulo: 1, categoria: 1 }
+)
+
+
+2. Contar cuántos cursos hay en total
+
+db.cursos.countDocuments()
+
+3. Buscar cursos de la categoría "Programación";
+
+db.cursos.find({ categoria: "Programación"})
+
+4. Buscar cursos de nivel "Básico";
+
+db.cursos.find({ nivel: "Básico" })
+
+5. Buscar cursos con precio menor a 70 euros
+db.cursos.find({
+  precio: { $lt: 70 }
+})
+
+6. Buscar cursos activos
+
+db.cursos.find({ activo: true })
+
+7. Buscar cursos del instructor &quot;Carlos Martínez&quot;
+
+db.cursos.find({
+  instructor: "Carlos Martínez"
+})
+
+8. Buscar cursos que estén en español
+db.cursos.find({
+  idiomas: "Español"
+})
+9. Proyección: Mostrar solo título y precio de todos los cursos.
+db.cursos.find(
+  {},
+  { _id: 0, titulo: 1, precio: 1 }
+)
+10. Buscar cursos con duración mayor a 30 horas
+db.cursos.find({
+  duracion_horas: { $gt: 30 }
+})
+
+
+Nivel 2: DOCUMENTOS ANIDADOS - MÓDULOS Y LECCIONES
+11. Buscar cursos que tengan más de 2 módulos
+
+12. Buscar cursos donde algún módulo dure más de 10 horas
+db.cursos.find({
+  "modulos.duracion_horas": { $gt: 10 }
+})
+13. Buscar cursos que tengan lecciones de tipo &quot;proyecto&quot;
+db.cursos.find({
+  "modulos.lecciones.tipo": "proyecto"
+})
+14. Buscar cursos donde alguna lección dure más de 60 minutos
+db.cursos.find({
+  "modulos.lecciones.duracion_minutos": { $gt: 60 }
+})
+15. Buscar cursos donde alguna lección haya sido completada por más de 200 personas
+db.cursos.find({
+  "modulos.lecciones.completado_por": { $gt: 200 }
+})
+16. Proyección: Mostrar título del curso y títulos de módulos
+db.cursos.aggregate([
+  {
+    $project: {
+      _id: 0,
+      titulo: 1,
+      modulos: {
+        titulo: 1
+      }
+    }
+  }
+])
+
+
+17. Buscar cursos que tengan al menos una lección de tipo &quot;video&quot;
+db.cursos.find({
+  "modulos.lecciones.tipo": "video"
+})
+18. Buscar cursos donde el primer módulo se llame &quot;Fundamentos de Python&quot;
+db.cursos.find({
+  "modulos.0.titulo": "Fundamentos de Python"
+})
+19. Proyección: Mostrar curso y solo la primera lección de cada módulo
+20. Buscar cursos que NO tengan requisitos (array vacío)
+db.cursos.find({
+  requisitos: { $size: 0 }
+})
+NIVEL 3: ESTUDIANTES Y PROGRESO
+21. Buscar cursos donde estudie &quot;Ana López&quot;
+22. Buscar cursos con al menos un estudiante que haya obtenido certificado
+23. Buscar cursos donde algún estudiante tenga 100% de progreso
+24. Buscar cursos con más de 200 estudiantes totales
+25. Buscar cursos donde algún estudiante se inscribió en 2024
+26. Buscar cursos donde algún estudiante tenga menos del 50% de progreso
+27. Proyección: Mostrar curso y solo nombres de estudiantes
+28. Buscar cursos donde &quot;Roberto Silva&quot; sea estudiante
+29. Contar cuántos estudiantes están inscritos en cada curso (proyección)
+30. Buscar cursos con al menos 3 estudiantes inscritos
+31. Buscar cursos con promedio de valoración mayor o igual a 4.5
+32. Buscar cursos con valoración perfecta (5.0)
+33. Buscar cursos donde &quot;Ana López&quot; haya dejado una valoración
+34. Buscar cursos con al menos una valoración de 5 estrellas
+35. Buscar cursos donde alguna valoración tenga más de 10 votos útiles
+36. Buscar cursos SIN valoraciones
+37. Proyección: Mostrar título y comentarios de valoraciones
+38. Buscar cursos con más de 2 valoraciones
+39. Buscar cursos donde alguna valoración sea menor a 4 estrellas
+40. Buscar cursos creados en 2024
+NIVEL 5: AGREGACIONES AVANZADAS
+41. Contar cursos por categoría
+42. Calcular el precio promedio de los cursos
+43. Encontrar el curso más caro
+44. Listar instructores y cuántos cursos imparten
+45. Calcular el total de estudiantes de todos los cursos (suma)
+46. Desenrollar módulos y contar total de lecciones por curso
+47. Encontrar los 3 estudiantes más activos (más cursos inscritos)
+48. Calcular el progreso promedio de estudiantes por curso
+
+49. Contar lecciones por tipo (video, practica, proyecto)
+50. Curso con mejor &quot;engagement&quot; (fórmula: total_estudiantes * promedio_valoracion)

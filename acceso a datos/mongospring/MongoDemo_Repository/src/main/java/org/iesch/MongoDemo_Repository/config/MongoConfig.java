@@ -1,7 +1,5 @@
 package org.iesch.MongoDemo_Repository.config;
 
-
-
 //Archivo de configuración para que no de problemas la conexión a BBDD Mongo,
 // Sin el se conecta a TEST en lugar de a la BBDD que le indicas en el properties.
 
@@ -28,7 +26,6 @@ public class MongoConfig {
                 .applyConnectionString(connectionString)
                 .build();
         return MongoClients.create(settings);
-
     }
 
     @Bean
@@ -36,6 +33,11 @@ public class MongoConfig {
         // Forzar el uso del nombre de la base de datos desde la URI
         ConnectionString connectionString = new ConnectionString(mongoUri);
         String databaseName = connectionString.getDatabase();
+
+        if (databaseName == null) {
+            throw new IllegalStateException("La URI de MongoDB no especifica una base de datos: " + mongoUri);
+        }
+
         return new SimpleMongoClientDatabaseFactory(mongoClient, databaseName);
     }
 
@@ -43,7 +45,5 @@ public class MongoConfig {
     public MongoTemplate mongoTemplate(MongoDatabaseFactory mongoDatabaseFactory) {
         return new MongoTemplate(mongoDatabaseFactory);
     }*/
-
-
 
 }

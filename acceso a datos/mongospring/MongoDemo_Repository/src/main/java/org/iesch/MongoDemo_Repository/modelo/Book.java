@@ -5,6 +5,11 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.List;
+
+/**
+ * Clase que representa un libro en la base de datos MongoDB.
+ * Utiliza Lombok para generar getters, setters, constructores y toString.
+ */
 @NoArgsConstructor
 //@AllArgsConstructor
 @Getter
@@ -19,13 +24,17 @@ public class Book {
     private String isbn;
     private Integer anioPublicacion;
     private Double precio;
-    private  Integer numeroPaginas;
+    private Integer numeroPaginas;
     private String editorial;
 
-    //Documentos enbebidos
+    // Documentos embebidos
     private List<Autor> autores;
-    private List<String> categorias;;
+    private List<String> categorias;
 
+    /**
+     * Constructor personalizado para crear un libro sin ID (el ID lo genera MongoDB).
+
+     */
     public Book(String titulo, String isbn, Integer anioPublicacion, Double precio, Integer numeroPaginas, String editorial, List<Autor> autores, List<String> categorias) {
         this.titulo = titulo;
         this.isbn = isbn;

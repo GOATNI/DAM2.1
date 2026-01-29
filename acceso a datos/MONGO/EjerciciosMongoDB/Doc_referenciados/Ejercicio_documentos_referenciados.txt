@@ -1,0 +1,492 @@
+Documentos referenciados.
+¿Cuándo usar un diseño con documentos embebidos?
+Datos que siempre se consultan juntos
+Relación uno-a-pocos (1 estudiante → 3-5 materias)
+Datos que no se comparten entre documentos
+¿Cuándo usar un diseño con documentos referenciados?
+Datos que se consultan independientemente
+Relación uno-a-muchos (1 autor → muchos libros)
+Datos que se reutilizan (muchos libros del mismo autor)
+Evitar duplicación de datos
+Conceptos clave:
+$lookup: El JOIN de MongoDB
+$unwind: Deshacer arrays
+$match: Filtrar (antes o después de lookup)
+$group: Agrupar y agregar
+$project: Seleccionar campos
+$sort: Ordenar
+$limit: Limitar resultados
+$size: Tamaño de array
+
+
+Ejercicios:
+ Ver todos los libros:
+db.libros.find()
+
+Buscar un autor específico ej: id 1:
+db.autores.find(
+	{_id:1	}
+)
+
+Buscar los libros de un autor específico ej:id1
+db.libros.aggregate([
+	{
+	$lookup: {
+		from: "autores",
+		localField: "autor_id",
+		foreignField: "_id",
+		as: "info_autor"
+		}
+	},
+	{$match: {autor_id:1}}	
+])
+
+Busca todos los libros pero debes mostrar toda la información del autor:
+db.libros.aggregate([
+	{
+	$lookup: {
+		from: "autores",
+		localField: "autor_id",
+		foreignField: "_id",
+		as: "info_autor"
+		}
+	},	
+])
+
+Busca todos los libros pero debes mostrar toda la información del autor, esta vez sin array:
+db.libros.aggregate([
+	{
+	$lookup: {
+		from: "autores",
+		localField: "autor_id",
+		foreignField: "_id",
+		as: "info_autor"
+		}
+	},	
+	{$unwind: "$info_autor"}
+])
+
+Saca toda la información de los libros, con sus autores y sus editoriales. Sin Array:
+
+db.libros.aggregate([
+	{
+	$lookup: {
+		from: "autores",
+		localField: "autor_id",
+		foreignField: "_id",
+		as: "autor"
+		}
+	},
+	{$lookup:{
+		from :"editoriales",
+		localField: "editorial_id",
+		foreignField:"_id",
+		as: "editorial"
+	}
+	},
+	{$unwind: "$autor"},
+	{$unwind: "$editorial"}	
+
+	
+])
+
+Busca la información relativa a los préstamos existentes, pero debes mostrar la
+ información de los libros, autores y usuarios.:
+
+db.prestamos.aggregate([
+	{
+		$lookup: {
+			from : "libros",
+			localField: "libro_id",
+			foreignField: "_id",
+			as: "libro"
+		}
+	},
+	{$unwind: "$libro"},
+
+	{
+		$lookup: {
+			from: "autores",
+			localField: "libro.autor_id",
+			foreignField: "_id",
+			as: "autor"
+		}
+	},
+	{$unwind: "$libro"},
+	{
+		$lookup: {
+			from: "usuarios",
+			localField: "usuario_id",
+			foreignField: "_id",
+			as: "usuario"
+		}
+	},
+	{$unwind: "$libro"},
+
+])
+
+repetir con project:
+db.prestamos.aggregate([
+	{
+		$lookup: {
+			from : "libros",
+			localField: "libro_id",
+			foreignField: "_id",
+			as: "libro"
+		}
+	},
+	{$unwind: "$libro"},
+
+	{
+		$lookup: {
+			from: "autores",
+			localField: "libro.autor_id",
+			foreignField: "_id",
+			as: "autor"
+		}
+	},
+	{$unwind: "$autor"},
+	{
+		$lookup: {
+			from: "usuarios",
+			localField: "usuario_id",
+			foreignField: "_id",
+			as: "usuario"
+		}
+	},
+	{$unwind: "$usuario"},
+	{
+		$project:{
+			"libro.titulo": 1,
+			"libro.nombre":1,
+			"usuario.nombre":1,
+			"fecha_prestamo":1,
+			"devuelto":1,
+			_id:0
+		}
+	}
+
+])
+
+
+Encuentra los libros de autores con premio Nobel:
+
+db.autores.aggregate([
+	{
+		$match: {premios: "Nobel"}
+	},
+	{
+		$lookup: {
+			from: "libros",
+			localField: "_id",
+			foreignField: "autor_id",
+			as: "libros"
+		}
+	},
+	{$unwind: "$libros"}
+])
+
+ahora sacando ciertos datos solo:
+db.autores.aggregate([
+	{
+		$match: {premios: "Nobel"}
+	},
+	{
+		$lookup: {
+			from: "libros",
+			localField: "_id",
+			foreignField: "autor_id",
+			as: "libros"
+		}
+	},
+	{$unwind: "$libros"},
+	{
+		$project: {
+			"nombre": 1,
+			"libros.titulo": 1,
+			"libros.año_publicacion": 1,
+			_id: 0
+
+		}
+	}
+])
+
+Muestra el total de libros por editorial:
+
+db.libros.aggregate([
+	{
+		$group: {
+			_id: "$editorial_id",
+			total_libros: {$sum:1}
+		}
+	},
+	{
+		$lookup: {
+			from: "editoriales",
+			localField: "_id",
+			foreignField: "_id",
+			as: "editorial"
+		}
+	},
+	{$unwind : "$editorial"}
+
+])
+
+Encuentra los préstamos no devueltos muestra la información completa.:
+
+db.prestamos.aggregate([
+	{
+		$match: {devuelto:false}
+	},
+	{
+		$lookup: {
+			from: "libros",
+			localField: "libro_id",
+			foreignField: "_id",
+			as: "libro"
+		}
+	},
+	{$unwind: "$libro"},
+	{
+		$lookup: {
+			from: "usuarios",
+			localField: "usuario_id",
+			foreignField: "_id",
+			as: "usuario"
+		}
+	},
+	{$unwind: "$usuario"},
+	{
+		$lookup: {
+			from: "autores",
+			localField: "libro.autor_id",
+			foreignField: "_id",
+			as: "autor"
+		}
+	},
+	{$unwind: "$autor"}
+])
+
+Encuentra el autor con más libros publicados:
+db.libros.aggregate([
+	{
+		$group: {
+			_id:"$autor_id",
+			totalLibros: {$sum: 1}
+		}
+	},
+	{
+		$lookup: {
+			from: "autores",
+			localField: "_id",
+			foreignField: "_id",
+			as: "autor"
+		}
+	},
+	{$unwind: "$autor"},
+	{
+		$project: {
+			"autor.nombre":1,
+			"totalLibros":1,
+			_id:0
+		}
+	}
+])
+Encuentra los usuarios Premium con sus préstamos activos.:
+db.usuarios.aggregate([
+	{
+		$match: {tipo: "premium"}
+	},
+	{
+		$lookup: {
+			from : "prestamos",
+			localField: "_id",
+			foreignField: "usuario_id",
+			as: "prestamo"
+		}
+	},
+	{
+		$unwind: "$prestamo"
+	},
+	{
+		$match: {"prestamo.devuelto":false}
+	},
+	{
+		$lookup: {
+			from : "libros",
+			localField: "prestamo.libro_id",
+			foreignField: "_id",
+			as: "libro"
+		}
+	},
+	{
+		$unwind: "$libro"
+	}
+	//Meter un project y sacar los campos que nos interesen
+
+])
+
+Muestra los libros publicados antes de 1970 con su autor y editorial:
+
+db.libros.aggregate([
+	{
+		$match: {
+			año_publicacion: {$lt:1970}
+		}
+	},
+	{
+		$lookup: {
+			from : "autores",
+			localField: "autor_id",
+			foreignField: "_id",
+			as: "autor"
+		}
+	},
+	{
+		$unwind: "$autor"
+	},
+	{
+		$lookup:{
+			from: "editoriales",
+			localField:"editorial_id",
+			foreignField: "_id",
+			as: "editorial"
+		}
+	},
+	{
+		$unwind: "$editorial"
+	}
+	//Lo mismo de siempre si queremos sacar solo unos datos poner un project y a partir de ahi sacar lo que queramos
+
+])
+
+Encuentra el promedio de páginas por género:
+
+db.libros.aggregate([
+	{
+		$group: {
+			_id: "$genero",
+			promedio_paginas: {$avg: "$paginas"},
+			cantidad_libros: {$sum: 1}
+		}
+	}
+])
+
+Muestra los autores argentinos con sus libros y total de páginas:
+db.autores.aggregate([
+	{
+		$match: { nacionalidad: "Argentino"}
+	},
+	{
+		$lookup: {
+			from : "libros",
+			localField: "_id",
+			foreignField: "autor_id",
+			as: "libro"
+		}
+
+	},
+	{$unwind: "$libro"},
+	{
+		$project: {
+			"nombre":1,
+			"libro.titulo":1,
+			"libro.paginas":1
+		}
+	}
+])
+Encuentra los  usuarios con más de 1 préstamo tanto los activos o los históricos:
+db.prestamos.aggregate([
+	{
+		$group: {
+			_id: "$usuario_id",
+			total_prestamos: {$sum:1},
+			prestamos_activos: {
+				$sum: { $cond: [ {$eq: ["$devuelto", false]},1, 0]}
+			}
+		}
+	},
+	{
+		$match: {total_prestamos: {$gt:1}}
+	},
+	{
+		$lookup: {
+			from: "usuarios",
+			localField: "_id",
+			foreignField: "_id",
+			as: "usuario"
+		}
+	},
+	{$unwind: "$usuario"},
+	{
+		$project: {
+			"usuario.nombre":1,
+			"usuario.email":1,
+			"total_prestamos":1,
+			"prestamos_activos":1,
+			"_id":0
+		}
+	}
+	
+])
+Muestra la editorial con el libro más largo y su autor:
+db.libros.aggregate([
+	{
+		$sort: {paginas: -1}
+	},
+	{
+		$limit:1
+	},
+	{
+		$lookup: {
+			from: "autores",
+			localField: "autor_id",
+			foreignField: "_id",
+			as: "autor"
+		}
+	},
+	{$unwind: "$autor"},
+	{
+		$lookup: {
+			from :"editoriales",
+			localField: "editorial_id",
+			foreignField: "_id",
+			as:"editorial"
+		}
+	},
+	{$unwind: "$editorial"},
+	{
+		$project: {
+			"titulo":1,
+			"paginas":1,
+			"autor.nombre":1,
+			"editorial.nombre":1,
+			"_id":0
+		}
+	}
+])
+
+Encuentra los libros que nunca han sido prestados.:
+db.libros.aggregate([
+	{
+		$lookup: {
+			from :"prestamos",
+			localField:"_id",
+			foreignField: "libro_id",
+			as: "prestamo"
+		}
+	},
+	{
+		$match: {
+			prestamo: {$size:0}
+		}
+	}
+
+
+])
+
+
+
+
+
+

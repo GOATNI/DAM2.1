@@ -1,0 +1,15 @@
+meta {
+  name: Buscar Autor por nombre con @Query
+  type: http
+  seq: 12
+}
+
+get {
+  url: http://127.0.0.1:8080/api/books/search/nativo/autor?nombre=Carlos
+  body: none
+  auth: inherit
+}
+
+params:query {
+  nombre: Carlos
+}

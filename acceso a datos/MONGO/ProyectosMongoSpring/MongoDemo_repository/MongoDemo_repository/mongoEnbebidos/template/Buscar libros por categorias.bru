@@ -1,0 +1,15 @@
+meta {
+  name: Buscar libros por categorias
+  type: http
+  seq: 2
+}
+
+get {
+  url: http://127.0.0.1:8080/api/books/template/search/categorias?cat=Aventura
+  body: none
+  auth: inherit
+}
+
+params:query {
+  cat: Aventura
+}

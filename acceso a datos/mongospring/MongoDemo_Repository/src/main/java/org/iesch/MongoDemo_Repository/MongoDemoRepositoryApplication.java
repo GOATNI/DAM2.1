@@ -9,28 +9,36 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.util.List;
 
+/**
+ * Clase principal de la aplicación Spring Boot.
+ * Implementa CommandLineRunner para ejecutar código al inicio.
+ */
 @SpringBootApplication
-public class    MongoDemoRepositoryApplication implements CommandLineRunner {
+public class MongoDemoRepositoryApplication implements CommandLineRunner {
 
-	@Autowired
-	BookRepository bookRepository;
-	public static void main(String[] args) {
-		SpringApplication.run(MongoDemoRepositoryApplication.class, args);
-	}
+    @Autowired
+    BookRepository bookRepository;
 
-	@Override
-	public void run(String... args) throws Exception {
-		// Código a ejecutar al iniciar la aplicación
-		List<Book> books = bookRepository.findAll();
-		System.out.println(books);
+    public static void main(String[] args) {
+        SpringApplication.run(MongoDemoRepositoryApplication.class, args);
+    }
 
-		Book book = new Book();
-		book.setTitulo("El Quijote");
-		bookRepository.save(book);
+    @Override
+    public void run(String... args) throws Exception {
+        // Código a ejecutar al iniciar la aplicación
+        // Listar todos los libros existentes
+        List<Book> books = bookRepository.findAll();
+        System.out.println("Libros iniciales: " + books);
 
+        // Crear y guardar un nuevo libro de ejemplo
+        Book book = new Book();
+        book.setTitulo("El Quijote");
+        book.setEditorial("Editorial Ejemplo");
+        book.setPrecio(20.5);
+        bookRepository.save(book);
 
-		books = bookRepository.findAll();
-		System.out.println(books);
-	}
-
+        // Listar libros después de la inserción
+        books = bookRepository.findAll();
+        System.out.println("Libros tras inserción: " + books);
+    }
 }

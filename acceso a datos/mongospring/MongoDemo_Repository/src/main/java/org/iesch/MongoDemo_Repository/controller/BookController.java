@@ -10,34 +10,55 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Controlador REST para gestionar operaciones CRUD sobre libros.
+ */
 @RestController
 @RequestMapping("/api/books")
 public class BookController {
     @Autowired
     BookRepository bookRepository;
 
-    //CRUD.
-    //GET ALL
+    // CRUD.
+
+    /**
+     * Obtiene todos los libros.
+     *
+     *
+     */
     @GetMapping
     public ResponseEntity<List<Book>> getAllBooks() {
         // Lógica para obtener todos los libros
-        return ResponseEntity.ok(bookRepository.findAll()); // Reemplazar null con la lista de libros obtenida
+        return ResponseEntity.ok(bookRepository.findAll());
     }
-    @GetMapping ("/{id}")
-    public ResponseEntity<Optional<Book>> libroporid (@PathVariable String id){
+
+    /**
+     * Obtiene un libro por su ID.
+
+     */
+    @GetMapping("/{id}")
+    public ResponseEntity<Optional<Book>> libroporid(@PathVariable String id) {
         Optional<Book> book = bookRepository.findById(id);
         return ResponseEntity.ok(book);
     }
 
+    /**
+     * Crea un nuevo libro.
+     *
+     */
     @PostMapping
-    public ResponseEntity<Book> creartebook(@RequestBody Book libro){
+    public ResponseEntity<Book> creartebook(@RequestBody Book libro) {
         Book save = bookRepository.save(libro);
         return ResponseEntity.status(HttpStatus.CREATED).body(save);
     }
 
+    /**
+     * Actualiza un libro existente.
+     *
+     */
     @PutMapping("/{id}")
-    public ResponseEntity<Book> updatebook(@PathVariable String id, @RequestBody Book libro){
-        if (bookRepository.existsById(id)){
+    public ResponseEntity<Book> updatebook(@PathVariable String id, @RequestBody Book libro) {
+        if (!bookRepository.existsById(id)) {
             return ResponseEntity.notFound().build();
         }
         libro.setId(id);
@@ -45,25 +66,34 @@ public class BookController {
         return ResponseEntity.ok(updatedbook);
     }
 
+    /**
+     * Elimina un libro por su ID.
+     *
+     */
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deletebook(@PathVariable String id){
-        if (bookRepository.existsById(id)){
+    public ResponseEntity<?> deletebook(@PathVariable String id) {
+        if (!bookRepository.existsById(id)) {
             return ResponseEntity.notFound().build();
         }
         bookRepository.deleteById(id);
         return ResponseEntity.noContent().build();
-
     }
 
+    /**
+     * Busca libros por título.
+     *
+     */
     @GetMapping("/search/{titulo}")
-    public ResponseEntity<List<Book>> serchbytitle (@PathVariable String titulo){
+    public ResponseEntity<List<Book>> serchbytitle(@PathVariable String titulo) {
         return ResponseEntity.ok(bookRepository.findByTituloContainingIgnoreCase(titulo));
     }
 
+    /**
+     * Busca libros por nombre de autor.
+     *
+     */
     @GetMapping("/search/Autor/{autor}")
-    public ResponseEntity<List<Book>> nombre_autor (@PathVariable String autor){
-        return ResponseEntity.ok(bookRepository.findByAutorNombreContainingIgnoreCase(autor));
+    public ResponseEntity<List<Book>> nombre_autor(@PathVariable String autor) {
+        return ResponseEntity.ok(bookRepository.findByAutoresNombreContainingIgnoreCase(autor));
     }
-
-
 }

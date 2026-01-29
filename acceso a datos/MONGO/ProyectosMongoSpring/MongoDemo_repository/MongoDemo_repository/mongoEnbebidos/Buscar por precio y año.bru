@@ -1,0 +1,16 @@
+meta {
+  name: Buscar por precio y año
+  type: http
+  seq: 13
+}
+
+get {
+  url: http://127.0.0.1:8080/api/books/search/nativo/precioAnio?precio=20&anio=1965
+  body: none
+  auth: inherit
+}
+
+params:query {
+  precio: 20
+  anio: 1965
+}
