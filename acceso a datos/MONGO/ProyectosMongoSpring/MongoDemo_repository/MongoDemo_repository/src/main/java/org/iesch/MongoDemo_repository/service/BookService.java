@@ -3,6 +3,7 @@ package org.iesch.MongoDemo_repository.service;
 import org.iesch.MongoDemo_repository.model.Book;
 import org.jspecify.annotations.Nullable;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoTemplate;
 
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -61,5 +62,37 @@ public class BookService {
         Query query = new Query();
         query.addCriteria(Criteria.where("precio").lt(precio).and("anioPublicacion").gt(anio));
         return mongoTemplate.find(query,Book.class);
+    }
+
+
+    public @Nullable List<Book> findByTitulocategoria(String titulo, String categoria) {
+        Query query = new Query();
+        query.addCriteria(Criteria.where("titulo").regex(titulo,"i").and("categorias").in(categoria));
+        return mongoTemplate.find(query,Book.class);
+    }
+
+    public @Nullable List<Book> buscarPorCategorias(List<String> categorias) {
+        Query query = new Query();
+        query.addCriteria(Criteria.where("categorias").in(categorias));
+        return mongoTemplate.find(query,Book.class);
+    }
+
+    public @Nullable List<Book> preciomaximoordenado(double precio) {
+        Query query = new Query();
+        query.addCriteria(Criteria.where("precio").lte(precio));
+        query.with(Sort.by(Sort.Direction.DESC,"anioPublicacion"));
+        return mongoTemplate.find(query,Book.class);
+    }
+
+    public @Nullable List<Book> buscrapormultiplesautores() {
+        Query query = new Query();
+        query.addCriteria(Criteria.where("autores.1").exists(true));
+        return mongoTemplate.find(query,Book.class);
+    }
+
+    public long buscarcantidadlibroporcategias(String categoria) {
+        Query query = new Query();
+        query.addCriteria(Criteria.where("categorias").regex(categoria,"i"));
+        return mongoTemplate.count(query,Book.class);
     }
 }

@@ -1,0 +1,15 @@
+meta {
+  name: ¡numerar libros con una sierta categoria
+  type: http
+  seq: 18
+}
+
+get {
+  url: http://127.0.0.1:8080/api/books/template/search/contar-categoria?categoria=java
+  body: none
+  auth: inherit
+}
+
+params:query {
+  categoria: java
+}
