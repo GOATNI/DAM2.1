@@ -9,7 +9,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.core.type.TypeReference;
 public class ClienteAemet {
     private static final String DIR = "https://opendata.aemet.es/opendata";
-    private static final String API_KEY_PARAM_PREFIX = "/?api_key=";
+    private static final String API_KEY_PARAM_PREFIX = "/?api_key=eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtbXVoYW1tYWRzQGllc2NoLm9yZyIsImp0aSI6ImFmYzEzNWUzLTBlNDAtNDA2Ny1hNzc5LWIzYjJjZDNmNTliYyIsImlzcyI6IkFFTUVUIiwiaWF0IjoxNzY5NzE2MDQ4LCJ1c2VySWQiOiJhZmMxMzVlMy0wZTQwLTQwNjctYTc3OS1iM2IyY2QzZjU5YmMiLCJyb2xlIjoiIn0.D9dFQZ6VBb2P1eUGRCvzgNR82PvsOf2JiyVQqtkyL2A";
     private static final HttpClient httpClient = HttpClient.newHttpClient();
     private static final ObjectMapper mapper = new ObjectMapper();
     // Clave API que se debe asignar antes de hacer peticiones

@@ -2,11 +2,61 @@
 <jasperReport name="empleados_jasper" language="java" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="7ddfac7a-41a4-4355-bd72-ffbeb410e567">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="empleados"/>
-	<parameter name="autonomia" class="java.lang.String"/>
-	<query language="SQL"><![CDATA[SELECT e.Nombre, e.FechaNac, e.Sexo, e.Salario, d.departamento
+	<dataset name="Datasetgraficos" uuid="8d14be3a-6fd7-4699-8e28-1a17abe83e99">
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="datasetgraficoschulos"/>
+		<query language="SQL"><![CDATA[SELECT e.Nombre, e.FechaNac, e.Sexo, e.Salario, d.departamento 
 FROM empresa.empleados e
 JOIN empresa.departamentos d ON e.departamento = d.id
-WHERE d.autonomia = $P{autonomia}
+]]></query>
+		<field name="Nombre" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="Nombre"/>
+			<property name="com.jaspersoft.studio.field.label" value="Nombre"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="empleados"/>
+		</field>
+		<field name="FechaNac" class="java.time.LocalDateTime">
+			<property name="com.jaspersoft.studio.field.name" value="FechaNac"/>
+			<property name="com.jaspersoft.studio.field.label" value="FechaNac"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="empleados"/>
+		</field>
+		<field name="Sexo" class="java.lang.Integer">
+			<property name="com.jaspersoft.studio.field.name" value="Sexo"/>
+			<property name="com.jaspersoft.studio.field.label" value="Sexo"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="empleados"/>
+		</field>
+		<field name="Salario" class="java.lang.Double">
+			<property name="com.jaspersoft.studio.field.name" value="Salario"/>
+			<property name="com.jaspersoft.studio.field.label" value="Salario"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="empleados"/>
+		</field>
+		<field name="departamento" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="Departamento"/>
+			<property name="com.jaspersoft.studio.field.label" value="departamento"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="departamentos"/>
+		</field>
+		<group name="Nombre">
+			<expression><![CDATA[$F{Nombre}]]></expression>
+		</group>
+		<group name="FechaNac">
+			<expression><![CDATA[$F{FechaNac}]]></expression>
+		</group>
+		<group name="Sexo">
+			<expression><![CDATA[$F{Sexo}]]></expression>
+		</group>
+		<group name="Salario">
+			<expression><![CDATA[$F{Salario}]]></expression>
+		</group>
+		<group name="departamento">
+			<expression><![CDATA[$F{departamento}]]></expression>
+		</group>
+	</dataset>
+	<parameter name="localidad" class="java.lang.String"/>
+	<query language="SQL"><![CDATA[SELECT e.Nombre, e.FechaNac, e.Sexo, e.Salario, d.departamento 
+FROM empresa.empleados e
+JOIN empresa.departamentos d ON e.departamento = d.id
+where d.departamento = $P{localidad} 
+
+
 ]]></query>
 	<field name="Nombre" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.name" value="Nombre"/>
@@ -102,4 +152,31 @@ WHERE d.autonomia = $P{autonomia}
 		</band>
 	</detail>
 	<columnFooter height="45" splitType="Stretch"/>
+	<summary height="401">
+		<element kind="chart" chartType="bar" uuid="2bcb5fd7-af09-4ff1-af1b-50fad44ad0e0" x="0" y="0" width="560" height="220" evaluationTime="Report" linkTarget="Self">
+			<dataset kind="category">
+				<datasetRun uuid="f5da9bfb-b391-4d71-be51-76dd2733aaab" subDataset="Datasetgraficos"/>
+				<series>
+					<seriesExpression><![CDATA["SERIES 1"]]></seriesExpression>
+					<categoryExpression><![CDATA[$F{Nombre}]]></categoryExpression>
+					<valueExpression><![CDATA[$F{Salario}]]></valueExpression>
+				</series>
+			</dataset>
+			<plot categoryAxisLabelColor="#000000" categoryAxisTickLabelColor="#000000" categoryAxisLineColor="#000000" valueAxisLabelColor="#000000" valueAxisTickLabelColor="#000000" valueAxisLineColor="#000000">
+				<itemLabel/>
+			</plot>
+		</element>
+		<element kind="chart" chartType="pie" uuid="b57bab46-c04f-411e-9d5d-a15d271be5b5" x="50" y="200" width="460" height="200" evaluationTime="Report">
+			<dataset kind="pie">
+				<series>
+					<keyExpression><![CDATA[$F{Nombre}]]></keyExpression>
+					<valueExpression><![CDATA[$F{Salario}]]></valueExpression>
+					<labelExpression><![CDATA[$F{Salario}.toString()]]></labelExpression>
+				</series>
+			</dataset>
+			<plot>
+				<itemLabel/>
+			</plot>
+		</element>
+	</summary>
 </jasperReport>

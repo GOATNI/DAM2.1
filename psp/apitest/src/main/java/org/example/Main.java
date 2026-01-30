@@ -8,6 +8,6 @@ public class Main {
         Estacion estacion = new Estacion();
         ClienteDatos clienteDatos = new ClienteDatos();
 
-        System.out.println(clienteAemet);
+        System.out.println(valoresDiarios);
     }
 }
