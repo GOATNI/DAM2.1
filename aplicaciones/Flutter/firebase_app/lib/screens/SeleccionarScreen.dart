@@ -34,7 +34,7 @@ class Seleccionarscreen extends StatelessWidget {
         }
         // si se ha lougeado
       if(snapshot.hasData){
-          return Homescreen();
+          return HomeScreen();
       }
       //si no hay usuario lougeado
       return Loginscreen();

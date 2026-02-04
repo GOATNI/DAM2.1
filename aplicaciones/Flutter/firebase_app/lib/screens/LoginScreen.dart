@@ -1,4 +1,5 @@
 import 'package:firebase_app/services/auth_service.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class Loginscreen extends StatefulWidget {
@@ -15,11 +16,10 @@ class _LoginscreenState extends State<Loginscreen> {
 
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passController = TextEditingController();
-
-
   final _formkey = GlobalKey<FormState>();
+
   final _authService = authService();
-  bool _isloading = false;
+  bool _isLoading = false;
 
   @override
   void dispose() {
@@ -28,31 +28,48 @@ class _LoginscreenState extends State<Loginscreen> {
     super.dispose();
   }
 
-  Future<void> _signing() async{
-    if (!_formkey.currentState!.validate()){
-      return null;
-      };
-    setState() => _isloading = true;
+  Future<void> _signIn() async {
+    if (!_formkey.currentState!.validate()) return;
+    setState(()=> _isLoading = true );
 
     try {
-      _authService.iniciarsession(email: _emailController.text, password: _passController.text);
-      // no nesesitamos navegar el streambuilder lo hace automatica mente 
+      _authService.iniciarsession(
+        email: _emailController.text.trim(), 
+        password: _passController.text,
+        );
+      // No necesitamos navegar manualmente, el Streambuilder lo hace automaticamente
     } catch (e) {
-      if (mounted) {
+      // Mostramos mensaje al usuario
+      if(mounted){
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: 
-          Text(e.toString(),
-          ),
-          backgroundColor: Colors.red,
-          )
-          );
-      } 
-    }
-    finally{
-      if (mounted) {
-        setState() => _isloading = true;
+          SnackBar(
+            content: Text(e.toString()),
+            backgroundColor: Colors.red,
+            )
+        );
+      }
+    } finally {
+      if (mounted){
+        setState(()=> _isLoading = false );
       }
     }
+  }
+
+  Future<void> _logueoConGoogle() async {
+    setState(()=> _isLoading = true );
+    try {
+      final userCredential = await _authService.loginConGoogle();
+      if ( userCredential != null ){
+        // Aqui nuestro Stream lo detectará automaticamente
+        print('Usuario logueado con Google correctamente!');
+      }
+      
+    } catch (e) {
+      throw FirebaseAuthException(code: 'ERROR CON GOOGLE');
+    } finally {
+      setState(()=> _isLoading = false );
+    }
+
   }
 
   @override
@@ -93,12 +110,13 @@ class _LoginscreenState extends State<Loginscreen> {
                           )
                         ),
                         validator: (value) {
-                          if(value == null || value.isEmpty){
-                            return "porfavor engresa un correo";
+                          if ( value == null || value.isEmpty ){
+                            return 'Por favor  ingresa un correo';
                           }
-                          if(!value.contains('@')){
-                            return "porfavor engresa un correo";
+                          if (!value.contains('@')) {
+                            return 'Ingresa un email válido';
                           }
+                          return null;
                         },
                       ),
                     ),
@@ -124,19 +142,19 @@ class _LoginscreenState extends State<Loginscreen> {
                           )
                         ),
                         validator: (value) {
-                          if(value == null || value.isEmpty){
-                            return "porfavor engresa una contraseña";
+                          if ( value == null || value.isEmpty ){
+                            return 'Por favor ingresa una contraseña';
                           }
+                          if (value.length < 6) {
+                            return 'La contraseña debe tener al menos 6 caracteres';
+                          }
+                          return null;
                         },
                       ),
                     ),
                     SizedBox(height: 30,),
                     GestureDetector(
-                      onTap: () {
-                       if(_isloading == false){
-                        _signing();
-                       } 
-                      },
+                      onTap: _isLoading ? null : _signIn,
                       child: Container(
                         width: MediaQuery.of(context).size.width,
                         padding: EdgeInsets.symmetric(
@@ -184,9 +202,7 @@ class _LoginscreenState extends State<Loginscreen> {
                       mainAxisAlignment: .center,
                       children: [
                         GestureDetector(
-                          onTap: () {
-                            
-                          },
+                          onTap: _isLoading ? null : _logueoConGoogle,
                           child: Image.asset(
                             'assets/google.png',
                             height: 45,

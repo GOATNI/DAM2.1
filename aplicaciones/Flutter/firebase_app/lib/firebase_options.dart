@@ -63,6 +63,9 @@ class DefaultFirebaseOptions {
     messagingSenderId: '583125018644',
     projectId: 'fireflutterdam-6bd97',
     storageBucket: 'fireflutterdam-6bd97.firebasestorage.app',
+    androidClientId: '583125018644-ff91iogmvbfavd1o55fucnagvinjeiq0.apps.googleusercontent.com',
+    iosClientId: '583125018644-aeq4aaaph5tks0f2sc14svnphh66k6no.apps.googleusercontent.com',
     iosBundleId: 'com.example.firebaseApp',
   );
+
 }
