@@ -20,4 +20,7 @@ class FirestoreService {
       
     }
   }*/
+  List<Map<String, dynamic>> obtenerTareas() {
+    
+  }
 }

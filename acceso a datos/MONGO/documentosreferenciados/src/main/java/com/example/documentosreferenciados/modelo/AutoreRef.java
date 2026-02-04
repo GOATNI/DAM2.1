@@ -1,16 +1,16 @@
-package modelo;
+package com.example.documentosreferenciados.modelo;
 
 import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.lang.annotation.Documented;
+
 @Getter
 @Setter
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-@Document(collation = "autores")
+@Document(collection = "autores")
 public class AutoreRef {
     @Id
     private String id;

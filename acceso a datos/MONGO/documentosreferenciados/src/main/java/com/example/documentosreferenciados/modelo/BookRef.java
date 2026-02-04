@@ -1,10 +1,11 @@
-package modelo;
+package com.example.documentosreferenciados.modelo;
 
 
 import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.DocumentReference;
 
 import java.util.List;
 @Getter
@@ -12,11 +13,7 @@ import java.util.List;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-
-
-
-
-@Document(collation = "libros_ref")
+@Document(collection = "libros_ref")
 public class BookRef {
     @Id
     private String id;
@@ -27,7 +24,7 @@ public class BookRef {
     private Integer numeroPaginas;
     private String editorial;
 
-    @DBRef
+    @DocumentReference
     private List<AutoreRef> autores;
     private List<String> categorias;
 
