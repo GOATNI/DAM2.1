@@ -2,6 +2,27 @@
 <jasperReport name="ventas_report_jasper" language="java" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="2bf9b698-bb30-489f-8080-861bba858728">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="New Data Adapter (2)"/>
+	<dataset name="Dataset1" uuid="0e09803a-e6a4-4bab-84a0-0d36e49ad3f4">
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="New Data Adapter (2)"/>
+		<query language="SQL"><![CDATA[select SUM(v.CantidadVendida * v.PrecioUnidad),v.Categoría  from ventas v
+group by v.Categoría;]]></query>
+		<field name="SUM(v.CantidadVendida * v.PrecioUnidad)" class="java.lang.Double">
+			<property name="com.jaspersoft.studio.field.name" value="SUM(v.CantidadVendida * v.PrecioUnidad)"/>
+			<property name="com.jaspersoft.studio.field.label" value="SUM(v.CantidadVendida * v.PrecioUnidad)"/>
+		</field>
+		<field name="Categoría" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="Categoría"/>
+			<property name="com.jaspersoft.studio.field.label" value="Categoría"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="ventas"/>
+		</field>
+		<group name="SUM(v.CantidadVendida * v.PrecioUnidad)">
+			<expression><![CDATA[$F{SUM(v.CantidadVendida * v.PrecioUnidad)}]]></expression>
+		</group>
+		<group name="Categoría">
+			<expression><![CDATA[$F{Categoría}]]></expression>
+		</group>
+	</dataset>
 	<parameter name="categoria" class="java.lang.String"/>
 	<query language="SQL"><![CDATA[SELECT 
     v.*, 
@@ -111,6 +132,20 @@ where Categoría =  $P{categoria}]]></query>
 			<text><![CDATA[Total de la categoria:]]></text>
 		</element>
 	</columnFooter>
-	<pageFooter height="54" splitType="Stretch"/>
+	<pageFooter height="223" splitType="Stretch">
+		<element kind="chart" chartType="pie" uuid="0251b3bb-4836-478a-a5c3-c3965b248739" x="184" y="23" width="200" height="200" evaluationTime="Report">
+			<dataset kind="pie">
+				<datasetRun uuid="366593da-943a-4806-8377-5f8ccf247dc8" subDataset="Dataset1"/>
+				<series>
+					<keyExpression><![CDATA[$F{Categoría}]]></keyExpression>
+					<valueExpression><![CDATA[$F{SUM(v.CantidadVendida * v.PrecioUnidad)}]]></valueExpression>
+					<labelExpression><![CDATA[$F{SUM(v.CantidadVendida * v.PrecioUnidad)}.toString()]]></labelExpression>
+				</series>
+			</dataset>
+			<plot>
+				<itemLabel/>
+			</plot>
+		</element>
+	</pageFooter>
 	<summary height="42" splitType="Stretch"/>
 </jasperReport>

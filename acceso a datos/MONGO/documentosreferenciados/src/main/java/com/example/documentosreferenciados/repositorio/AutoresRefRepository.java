@@ -17,8 +17,9 @@ public interface AutoresRefRepository extends MongoRepository<AutoreRef,String> 
     //consulta @query
     // buscar libros con precio inferior y año de publicacion superior a los valores dados
     @Query( "{ 'books': { $elemMatch: { 'precio': { $lt: ?0 }, 'anioPublicacion': { $gt: ?1 } } } }" )
-    default List<BookRef> buscarLibrosPorPrecioYAno(double precio, int anioPublicacion) {
+    List<BookRef> buscarLibrosPorPrecioYAno(double precio, int anioPublicacion);
         // Implementación de la consulta personalizada
-    }
+
+
 
 }
