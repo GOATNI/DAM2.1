@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="0cf89f8a-be41-4ced-be5d-fa5b08b56c14" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../../../aplicaciones/Flutter/aplication2/lib/presentacionesScreen/screen/botones_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../../../aplicaciones/Flutter/aplication2/lib/presentacionesScreen/screen/botones_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../aplicaciones/Flutter/aplication2/lib/presentacionesScreen/wigets/TarjetaPersonalisada1.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../../../aplicaciones/Flutter/aplication2/lib/presentacionesScreen/wigets/TarjetaPersonalisada1.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../aplicaciones/Flutter/componentes/lib/presentation/screens/animaciones_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../../../aplicaciones/Flutter/componentes/lib/presentation/screens/animaciones_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../aplicaciones/Flutter/componentes/lib/presentation/screens/botones_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../../../aplicaciones/Flutter/componentes/lib/presentation/screens/botones_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../aplicaciones/Flutter/componentes/lib/presentation/screens/progres_indicator_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../../../aplicaciones/Flutter/componentes/lib/presentation/screens/progres_indicator_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../aplicaciones/Flutter/componentes/lib/presentation/screens/sliders_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../../../aplicaciones/Flutter/componentes/lib/presentation/screens/sliders_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../aplicaciones/Flutter/componentes/lib/presentation/widgets/tarjeta_personalizada_1.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../../../aplicaciones/Flutter/componentes/lib/presentation/widgets/tarjeta_personalizada_1.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../aplicaciones/Flutter/contador/lib/screens/counter_functions_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../../../aplicaciones/Flutter/contador/lib/screens/counter_functions_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../aplicaciones/Flutter/gestor_de_estados/lib/screens/home_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../../../aplicaciones/Flutter/gestor_de_estados/lib/screens/home_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../aplicaciones/Flutter/menu_dash/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../../../aplicaciones/Flutter/menu_dash/lib/main.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../aplicaciones/Flutter/menu_dash/lib/screens/apijson_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../../../aplicaciones/Flutter/menu_dash/lib/screens/apijson_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../aplicaciones/Flutter/menu_dash/lib/services/jsonplaceholder_services.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../../../aplicaciones/Flutter/menu_dash/lib/services/jsonplaceholder_services.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../aplicaciones/Flutter/menudash2/lib/screens/apijson_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../../../aplicaciones/Flutter/menudash2/lib/screens/apijson_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../aplicaciones/Flutter/menudash2/lib/screens/menu_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../../../aplicaciones/Flutter/menudash2/lib/screens/menu_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../aplicaciones/Flutter/menudash2/menudash/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../../../aplicaciones/Flutter/menudash2/menudash/lib/main.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../aplicaciones/Flutter/superhero_app/lib/screens/superhero_search_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../../../aplicaciones/Flutter/superhero_app/lib/screens/superhero_search_screen.dart" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../.." />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHomeTypeForPersistence" value="WRAPPER" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 5
+}</component>
+  <component name="ProjectId" id="38AMMUbwB7tAIysSiMgJoR93l3A" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+    <option name="sortKey" value="BY_TIME_DESCENDING" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/dam2/Desktop/DAM2.1/interfaces/tema3/jasperReport_demo1/informes&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\dam2\Desktop\DAM2.1\interfaces\tema3\jasperReport_demo1\informes" />
+    </key>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="0cf89f8a-be41-4ced-be5d-fa5b08b56c14" name="Changes" comment="" />
+      <created>1768237873611</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1768237873611</updated>
+    </task>
+    <servers />
+  </component>
+</project>

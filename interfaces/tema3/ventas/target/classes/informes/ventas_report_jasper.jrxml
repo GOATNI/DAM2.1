@@ -1,0 +1,151 @@
+<!-- Created with Jaspersoft Studio version 7.0.3.final using JasperReports Library version 7.0.3-41034ca841d452f3305ba55b9042260aaa1ab5dd  -->
+<jasperReport name="ventas_report_jasper" language="java" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="2bf9b698-bb30-489f-8080-861bba858728">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="New Data Adapter (2)"/>
+	<dataset name="Dataset1" uuid="0e09803a-e6a4-4bab-84a0-0d36e49ad3f4">
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="New Data Adapter (2)"/>
+		<query language="SQL"><![CDATA[select SUM(v.CantidadVendida * v.PrecioUnidad),v.Categoría  from ventas v
+group by v.Categoría;]]></query>
+		<field name="SUM(v.CantidadVendida * v.PrecioUnidad)" class="java.lang.Double">
+			<property name="com.jaspersoft.studio.field.name" value="SUM(v.CantidadVendida * v.PrecioUnidad)"/>
+			<property name="com.jaspersoft.studio.field.label" value="SUM(v.CantidadVendida * v.PrecioUnidad)"/>
+		</field>
+		<field name="Categoría" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="Categoría"/>
+			<property name="com.jaspersoft.studio.field.label" value="Categoría"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="ventas"/>
+		</field>
+		<group name="SUM(v.CantidadVendida * v.PrecioUnidad)">
+			<expression><![CDATA[$F{SUM(v.CantidadVendida * v.PrecioUnidad)}]]></expression>
+		</group>
+		<group name="Categoría">
+			<expression><![CDATA[$F{Categoría}]]></expression>
+		</group>
+	</dataset>
+	<parameter name="categoria" class="java.lang.String"/>
+	<query language="SQL"><![CDATA[SELECT 
+    v.*, 
+    (v.CantidadVendida * v.PrecioUnidad) AS preciototal,
+    SUM(v.CantidadVendida * v.PrecioUnidad) OVER(PARTITION BY v.Categoría) AS total_categoria
+FROM ventas v
+where Categoría =  $P{categoria}]]></query>
+	<field name="Nombre" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="Nombre"/>
+		<property name="com.jaspersoft.studio.field.label" value="Nombre"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="ventas"/>
+	</field>
+	<field name="Categoría" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="Categoría"/>
+		<property name="com.jaspersoft.studio.field.label" value="Categoría"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="ventas"/>
+	</field>
+	<field name="PrecioUnidad" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.name" value="PrecioUnidad"/>
+		<property name="com.jaspersoft.studio.field.label" value="PrecioUnidad"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="ventas"/>
+	</field>
+	<field name="CantidadVendida" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="CantidadVendida"/>
+		<property name="com.jaspersoft.studio.field.label" value="CantidadVendida"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="ventas"/>
+	</field>
+	<field name="preciototal" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.name" value="preciototal"/>
+		<property name="com.jaspersoft.studio.field.label" value="preciototal"/>
+	</field>
+	<field name="total_categoria" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.name" value="total_categoria"/>
+		<property name="com.jaspersoft.studio.field.label" value="total_categoria"/>
+	</field>
+	<sortField name="Categoría"/>
+	<group name="Nombre">
+		<expression><![CDATA[$F{Nombre}]]></expression>
+	</group>
+	<group name="Categoría">
+		<expression><![CDATA[$F{Categoría}]]></expression>
+	</group>
+	<group name="PrecioUnidad">
+		<expression><![CDATA[$F{PrecioUnidad}]]></expression>
+	</group>
+	<group name="CantidadVendida">
+		<expression><![CDATA[$F{CantidadVendida}]]></expression>
+	</group>
+	<background splitType="Stretch"/>
+	<title height="79" splitType="Stretch">
+		<element kind="staticText" uuid="8161abc7-ec83-4dcb-872e-a2447ec96a57" x="150" y="10" width="240" height="61" fontSize="25.0" hTextAlign="Center" vTextAlign="Middle">
+			<text><![CDATA[Informe Ventas]]></text>
+		</element>
+	</title>
+	<pageHeader height="35" splitType="Stretch"/>
+	<columnHeader height="39" splitType="Stretch">
+		<element kind="staticText" uuid="78945aa0-0dfb-4c8e-8325-390bb4d71c91" x="0" y="0" width="100" height="30">
+			<text><![CDATA[Nombre]]></text>
+			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="f243d99c-4fd6-4b5f-87f8-8dd951426cce"/>
+		</element>
+		<element kind="staticText" uuid="5adfa8dc-f692-4e0a-a5ac-ff048e1aefd5" x="220" y="0" width="100" height="30">
+			<text><![CDATA[PrecioUnidad]]></text>
+			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="c4fd9849-f9ff-4083-8d75-94a166b773ce"/>
+		</element>
+		<element kind="staticText" uuid="89986769-692d-4809-aafc-ab2d69461f55" x="340" y="0" width="100" height="30">
+			<text><![CDATA[CantidadVendida]]></text>
+			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="cf14a4de-9c4c-4b50-aac7-c26113e7bf07"/>
+		</element>
+		<element kind="staticText" uuid="4f54c0b1-66ea-402a-8362-9db6e1ea2708" x="110" y="0" width="100" height="30">
+			<text><![CDATA[Categoría]]></text>
+			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="7382c460-e688-4ac3-ac30-51bf252db136"/>
+		</element>
+		<element kind="staticText" uuid="d7337082-9766-482e-8bf9-f70041c961d8" x="460" y="0" width="100" height="30">
+			<text><![CDATA[preciototal]]></text>
+			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="eb294d19-de42-4ad6-9434-557f689cb5f3"/>
+		</element>
+	</columnHeader>
+	<detail>
+		<band height="43" splitType="Stretch">
+			<element kind="textField" uuid="7a328c4c-6c06-4b70-b4b1-72b24e70d4c8" x="0" y="0" width="100" height="30">
+				<expression><![CDATA[$F{Nombre}]]></expression>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="f243d99c-4fd6-4b5f-87f8-8dd951426cce"/>
+			</element>
+			<element kind="textField" uuid="02edf119-1a59-42e4-ba49-c6418bd37ca3" x="220" y="0" width="100" height="30">
+				<expression><![CDATA[$F{PrecioUnidad}]]></expression>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="c4fd9849-f9ff-4083-8d75-94a166b773ce"/>
+			</element>
+			<element kind="textField" uuid="518a9e24-9046-4dcf-8b46-3441f7b83499" x="340" y="0" width="100" height="30">
+				<expression><![CDATA[$F{CantidadVendida}]]></expression>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="cf14a4de-9c4c-4b50-aac7-c26113e7bf07"/>
+			</element>
+			<element kind="textField" uuid="2fa3597b-ba48-42a7-8ebe-a040fd812f01" x="110" y="0" width="100" height="30">
+				<expression><![CDATA[$F{Categoría}]]></expression>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="7382c460-e688-4ac3-ac30-51bf252db136"/>
+			</element>
+			<element kind="textField" uuid="0d335612-b647-4bf3-98e8-2f4113cddcae" key="" x="460" y="0" width="100" height="30">
+				<expression><![CDATA[$F{preciototal}.toString()+"€"]]></expression>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="eb294d19-de42-4ad6-9434-557f689cb5f3"/>
+			</element>
+		</band>
+	</detail>
+	<columnFooter height="54" splitType="Stretch">
+		<element kind="textField" uuid="904cdd4f-1a73-446e-a72b-54013fe9a897" x="220" y="12" width="100" height="30" hTextAlign="Center" vTextAlign="Middle">
+			<expression><![CDATA[$F{total_categoria}.toString()+"€"]]></expression>
+		</element>
+		<element kind="staticText" uuid="dd361300-5113-422d-8829-a82e7b8967b5" x="80" y="12" width="100" height="30" hTextAlign="Right" vTextAlign="Middle">
+			<text><![CDATA[Total de la categoria:]]></text>
+		</element>
+	</columnFooter>
+	<pageFooter height="223" splitType="Stretch">
+		<element kind="chart" chartType="pie" uuid="0251b3bb-4836-478a-a5c3-c3965b248739" x="184" y="23" width="200" height="200" evaluationTime="Report">
+			<dataset kind="pie">
+				<datasetRun uuid="366593da-943a-4806-8377-5f8ccf247dc8" subDataset="Dataset1"/>
+				<series>
+					<keyExpression><![CDATA[$F{Categoría}]]></keyExpression>
+					<valueExpression><![CDATA[$F{SUM(v.CantidadVendida * v.PrecioUnidad)}]]></valueExpression>
+					<labelExpression><![CDATA[$F{SUM(v.CantidadVendida * v.PrecioUnidad)}.toString()]]></labelExpression>
+				</series>
+			</dataset>
+			<plot>
+				<itemLabel/>
+			</plot>
+		</element>
+	</pageFooter>
+	<summary height="42" splitType="Stretch"/>
+</jasperReport>

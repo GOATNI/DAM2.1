@@ -68,6 +68,7 @@ public class HelloController {
         System.out.println("Generando informe para el departamento: " + categoria);
         Map<String, Object> parametros = new java.util.HashMap<>();
         parametros.put("categoria", categoria);
+        parametros.put("imag_ruta","/imagenes/ventas.png");
         // Lógica para generar el informe JasperReports para el departamento seleccionado
         JasperPrint jasperPrint = JasperFillManager.fillReport(getClass().getResourceAsStream(ruta),
                 parametros,con);

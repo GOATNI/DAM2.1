@@ -24,6 +24,7 @@ group by v.Categoría;]]></query>
 		</group>
 	</dataset>
 	<parameter name="categoria" class="java.lang.String"/>
+	<parameter name="imag_ruta" class="java.lang.String"/>
 	<query language="SQL"><![CDATA[SELECT 
     v.*, 
     (v.CantidadVendida * v.PrecioUnidad) AS preciototal,
@@ -72,9 +73,13 @@ where Categoría =  $P{categoria}]]></query>
 		<expression><![CDATA[$F{CantidadVendida}]]></expression>
 	</group>
 	<background splitType="Stretch"/>
-	<title height="79" splitType="Stretch">
+	<title height="87" splitType="Stretch">
 		<element kind="staticText" uuid="8161abc7-ec83-4dcb-872e-a2447ec96a57" x="150" y="10" width="240" height="61" fontSize="25.0" hTextAlign="Center" vTextAlign="Middle">
 			<text><![CDATA[Informe Ventas]]></text>
+		</element>
+		<element kind="image" uuid="f4669297-b308-4283-9b7a-59bf549885ba" x="485" y="18" width="50" height="50">
+			<printWhenExpression><![CDATA[$P{imag_ruta}]]></printWhenExpression>
+			<expression><![CDATA[""]]></expression>
 		</element>
 	</title>
 	<pageHeader height="35" splitType="Stretch"/>
@@ -115,7 +120,8 @@ where Categoría =  $P{categoria}]]></query>
 				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="cf14a4de-9c4c-4b50-aac7-c26113e7bf07"/>
 			</element>
 			<element kind="textField" uuid="2fa3597b-ba48-42a7-8ebe-a040fd812f01" x="110" y="0" width="100" height="30">
-				<expression><![CDATA[$F{Categoría}]]></expression>
+				<expression><![CDATA[$F{Categoría}.equals("Quesos") ? "help" : "False"
+]]></expression>
 				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="7382c460-e688-4ac3-ac30-51bf252db136"/>
 			</element>
 			<element kind="textField" uuid="0d335612-b647-4bf3-98e8-2f4113cddcae" key="" x="460" y="0" width="100" height="30">
