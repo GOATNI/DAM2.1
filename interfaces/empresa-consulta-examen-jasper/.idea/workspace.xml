@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="4fb35abc-d78d-4a00-a528-1f18f704e56c" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../../acceso a datos/MONGO/ProyectosMongoSpring/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../acceso a datos/MONGO/ProyectosMongoSpring/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jasper/eje1_empleados/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../jasper/eje1_empleados/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tema3/jasperReport_demo1/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tema3/jasperReport_demo1/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tema3/jasperReport_demo1/.idea/dbnavigator.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tema3/jasperReport_demo1/.idea/encodings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tema3/jasperReport_demo1/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tema3/jasperReport_demo1/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tema3/jasperReport_demo1/.mvn/wrapper/maven-wrapper.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tema3/jasperReport_demo1/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tema3/jasperReport_demo1/informes/capitales_informes_normal.jrxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tema3/jasperReport_demo1/informes/capitalesinforme.jrxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tema3/jasperReport_demo1/mvnw" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tema3/jasperReport_demo1/mvnw.cmd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tema3/jasperReport_demo1/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tema3/jasperReport_demo1/src/main/java/module-info.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tema3/jasperReport_demo1/src/main/java/org/example/jasperreport_demo1/HelloApplication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tema3/jasperReport_demo1/src/main/java/org/example/jasperreport_demo1/HelloController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tema3/jasperReport_demo1/src/main/resources/org/example/jasperreport_demo1/hello-view.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tema3/jasper_chart_empleado/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tema3/jasper_chart_empleado/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tema3/jasper_chart_empleado/.idea/copilot.data.migration.agent.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tema3/jasper_chart_empleado/.idea/copilot.data.migration.ask2agent.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tema3/jasper_chart_empleado/.idea/copilot.data.migration.edit.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tema3/jasper_chart_empleado/.idea/dbnavigator.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tema3/jasper_chart_empleado/.idea/encodings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tema3/jasper_chart_empleado/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tema3/jasper_chart_empleado/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tema3/jasper_chart_empleado/.mvn/wrapper/maven-wrapper.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tema3/jasper_chart_empleado/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tema3/jasper_chart_empleado/mvnw" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tema3/jasper_chart_empleado/mvnw.cmd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tema3/jasper_chart_empleado/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tema3/jasper_chart_empleado/src/main/java/module-info.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tema3/jasper_chart_empleado/src/main/java/org/example/jasper_chart_empleado/HelloApplication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tema3/jasper_chart_empleado/src/main/java/org/example/jasper_chart_empleado/HelloController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tema3/jasper_chart_empleado/src/main/resources/informes/empleados_jasper_reports.jasper" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tema3/jasper_chart_empleado/src/main/resources/informes/empleados_jasper_reports.jrxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tema3/jasper_chart_empleado/src/main/resources/org/example/jasper_chart_empleado/hello-view.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tema3/ventas/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tema3/ventas/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tema3/ventas/.idea/artifacts/ventas_jar.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tema3/ventas/.idea/copilot.data.migration.agent.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tema3/ventas/.idea/copilot.data.migration.ask2agent.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tema3/ventas/.idea/copilot.data.migration.edit.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tema3/ventas/.idea/dbnavigator.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tema3/ventas/.idea/encodings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tema3/ventas/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tema3/ventas/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tema3/ventas/.mvn/wrapper/maven-wrapper.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tema3/ventas/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tema3/ventas/mvnw" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tema3/ventas/mvnw.cmd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tema3/ventas/out/artifacts/ventas_jar/help.iss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tema3/ventas/out/artifacts/ventas_jar/ventas.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tema3/ventas/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tema3/ventas/src/main/java/module-info.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tema3/ventas/src/main/java/org/example/ventas/HelloApplication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tema3/ventas/src/main/java/org/example/ventas/HelloController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tema3/ventas/src/main/java/org/example/ventas/Launcher.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tema3/ventas/src/main/resources/META-INF/MANIFEST.MF" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tema3/ventas/src/main/resources/informes/ventas_report_jasper.jasper" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tema3/ventas/src/main/resources/informes/ventas_report_jasper.jrxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tema3/ventas/src/main/resources/org/example/ventas/hello-view.fxml" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHomeTypeForPersistence" value="WRAPPER" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 3
+}]]></component>
+  <component name="ProjectId" id="39HOzRlYcOjcIBB30YTMBph3gYz" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.HelloApplication.executor": "Run",
+    "Application.Launcher.executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/azeem/Desktop/DAM2.1/interfaces/empresa-consulta-examen-jasper/src/main/resources/informes"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\azeem\Desktop\DAM2.1\interfaces\empresa-consulta-examen-jasper\src\main\resources\informes" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="Launcher" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.helping.empresaconsultaexamenjasper.Launcher" />
+      <module name="empresa-consulta-examen-jasper" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.helping.empresaconsultaexamenjasper.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Launcher" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="4fb35abc-d78d-4a00-a528-1f18f704e56c" name="Changes" comment="" />
+      <created>1770349792732</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1770349792732</updated>
+    </task>
+    <servers />
+  </component>
+</project>

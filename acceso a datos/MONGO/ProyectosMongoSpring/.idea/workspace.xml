@@ -4,18 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="72a7fdd4-c535-45bf-8cc7-e83401afa5f5" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../documentosreferenciados/src/main/java/Repositorio/autoresRefRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../documentosreferenciados/src/main/java/config/MongoConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../documentosreferenciados/src/main/java/controller/autorRefController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../documentosreferenciados/src/main/java/modelo/AutoreRef.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../documentosreferenciados/src/main/java/modelo/BookRef.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MongoDemo_repository/MongoDemo_repository/mongoEnbebidos/DeleteOne.bru" beforeDir="false" afterPath="$PROJECT_DIR$/MongoDemo_repository/MongoDemo_repository/mongoEnbebidos/DeleteOne.bru" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MongoDemo_repository/MongoDemo_repository/src/main/java/org/iesch/MongoDemo_repository/controller/BookTemplateController.java" beforeDir="false" afterPath="$PROJECT_DIR$/MongoDemo_repository/MongoDemo_repository/src/main/java/org/iesch/MongoDemo_repository/controller/BookTemplateController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MongoDemo_repository/MongoDemo_repository/src/main/java/org/iesch/MongoDemo_repository/service/BookService.java" beforeDir="false" afterPath="$PROJECT_DIR$/MongoDemo_repository/MongoDemo_repository/src/main/java/org/iesch/MongoDemo_repository/service/BookService.java" afterDir="false" />
-    </list>
+    <list default="true" id="72a7fdd4-c535-45bf-8cc7-e83401afa5f5" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
