@@ -27,6 +27,37 @@ public class HelloController {
                     ResultSet.TYPE_SCROLL_INSENSITIVE,
                     ResultSet.CONCUR_READ_ONLY
             );
+
+            /*
+   1. ESTADOS DE PROCESO (Anidado clásico)
+   Si es 1 devuelve Iniciado, si es 2 En proceso, sino Finalizado.
+        $F{estado} == 1 ? "Iniciado" : ($F{estado} == 2 ? "En proceso" : "Finalizado")
+        */
+
+        /*
+            2. RANGOS NUMÉRICOS (Semáforo de salarios)
+             $F{salario} > 3000 ? "Sueldo Alto" : ($F{salario} > 1500 ? "Sueldo Medio" : "Sueldo Bajo")
+            */
+
+            /*
+           3. COMPARACIÓN DE TEXTO (Uso de .equals para seguridad)
+           $F{categoria}.equals("A") ? "Premium" : ($F{categoria}.equals("B") ? "Estándar" : "Básico")
+            */
+
+            /*
+               4. CONTROL DE NULOS (Evita que el reporte muestre la palabra "null")
+               $F{observaciones} == null || $F{observaciones}.isEmpty() ? "Sin datos" : $F{observaciones}
+            */
+
+            /*
+               5. LÓGICA BOOLEANA (Para campos tipo Checkbox/Boolean)
+               $F{activo} ? "Usuario Habilitado" : "Usuario Suspendido"
+            */
+
+            /*
+               6. FORMATO DE GÉNERO / TRATO
+               $F{sexo}.equalsIgnoreCase("H") ? "Bienvenido Sr. " + $F{nombre} : "Bienvenida Sra. " + $F{nombre}
+            */
             /*
             SELECT
                 e.nombre,
