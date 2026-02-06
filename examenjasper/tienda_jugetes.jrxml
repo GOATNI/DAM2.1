@@ -5,6 +5,9 @@
 	<parameter name="p_cat" class="java.lang.String"/>
 	<parameter name="p_min" class="java.lang.Double"/>
 	<parameter name="p_max" class="java.lang.Double"/>
+	<parameter name="pagrupado" class="java.lang.Boolean">
+		<defaultValueExpression><![CDATA[true]]></defaultValueExpression>
+	</parameter>
 	<query language="SQL"><![CDATA[SELECT p.nombre, p.precio, p.estado, p.disponible, c.nombre_cat, plat.nombre_plat
 FROM productos p
 INNER JOIN categorias c ON p.id_categoria = c.id_categoria
@@ -48,9 +51,10 @@ WHERE
 		<expression><![CDATA[$F{precio}]]></expression>
 	</variable>
 	<group name="categoriaGroup">
-		<expression><![CDATA[$F{nombre_cat}]]></expression>
+		<expression><![CDATA[$P{pagrupado} ? $F{nombre_cat} : null]]></expression>
 		<groupHeader>
-			<band height="51">
+			<band height="40">
+				<printWhenExpression><![CDATA[$P{pagrupado}]]></printWhenExpression>
 				<element kind="staticText" uuid="d3390139-da32-47ce-9773-a4e56d188d62" x="140" y="14" width="110" height="26" fontSize="14.0" hTextAlign="Center" vTextAlign="Middle">
 					<text><![CDATA[Categoria:]]></text>
 				</element>
@@ -61,6 +65,7 @@ WHERE
 		</groupHeader>
 		<groupFooter>
 			<band height="59">
+				<printWhenExpression><![CDATA[$P{pagrupado}]]></printWhenExpression>
 				<element kind="staticText" uuid="fc715553-249e-42ea-a12f-a7320230641f" x="110" y="12" width="100" height="30" hTextAlign="Center" vTextAlign="Middle">
 					<text><![CDATA[PrecioTotalCategoria]]></text>
 				</element>
