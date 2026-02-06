@@ -50,6 +50,9 @@ WHERE
 	<variable name="precio1" resetType="Group" calculation="Sum" resetGroup="categoriaGroup" class="java.math.BigDecimal">
 		<expression><![CDATA[$F{precio}]]></expression>
 	</variable>
+	<variable name="precio_coniva" class="java.lang.Double">
+		<expression><![CDATA[$F{precio}.doubleValue()*1.21]]></expression>
+	</variable>
 	<group name="categoriaGroup">
 		<expression><![CDATA[$P{pagrupado} ? $F{nombre_cat} : null]]></expression>
 		<groupHeader>
@@ -95,7 +98,7 @@ WHERE
 			<text><![CDATA[disponible]]></text>
 			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a092693f-9305-4682-aea4-3656555b1a31"/>
 		</element>
-		<element kind="staticText" uuid="74759bfa-e283-4eca-83e3-df8a0e82cf17" x="490" y="0" width="100" height="30">
+		<element kind="staticText" uuid="74759bfa-e283-4eca-83e3-df8a0e82cf17" x="390" y="0" width="100" height="30">
 			<text><![CDATA[nombre_plat]]></text>
 			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="b15e133d-9fb2-4377-adff-27229c2bde43"/>
 		</element>
@@ -118,9 +121,12 @@ WHERE
 				<expression><![CDATA[$F{disponible} == 0 ? "Sin Existencias" : ($F{disponible} > 5 ? "Suficiente" : "Casi Agotado")]]></expression>
 				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a092693f-9305-4682-aea4-3656555b1a31"/>
 			</element>
-			<element kind="textField" uuid="e4cb4d92-dff8-4c46-bc12-8ff78eefaff0" x="480" y="10" width="100" height="30">
+			<element kind="textField" uuid="e4cb4d92-dff8-4c46-bc12-8ff78eefaff0" x="400" y="10" width="80" height="30">
 				<expression><![CDATA[$F{nombre_plat}]]></expression>
 				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="b15e133d-9fb2-4377-adff-27229c2bde43"/>
+			</element>
+			<element kind="textField" uuid="4fff7c51-57bf-4a04-aeaa-f3785bba8921" x="480" y="10" width="100" height="30" pattern="#,##.00€">
+				<expression><![CDATA[$V{precio_coniva}]]></expression>
 			</element>
 		</band>
 	</detail>
