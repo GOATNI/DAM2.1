@@ -1,0 +1,30 @@
+meta {
+  name: añadirUno Book
+  type: http
+  seq: 7
+}
+
+post {
+  url: http://localhost:8080/api/books-ref
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+      "titulo": "La Galatea",
+      "isbn": "978-0307474728",
+      "anioPublicacion": 1585,
+      "precio": 22.0,
+      "numeroPaginas": 200,
+      "editorial": "Clasicos",
+      "autores": [
+        {
+          "id": "60a1b1c1e4b0a1c1e4b0a1c3",
+        }
+      ],
+      "categorias": [
+        "Historia",
+      ]
+  }
+}

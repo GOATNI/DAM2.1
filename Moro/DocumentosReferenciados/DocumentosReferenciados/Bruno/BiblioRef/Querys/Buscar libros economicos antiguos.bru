@@ -1,0 +1,16 @@
+meta {
+  name: Buscar libros economicos antiguos
+  type: http
+  seq: 6
+}
+
+get {
+  url: http://127.0.0.1:8080/api/autores/search/economicos-antiguos?precio=15&anio=1940
+  body: none
+  auth: inherit
+}
+
+params:query {
+  precio: 15
+  anio: 1940
+}

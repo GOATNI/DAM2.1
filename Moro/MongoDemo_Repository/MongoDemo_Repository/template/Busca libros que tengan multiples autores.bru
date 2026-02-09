@@ -1,0 +1,15 @@
+meta {
+  name: Busca libros que tengan multiples autores
+  type: http
+  seq: 9
+}
+
+get {
+  url: http://localhost:8080/api/books/template/search/precio-maximo-ordenado?precio=15
+  body: json
+  auth: inherit
+}
+
+params:query {
+  precio: 15
+}

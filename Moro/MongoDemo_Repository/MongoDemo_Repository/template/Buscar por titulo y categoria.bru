@@ -1,0 +1,16 @@
+meta {
+  name: Buscar por titulo y categoria
+  type: http
+  seq: 6
+}
+
+get {
+  url: http://localhost:8080/api/books/template/search/titulo-categoria?titulo=spring&categoria=Programación
+  body: none
+  auth: inherit
+}
+
+params:query {
+  titulo: spring
+  categoria: Programación
+}

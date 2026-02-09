@@ -1,0 +1,16 @@
+meta {
+  name: Buscar por rango precio
+  type: http
+  seq: 4
+}
+
+get {
+  url: http://localhost:8080/api/books/search/rango-precio?min=50&max=10000
+  body: none
+  auth: inherit
+}
+
+params:query {
+  min: 50
+  max: 10000
+}

@@ -1,0 +1,15 @@
+meta {
+  name: Contar libros por categoria
+  type: http
+  seq: 10
+}
+
+get {
+  url: http://localhost:8080/api/books/template/count/categoria?cat=Programación
+  body: json
+  auth: inherit
+}
+
+params:query {
+  cat: Programación
+}

@@ -10,18 +10,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="935b725e-1166-4040-a4af-1024cf1084b8" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../../../examenjasper/Ventas2/informes/ejercicio8.jasper" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../../examenjasper/Ventas2/informes/ejercicio8.jrxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../../examenjasper/Ventas2/informes/ejercicio8grouped.jasper" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../../examenjasper/Ventas2/informes/ejercicio8grouped.jrxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../../examenjasper/Ventas2/informes/ejercicio8ventatotal.jasper" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../../examenjasper/Ventas2/informes/ejercicio8ventatotal.jrxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../../examenjasper/ventas/src/main/resources/imagenes/venta.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../examenjasper/ventas/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../examenjasper/ventas/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../examenjasper/ventas/src/main/java/org/example/ventas/HelloApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../examenjasper/ventas/src/main/java/org/example/ventas/HelloApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../examenjasper/ventas/src/main/java/org/example/ventas/HelloController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../examenjasper/ventas/src/main/java/org/example/ventas/HelloController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../examenjasper/ventas/src/main/resources/informes/ventas_report_jasper.jasper" beforeDir="false" afterPath="$PROJECT_DIR$/../../../examenjasper/ventas/src/main/resources/informes/ventas_report_jasper.jasper" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../examenjasper/ventas/src/main/resources/informes/ventas_report_jasper.jrxml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../examenjasper/ventas/src/main/resources/informes/ventas_report_jasper.jrxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../examenjasper/empresa-consulta-examen-jasper/src/main/resources/informes/examenJasper.jasper" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../examenjasper/empresa-consulta-examen-jasper/src/main/resources/informes/examenJasper.jrxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../examenjasper/tienda_jugetes.jasper" beforeDir="false" afterPath="$PROJECT_DIR$/../../../examenjasper/tienda_jugetes.jasper" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

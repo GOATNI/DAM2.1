@@ -1,0 +1,172 @@
+<!-- Created with Jaspersoft Studio version 7.0.3.final using JasperReports Library version 7.0.3-41034ca841d452f3305ba55b9042260aaa1ab5dd  -->
+<jasperReport name="examenJasper" language="java" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="1bf5126d-e785-4aac-8140-b486f36ef48b">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="New Data Adapter (3)"/>
+	<dataset name="Datasettipos" uuid="6f0e5a68-3207-4acc-bf63-3eebe0789b6b">
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="New Data Adapter (3)"/>
+		<query language="SQL"><![CDATA[select t.Tipo,(p.Unidades*p.Precio) as totalventa from examen.productos p 
+inner join examen.tipos t on t.Id = p.Tipo]]></query>
+		<field name="Tipo" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="Tipo"/>
+			<property name="com.jaspersoft.studio.field.label" value="Tipo"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="tipos"/>
+		</field>
+		<field name="totalventa" class="java.lang.Double">
+			<property name="com.jaspersoft.studio.field.name" value="totalventa"/>
+			<property name="com.jaspersoft.studio.field.label" value="totalventa"/>
+		</field>
+		<sortField name="Tipo"/>
+		<group name="Tipo">
+			<expression><![CDATA[$F{Tipo}]]></expression>
+		</group>
+		<group name="Group1"/>
+	</dataset>
+	<dataset name="Datasetprovedores" uuid="54f56bec-54aa-41c8-b3d0-6b673f1c4be5">
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="New Data Adapter (3)"/>
+		<query language="SQL"><![CDATA[select p2.Proveedor,(p.Unidades*p.Precio) as totalventa from examen.productos p 
+inner join examen.proveedores p2 on p2.Id = p.Proveedor]]></query>
+		<field name="Proveedor" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="Proveedor"/>
+			<property name="com.jaspersoft.studio.field.label" value="Proveedor"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="proveedores"/>
+		</field>
+		<field name="totalventa" class="java.lang.Double">
+			<property name="com.jaspersoft.studio.field.name" value="totalventa"/>
+			<property name="com.jaspersoft.studio.field.label" value="totalventa"/>
+		</field>
+		<group name="Proveedor">
+			<expression><![CDATA[$F{Proveedor}]]></expression>
+		</group>
+	</dataset>
+	<query language="SQL"><![CDATA[select p.Id,p.Nombre,p.Precio,p.Unidades,t.Tipo ,p2.Proveedor,p.Caducidad,p.Unidades,p.Disponible ,(p.Unidades*p.Precio) as totalventa from examen.productos p 
+inner join examen.tipos t on t.Id = p.Tipo
+inner join examen.proveedores p2 on p2.Id = p.Proveedor
+]]></query>
+	<field name="Id" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="Id"/>
+		<property name="com.jaspersoft.studio.field.label" value="Id"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="productos"/>
+	</field>
+	<field name="Nombre" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="Nombre"/>
+		<property name="com.jaspersoft.studio.field.label" value="Nombre"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="productos"/>
+	</field>
+	<field name="Precio" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.name" value="Precio"/>
+		<property name="com.jaspersoft.studio.field.label" value="Precio"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="productos"/>
+	</field>
+	<field name="Unidades" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="Unidades"/>
+		<property name="com.jaspersoft.studio.field.label" value="Unidades"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="productos"/>
+	</field>
+	<field name="Tipo" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="Tipo"/>
+		<property name="com.jaspersoft.studio.field.label" value="Tipo"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="tipos"/>
+	</field>
+	<field name="Proveedor" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="Proveedor"/>
+		<property name="com.jaspersoft.studio.field.label" value="Proveedor"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="proveedores"/>
+	</field>
+	<field name="Caducidad" class="java.sql.Date">
+		<property name="com.jaspersoft.studio.field.name" value="Caducidad"/>
+		<property name="com.jaspersoft.studio.field.label" value="Caducidad"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="productos"/>
+	</field>
+	<field name="COLUMN_8" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="Unidades"/>
+		<property name="com.jaspersoft.studio.field.label" value="Unidades"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="productos"/>
+	</field>
+	<field name="Disponible" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="Disponible"/>
+		<property name="com.jaspersoft.studio.field.label" value="Disponible"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="productos"/>
+	</field>
+	<field name="totalventa" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.name" value="totalventa"/>
+		<property name="com.jaspersoft.studio.field.label" value="totalventa"/>
+	</field>
+	<sortField name="Tipo"/>
+	<variable name="Ventas_conIva" class="java.lang.Double"/>
+	<variable name="totalventa1" resetType="Group" calculation="Sum" resetGroup="GroupTipo" class="java.lang.Double">
+		<expression><![CDATA[$F{totalventa}]]></expression>
+	</variable>
+	<group name="GroupTipo">
+		<expression><![CDATA[$F{Tipo}]]></expression>
+		<groupHeader>
+			<band height="53">
+				<element kind="staticText" uuid="aef609da-0771-47bd-982c-a84ab88a9733" x="40" y="11" width="100" height="30" fontSize="14.0" bold="true" hTextAlign="Center" vTextAlign="Middle">
+					<text><![CDATA[Tipo]]></text>
+				</element>
+				<element kind="textField" uuid="55b14917-0e81-475a-835e-6883c161f4a5" x="170" y="11" width="100" height="30" fontSize="14.0" hTextAlign="Center" vTextAlign="Middle">
+					<expression><![CDATA[$F{Tipo}]]></expression>
+				</element>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="56">
+				<element kind="textField" uuid="f07c4f6b-70be-4fe3-bd85-48e256a2a8e0" x="90" y="10" width="150" height="30" bold="true">
+					<expression><![CDATA["Total ventas por:" + $F{Tipo}]]></expression>
+				</element>
+				<element kind="textField" uuid="4a747dee-c3e0-4133-adcf-cefc1bef9ce5" x="280" y="10" width="100" height="30" pattern="###.00€">
+					<expression><![CDATA[$V{totalventa1}*1.21]]></expression>
+				</element>
+			</band>
+		</groupFooter>
+	</group>
+	<background splitType="Stretch"/>
+	<title height="79" splitType="Stretch">
+		<element kind="staticText" uuid="52f4762f-7a32-47cd-bc86-297fa9ca6576" x="70" y="8" width="365" height="63" fontSize="19.0" bold="true" hTextAlign="Center" vTextAlign="Middle">
+			<text><![CDATA[Listado Venta Con IVA]]></text>
+		</element>
+	</title>
+	<pageHeader height="35" splitType="Stretch"/>
+	<columnHeader height="61" splitType="Stretch">
+		<element kind="staticText" uuid="d651fade-6b95-4521-9bcf-1de82e86a6ec" x="-10" y="0" width="100" height="30">
+			<text><![CDATA[Nombre]]></text>
+			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="1d2a4e6f-931d-4c55-917c-8916d1e0b7a4"/>
+		</element>
+		<element kind="staticText" uuid="8cbf8ff2-149a-4af9-a500-0a57cb13052a" x="240" y="0" width="100" height="30">
+			<text><![CDATA[Caducidad]]></text>
+			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="368a4205-336c-40fb-8538-379ac9540562"/>
+		</element>
+		<element kind="staticText" uuid="0045017f-6b24-430f-9daa-fafd991b7dfb" x="410" y="0" width="100" height="30">
+			<text><![CDATA[Disponible]]></text>
+			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="41270d9a-4dc9-4769-9d51-94de40a7fe62"/>
+		</element>
+		<element kind="staticText" uuid="6cb110e4-0512-49a6-90f2-d091188a4f48" x="110" y="0" width="100" height="30">
+			<text><![CDATA[totalventa + IVA]]></text>
+			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="bede7f7b-6c2d-4e12-a6e5-64847abb2be6"/>
+		</element>
+	</columnHeader>
+	<detail>
+		<band height="56" splitType="Stretch">
+			<element kind="textField" uuid="cab44628-9dc3-43e1-8775-2c420f3fdf7f" x="-10" y="10" width="100" height="30">
+				<expression><![CDATA[$F{Nombre}]]></expression>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="1d2a4e6f-931d-4c55-917c-8916d1e0b7a4"/>
+			</element>
+			<element kind="textField" uuid="9b580772-0806-409e-b688-3edeacd697c8" x="240" y="10" width="100" height="30" pattern="dd/MM/yy">
+				<expression><![CDATA[$F{Caducidad}]]></expression>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="368a4205-336c-40fb-8538-379ac9540562"/>
+			</element>
+			<element kind="textField" uuid="2fa5c3c6-7693-4388-9ee6-4fcca79ef58c" x="410" y="10" width="100" height="30">
+				<expression><![CDATA[ $F{Disponible}== 0 ? "Agotado" : ( $F{Disponible}== 1 ? "En Stock" : "Finalizado")]]></expression>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="41270d9a-4dc9-4769-9d51-94de40a7fe62"/>
+			</element>
+			<element kind="textField" uuid="d1aea02c-b723-4854-8837-54537adb6e76" x="110" y="10" width="100" height="30" pattern="##0.00€">
+				<expression><![CDATA[$F{totalventa}*1.21]]></expression>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="bede7f7b-6c2d-4e12-a6e5-64847abb2be6"/>
+			</element>
+		</band>
+	</detail>
+	<columnFooter height="45" splitType="Stretch"/>
+	<pageFooter height="54" splitType="Stretch"/>
+	<summary height="290" splitType="Stretch"/>
+</jasperReport>

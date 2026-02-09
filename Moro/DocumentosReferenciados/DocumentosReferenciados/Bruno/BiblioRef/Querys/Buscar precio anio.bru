@@ -1,0 +1,16 @@
+meta {
+  name: Buscar precio anio
+  type: http
+  seq: 5
+}
+
+get {
+  url: http://127.0.0.1:8080/api/autores/search/precio-anio?precio=10&anio=1940
+  body: none
+  auth: inherit
+}
+
+params:query {
+  precio: 10
+  anio: 1940
+}

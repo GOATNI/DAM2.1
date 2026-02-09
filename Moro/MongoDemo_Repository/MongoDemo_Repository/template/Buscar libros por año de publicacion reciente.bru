@@ -1,0 +1,15 @@
+meta {
+  name: Buscar libros por año de publicacion reciente
+  type: http
+  seq: 4
+}
+
+get {
+  url: http://localhost:8080/api/books/template/search/recientes?anio=1999
+  body: none
+  auth: inherit
+}
+
+params:query {
+  anio: 1999
+}

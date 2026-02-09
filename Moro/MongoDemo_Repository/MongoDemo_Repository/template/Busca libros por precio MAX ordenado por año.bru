@@ -1,0 +1,15 @@
+meta {
+  name: Busca libros por precio MAX ordenado por año
+  type: http
+  seq: 8
+}
+
+get {
+  url: http://localhost:8080/api/books/template/search/precio-maximo-ordenado?precio=15
+  body: json
+  auth: inherit
+}
+
+params:query {
+  precio: 15
+}

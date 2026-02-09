@@ -1,0 +1,18 @@
+meta {
+  name: Crear autor
+  type: http
+  seq: 8
+}
+
+post {
+  url: http://localhost:8080/api/autores
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "nombre" : "Sun Tzu",
+    "nacionalidad" : "China"
+  }
+}

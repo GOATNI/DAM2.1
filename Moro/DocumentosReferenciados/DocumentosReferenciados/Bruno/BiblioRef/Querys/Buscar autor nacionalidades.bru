@@ -1,0 +1,21 @@
+meta {
+  name: Buscar autor nacionalidades
+  type: http
+  seq: 3
+}
+
+post {
+  url: http://127.0.0.1:8080/api/autores/search/nacionalidades?paises=ch
+  body: json
+  auth: inherit
+}
+
+params:query {
+  paises: ch
+}
+
+body:json {
+  [
+    "China","España"
+  ]
+}

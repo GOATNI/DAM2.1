@@ -1,0 +1,15 @@
+meta {
+  name: Buscar libros por nombre autor
+  type: http
+  seq: 2
+}
+
+get {
+  url: http://localhost:8080/api/books/template/search/autor?nombre=Antoine de Saint-Exupéry
+  body: none
+  auth: inherit
+}
+
+params:query {
+  nombre: Antoine de Saint-Exupéry
+}

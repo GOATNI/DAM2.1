@@ -1,0 +1,15 @@
+meta {
+  name: BuscarPorAutorNombre
+  type: http
+  seq: 4
+}
+
+get {
+  url: http://localhost:8080/api/books-ref/template/search/autor-nombre?nombre=García
+  body: none
+  auth: inherit
+}
+
+params:query {
+  nombre: García
+}

@@ -1,0 +1,18 @@
+meta {
+  name: Buscar por multiples categorias
+  type: http
+  seq: 7
+}
+
+post {
+  url: http://localhost:8080/api/books/template/search/categorias-multiples
+  body: json
+  auth: inherit
+}
+
+body:json {
+  [
+    "Programación",
+    "Java"
+  ]
+}

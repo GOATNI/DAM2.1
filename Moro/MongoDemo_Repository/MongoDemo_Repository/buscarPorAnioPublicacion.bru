@@ -1,0 +1,15 @@
+meta {
+  name: buscarPorAnioPublicacion
+  type: http
+  seq: 5
+}
+
+get {
+  url: http://localhost:8080/api/books/search/recientes?anio=1900
+  body: none
+  auth: inherit
+}
+
+params:query {
+  anio: 1900
+}

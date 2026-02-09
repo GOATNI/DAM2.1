@@ -1,0 +1,15 @@
+meta {
+  name: BuscarPorCategoria
+  type: http
+  seq: 2
+}
+
+get {
+  url: http://127.0.0.1:8080/api/books/search/categoria?cat=Java
+  body: none
+  auth: inherit
+}
+
+params:query {
+  cat: Java
+}
